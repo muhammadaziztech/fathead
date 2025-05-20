@@ -1,0 +1,83 @@
+.tabbed-content .tab-panel:not(.current){
+    display: none;
+}
+.tabbed-content .tabs__list {
+    margin: 0 0 1.5rem;
+    padding: 0;
+    list-style:none;
+}
+.tabbed-content .tabs__list li{
+    display: inline-block;
+}
+.tabbed-content .tabs__list a{
+    padding: 1.1rem 1.5rem;
+    min-width: 170px;
+    display: inline-block;
+    text-align:center;
+    text-decoration: none;
+    color: #9D9D9D;
+    font-weight: 700;
+    border-bottom: 2px solid #f9f9f9;
+    transition: color .3s ease-out, border-color .2s ease-in
+}
+.tabbed-content .tabs__list a:hover,
+.tabbed-content .tabs__list a.current{
+    color: #161616
+}
+.tabbed-content .tabs__list a.current{
+    border-color:#161616;
+}
+.tabbed-content table{
+    width: 100%;
+    text-align: left;
+    box-shadow: none;
+}
+.tabbed-content table thead th{
+    text-transform: uppercase;
+    color: #161616;
+    font-weight: 700;
+}
+.tabbed-content table thead th span{
+    font-weight: 400;
+    color: #2E2E2E;
+    display: block;
+    text-transform: none;
+}
+.tabbed-content table td, 
+.tabbed-content table th {
+    border: 0;
+    border-bottom: 0.1rem solid #EEE;
+    line-height: 1.3;
+}
+.tabbed-content table td svg{
+    width: 1.3em;
+    height: 1.3em;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 3px;
+}
+.shipping-tabs__description{
+    margin-top: 3rem;
+    color: #161616
+}
+.shipping-tabs{
+    padding-bottom: 3rem;
+    margin-bottom: 3rem;
+    border-bottom: 0.1rem solid #EEE;
+}
+.shipping-tabs .title{
+    text-transform: uppercase;
+}
+.shipping-tabs .shipping-tabs__button{
+    --color-button: 22, 22, 22;
+    margin-top: 3rem;
+}
+@media screen and (min-width: 750px){
+    .shipping-tabs{
+        padding-bottom: 4.8rem;
+        margin-bottom: 4.8rem;
+    }
+    .shipping-tabs .shipping-tabs__button{
+        margin-top: 4.8rem;
+    }
+}

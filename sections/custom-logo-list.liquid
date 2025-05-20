@@ -1,0 +1,285 @@
+<div
+  class="relative container container--no-mobile-padding custom-logo-list section-{{ section.id }}"
+  data-section-id="{{ section.id }}"
+  data-section-type="logo-list"
+>
+  {% style %}
+    .section-{{ section.id }} .logo-list-section {
+      background-color: {{ section.settings.color_bg }};
+    }
+    .section-{{ section.id }} .logo-list__logo {
+      color: {{ section.settings.color_text }};
+    }
+    .section-{{ section.id }} .logo-list__title {
+      color: {{ section.settings.color_title }};
+    }
+    .section-{{ section.id }} .logo-list__link .logo-list__logo-image {
+      opacity: {{ section.settings.image_opacity }}%;
+    }
+    .section-{{ section.id }} .logo-list__link:hover .logo-list__logo-image {
+      opacity: 100%;
+    }
+    {%- for block in section.blocks -%}
+      .section-{{ section.id }} .logo-list__logo-{{ forloop.index }} .logo-list__logo-image {
+        max-width: {{ block.settings.image_width }}px;
+      }
+    {%- endfor -%}
+
+     .custom-logo-list .logo-list__logo-image{
+      flex-wrap: wrap;
+      gap: 15px;
+      justify-content: center;
+    }
+    .custom-logo-list .rimage-outer-wrapper{
+      /*max-width:70px !important; */
+      margin:0;
+    }
+    .custom-logo-list .logo-list{
+      max-width:97%;
+      margin:0 auto;
+      box-shadow: -20px 0px 10px -5px #d3d3d317, 20px 0px 10px -5px #d3d3d317;
+      border-radius: 10px;
+    }
+    .custom-logo-list .page-width{
+      max-width:100% !important;
+    }
+    @media(max-width:768px){
+      .custom-logo-list .rimage-outer-wrapper{
+        margin:0 15px;
+      }
+      .custom-logo-list .logo-list{
+        max-width:100%;
+        box-shadow:unset;
+        padding: 10px 40px 10px 40px;
+      }
+      .custom-logo-list .slick-arrow {
+        position: absolute;
+        color: #000;
+        background: #fff;
+        border: 0 solid rgba(0, 0, 0, 0.1);
+        border-radius: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height:30px !important;
+        width: 30px !important;
+        box-shadow: 0 0 5px #00000059;
+        transition: all 0.3s ease-in;
+      }
+      .custom-logo-list .slick-prev{
+        background-color: white;
+        background-image: url("{{ 'custom-slide-arrow-left.svg' | asset_url }}");
+        background-size: 16px;    
+        background-repeat: no-repeat;
+        background-position: center;  
+        left: -30px;
+        border: 0px solid rgba(0, 0, 0, .1) !important;
+        border-radius: 60%; 
+        z-index: 1000;  
+      }
+      .custom-logo-list .slick-next{
+        background-color: white;
+        background-image: url("{{ 'custom-slide-arrow-right.svg' | asset_url }}");
+        background-size: 16px;    
+        background-repeat: no-repeat;
+        background-position: center;                 
+        right: -30px;                 
+        border: 0px solid rgba(0, 0, 0, .1) !important;
+        border-radius: 60%;
+        z-index: 1000;
+      }
+    }
+    {% if section.settings.section_top_margin %}
+      #shopify-section-{{ section.id }}{
+        margin-top: 30px;
+      }
+    {% endif %}
+    {% if section.settings.section_bottom_margin %}
+      #shopify-section-{{ section.id }} {
+        margin-bottom: 30px;
+      }
+    {% endif %}
+  {% endstyle %}
+  <div class="page-width large-section logo-list-section global-border-radius large-row">
+    {%- if section.settings.title != blank or section.settings.enable_carousel == true -%}
+      <div class="logo-list__title text-center" data-cc-animate>
+        {% if section.settings.title != blank %}
+          <h2 class="{% if section.settings.enlarge_title %}giant-title{% else %}large-title{% endif%}">
+            {{ section.settings.title | escape }}
+          </h2>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    <div class="logo-list">
+      <div
+        class="logo-list__logo-image"
+        data-cc-animate="fade-in-up"
+        data-cc-animate-delay="{{ forloop.index | times: 0.07 }}s"
+      >
+        {% assign all_custom_socials = collection.metafields.custom.logo_list.value %}
+        {% for custom_social in all_custom_socials %}
+          <div class="rimage-outer-wrapper" style="max-width:{{ section.settings.logo_width }}px;min-width:{{ section.settings.logo_width_min }}px; width:100%;">
+            <a href="{{ custom_social.link }}">
+              <img
+                src="{{ custom_social.icon | img_url: 'original' }}"
+                width="{{ custom_social.icon.width }}"
+                height="{{ custom_social.icon.height }}"
+                alt="{{ custom_social.icon.alt }}"
+              >
+            </a>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  $(document).ready(function () {
+    function initMobileSlider() {
+      if ($(window).width() <= 768) {
+        if (!$('.custom-logo-list').hasClass('slick-initialized')) {
+          $('.custom-logo-list .logo-list__logo-image').slick({
+            infinite: true,
+            slidesToShow: 5,
+            autoplay: true,
+            autoplaySpeed: 5000,
+            speed: 1000,
+            arrows: true,
+            dots: false,
+            responsive: [
+               {
+              breakpoint: 9999,
+              settings: "unslick"
+          },
+              {
+                breakpoint: 768,
+                settings: {
+                  slidesToShow: 5,
+                  slidesToScroll: 5
+                }
+              },
+              {
+                breakpoint: 425,
+                settings: {
+                  slidesToShow: 4,
+                  slidesToScroll: 4
+                }
+              }
+            ]
+          });
+        }
+      } else {
+        if ($('.custom-logo-list').hasClass('slick-initialized')) {
+          $('.custom-logo-list').slick('unslick');
+        }
+      }
+    }
+
+    initMobileSlider();
+    $(window).on('resize', initMobileSlider);
+  });
+</script>
+
+{% schema %}
+{
+  "name": "FH - logo list",
+  "tag": "section",
+  "class": "section-logo-list",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "section_top_margin",
+      "label": "Add section top margin",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "section_bottom_margin",
+      "label": "Add section bottom margin",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Logo list"
+    },
+    {
+      "type": "color",
+      "id": "color_bg",
+      "label": "Background color",
+      "default": "#dae4e6"
+    },
+    {
+      "type": "color",
+      "id": "color_title",
+      "label": "Heading color",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "color_text",
+      "label": "Text color",
+      "default": "#333333"
+    },
+    {
+      "type": "checkbox",
+      "id": "enlarge_title",
+      "label": "Enlarge heading",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "enlarge_text",
+      "label": "Enlarge text",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "image_opacity",
+      "label": "Logo opacity",
+      "info": "Used to create hover effect when a link is added.",
+      "min": 20,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 75
+    },
+    {
+      "type": "checkbox",
+      "id": "en-slider",
+      "label": "Enable Carousel",
+    },
+    {
+      "type": "range",
+       "id": "logo_width",
+      "label": "Maximum Logo Width (Desktop)",
+      "min": 36,
+      "max": 240,
+      "step": 4,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+       "id": "logo_width_min",
+      "label": "Minimum Logo Width (Desktop)",
+      "min": 36,
+      "max": 240,
+      "step": 4,
+      "unit": "px",
+      "default": 40
+    }
+  ],
+  "presets": [
+    {"name": "FH - Logo list"}
+  ],
+  "disabled_on": {
+    "groups": [
+      "aside"
+    ]
+  }
+}
+{% endschema %}

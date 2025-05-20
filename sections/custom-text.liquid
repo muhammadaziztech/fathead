@@ -1,0 +1,149 @@
+<style>
+  .custom_{{ section.id }}{
+    {% if section.settings.ct_background_image !=blank %}
+    background-image: url({{section.settings.ct_background_image |img_url: 'master'}});
+    background-size:cover;
+    background-repeat:no-repeat;
+    background-position:center;
+    {% endif %}
+    {% if section.settings.ct_background_image == blank %}
+    background-color:{{ section.settings.custom_background_color }};
+    {% endif %}
+    padding:15px 20px;
+    max-width:100%;
+    max-height:{{section.settings.is_height}}px;
+    min-height:{{section.settings.is_height}}px;
+          display: flex;
+      justify-content: center;
+      align-items: center;
+  }
+  .custom_{{ section.id }} .custom-txt-1{
+    color:{{section.settings.heading_color_1}};
+    text-align:center;
+    font-size:40px;
+  }
+  .custom_{{ section.id }} .custom-txt-2{
+    color:{{section.settings.heading_color_2}};
+    padding-left:10px;
+  }
+  @media(max-width:768px){
+  .custom-txt-1{
+    font-size:34px !important;
+  }
+  .custom_{{ section.id }}{
+    {% if section.settings.ct_background_image_mob !=blank %}
+    background-image: url({{section.settings.ct_background_image_mob |img_url: 'master'}});
+    backgorund-size:cover;
+    background-repeat:no-repeat;
+    background-position:center;
+    {% endif %}
+    {% if section.settings.ct_background_image_mob == blank %}
+    background-color:{{ section.settings.custom_background_color_mob }};
+    {% endif %}
+    max-height:{{section.settings.is_height_mob}}px;
+    min-height:{{section.settings.is_height_mob}}px;
+  }
+  }
+  {% if section.settings.section_top_margin %}
+    #shopify-section-{{ section.id }} {
+      margin-top: 30px;
+    }
+  {% endif %}
+  {% if section.settings.section_bottom_margin %}
+    #shopify-section-{{ section.id }} {
+      margin-bottom: 30px;
+    }
+  {% endif %}
+</style>
+
+<div class="custom-main custom_{{ section.id }}">
+  <h2 class="custom-txt-1">
+    {{ section.settings.custom_txt_1 -}}
+    <span class="custom-txt-2">{{ section.settings.Custom_txt_2 }}</span>
+  </h2>
+</div>
+
+{% schema %}
+{
+  "name": "FH - Text",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "section_top_margin",
+      "label": "Add section top margin",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "section_bottom_margin",
+      "label": "Add section bottom margin",
+      "default": false
+    },
+    {
+      "type": "image_picker",
+      "id": "ct_background_image",
+      "label": "Desktop Background Image"
+    },
+    {
+      "type": "color",
+      "id": "custom_background_color",
+      "label": "Desktop Background Color",
+      "info": "If the background image is blank, the background color will be displayed."
+    },
+    {
+      "type": "image_picker",
+      "id": "ct_background_image_mob",
+      "label": "Mobile Background Image"
+    },
+    {
+      "type": "color",
+      "id": "custom_background_color_mob",
+      "label": "Mobile Background Color",
+      "info": "If the background image is blank, the background color will be displayed."
+    },
+    {
+      "type": "text",
+      "id": "custom_txt_1",
+      "label": "Heading 1"
+    },
+    {
+      "type": "text",
+      "id": "Custom_txt_2",
+      "label": "Heading 2"
+    },
+    {
+      "type": "color",
+      "id": "heading_color_1",
+      "label": "Heading Color 1"
+    },
+    {
+      "type": "color",
+      "id": "heading_color_2",
+      "label": "Heading Color 2"
+    },
+    {
+    "type": "range",
+    "id": "is_height",
+    "label": "Desktop Max Height",
+    "max": 800,
+    "min": 10,
+    "step": 10,
+    "unit": "px",
+    "default": 80
+  },
+  {
+    "type": "range",
+    "id": "is_height_mob",
+    "label": "Mobile Max Height",
+    "max": 800,
+    "min": 10,
+    "step": 10,
+    "unit": "px",
+    "default": 80
+  }
+  ],
+  "presets": [
+    {"name": "FH - Text"}
+  ]
+}
+{% endschema %}

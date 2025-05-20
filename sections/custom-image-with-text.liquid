@@ -1,0 +1,421 @@
+<div class="relative container container--no-mobile-padding large-row section-{{ section.id }}" data-section-id="{{ section.id }}" data-section-type="image-with-text">
+  {% liquid
+    assign img_padding = section.settings.image_size
+    assign img_padding_mob = section.settings.image_size | divided_by: 2
+  %}
+  {% style %}
+    @media(min-width:1100px){
+      .Small-desktop-img{
+        display:none;
+      }
+    }
+    @media(max-width:1100px){
+      .Small-desktop-img{
+        display:block;
+      }
+      .desktop-display-wrap{
+        display:none;
+      }
+    }
+    @media(min-width:900px){
+      .section-{{ section.id }} .mobile-display-wrap{
+        position:absolute;
+        {% if section.settings.image_position == 'left' %}
+        right:0;
+        {% elsif section.settings.image_position == 'right' %}
+        left:0;
+        {% endif %}
+      }
+      .desktop-display-wrap{
+        width:100%;
+      }
+      .section-{{ section.id }} .rimage-wrapper .rimage__image{
+        max-width:100%;
+        width:100%;
+      }
+      .section-{{ section.id }} .Small-desktop-img .ciwt-image-mobile img{
+        position:unset;
+        height:{{section.settings.section_height_des}}px;
+        object-position:
+        {% if section.settings.image_position == 'left' %}
+        left !important;
+        {% elsif section.settings.image_position == 'right' %}
+        right !important;
+        {% endif %}
+        object-fit:contain;
+     } 
+    }
+    @media(max-width:900px){
+      .Small-desktop-img{
+        width:50%;
+      }
+      .section-{{ section.id }} .Small-desktop-img .ciwt-image-mobile img{
+        object-fit:cover;
+        object-position:
+        {% if section.settings.image_position == 'left' %}
+        right;
+        {% elsif section.settings.image_position == 'right' %}
+        left;
+        {% endif %}
+      }
+    }
+    @media(min-width:769px){
+      .section-{{ section.id }} .image-with-text{
+      {% if section.settings.background_img_des !=blank %}
+      background-image:url({{section.settings.background_img_des |img_url: 'master'}});
+      {% endif %}
+      height:{{section.settings.section_height_des}}px;
+    }
+     .section-{{ section.id }} .rimage-wrapper .rimage__image{
+        position:unset;
+        height:{{section.settings.section_height_des}}px;
+        object-position:{{ section.settings.image_position }} !important;
+        object-fit:contain;
+     } 
+    .section-{{ section.id }} .Small-desktop-img .ciwt-image-mobile img{
+        height:{{section.settings.section_height_des}}px;
+    }
+    .section-{{ section.id }} .mobile-image-wrapper{
+        display:none;
+    }
+    }
+    @media screen and (max-width: 768px) and (min-width: 550px){
+      .section-{{ section.id }} .image-with-text{
+       min-height:max-content;
+      } 
+      }
+    @media(max-width:768px){
+      .section-{{ section.id }} .image-with-text{
+      {% if section.settings.background_img_mob !=blank %}
+      background-image:url({{section.settings.background_img_mob |img_url: 'master'}});
+      {% endif %}
+      flex-direction: column-reverse;
+      flex-wrap:nowrap;
+      }
+      .section-{{ section.id }} .mobile-image-wrapper{
+        width:100%;
+        display:block !important;
+      }
+      .ciwt-image-mobile{
+        display:flex;
+      }
+      .mobile-display-wrap{
+        width:100%;
+        padding: 40px 20px 20px 20px !important;
+      }
+      .Small-desktop-img{
+        display:none;
+      }
+    }
+     @media(max-width:550px){
+      }
+      .section-{{ section.id }} .btn{
+        color:{{section.settings.button_link_color}};
+        background:{{section.settings.button_link_background}};
+        --button-border-color:{{section.settings.button_link_background}};
+        font-size:14px;
+      }
+      .section-{{ section.id }} .btn:hover{
+        color:{{section.settings.button_link_color}};
+      }
+      .section-{{ section.id }}{
+        padding-left:0;
+        padding-right:0;
+        }
+     .section-{{ section.id }} .rimage-wrapper{
+        padding-top:0 !important;
+     }
+    .section-{{ section.id }} .image-with-text{
+      background-size:cover;
+      background-repeat:no-repeat;
+      background-position:center;
+    }
+    .section-{{ section.id }} .right{
+        text-align:right;
+    }
+    .section-{{ section.id }} .image-with-text__image-size {
+      padding: {{ img_padding }}px 0 {{ img_padding }}px {{ img_padding }}px;
+    }
+
+    .section-{{ section.id }} .image-with-text--reverse .image-with-text__image-size {
+      padding: {{ img_padding }}px {{ img_padding }}px {{ img_padding }}px 0;
+    }
+
+    @media only screen and (max-width: 767.98px) {
+      .section-{{ section.id }} .image-with-text .image-with-text__image-size {
+        padding: {{ img_padding }}px {{ img_padding }}px 0 {{ img_padding }}px;
+      }
+    }
+
+    {% if section.settings.image_size == '120' %}
+      @media screen and (max-width: 1000px) and (min-width: 767.98px) {
+        .section-{{ section.id }} .image-with-text .image-with-text__image-size {
+          padding: {{ img_padding_mob }}px 0 {{ img_padding_mob }}px {{ img_padding_mob }}px;
+        }
+        .section-{{ section.id }} .image-with-text--reverse .image-with-text__image-size {
+          padding: {{ img_padding_mob }}px {{ img_padding_mob }}px {{ img_padding_mob }}px 0;
+        }
+      }
+      @media screen and (max-width: 580px) {
+        .section-{{ section.id }} .image-with-text .image-with-text__image-size {
+          padding: {{ img_padding_mob }}px {{ img_padding_mob }}px 0 {{ img_padding_mob }}px;
+        }
+      }
+    {% endif %}
+    {% if section.settings.section_top_margin %}
+      #shopify-section-{{ section.id }}{
+        margin-top: 30px;
+      }
+    {% endif %}
+    {% if section.settings.section_bottom_margin %}
+      #shopify-section-{{ section.id }} {
+        margin-bottom: 30px;
+      }
+    {% endif %}
+  {% endstyle %}
+
+  <div class="page-width image-with-text flex global-border-radius {% if section.settings.image_position == 'right' %} image-with-text--reverse{% endif %} {% if section.settings.image_size == '0' %} image-with-text--full{% endif %}">
+
+    <div class="one-half desktop-display-wrap small-down--one-whole relative image-with-text__image overflow-hidden">
+      <div class="image-with-text__image-size {% unless section.settings.image_size == '0' %}image-with-text__image-radius{% endunless %}" data-cc-animate="zoom-out-fade-in">
+        {%- if section.settings.image_link != blank -%}
+          <a class="block hover-images{% unless section.settings.image_size == '0' %} global-border-radius{% endunless %}" href="{{ section.settings.image_link }}">
+            <div class="image-one">
+        {%- endif -%}
+
+        {%- if section.settings.image != blank -%}
+          {%- if section.settings.image_size == '0' -%}
+              <div class="rimage-outer-wrapper rimage-background lazyload fade-in"
+                data-bgset="{% render 'bgset', image: section.settings.image %}"
+                data-sizes="auto"
+                data-parent-fit="cover"
+                style="background-position: {{ section.settings.image.presentation.focal_point }}">
+                <div class="rimage-wrapper" style="padding-top:{{ 1 | divided_by: section.settings.image.aspect_ratio | times: 100 }}%">
+                  <noscript>
+                    <img src="{{ section.settings.image | img_url: '1024x1024' }}" alt="{{ section.settings.image.alt | escape }}" class="rimage__image">
+                  </noscript>
+                </div>
+              </div>
+          {%- else -%}
+            {% render 'responsive-image', image: section.settings.image, nomax: true %}
+          {%- endif -%}
+        {%- endif -%}
+
+        {%- if section.settings.image_link != blank -%}
+            </div>
+          </a>
+        {%- endif -%}
+      </div>
+    </div>
+    <div class="Small-desktop-img">
+      {% if section.settings.image_small_desktop !=blank %}
+         <div class="ciwt-image-mobile">
+       <img src="{{ section.settings.image_small_desktop |img_url: 'master' }}" alt="{{ section.settings.image_small_desktop.alt }}">
+         </div>
+       {% endif %}
+    </div>
+    
+     <div class="mobile-image-wrapper">
+       {% if section.settings.image_mobile !=blank %}
+         <div class="ciwt-image-mobile">
+       <img src="{{ section.settings.image_mobile |img_url: 'master' }}" alt="{{ section.settings.image_mobile.alt }}">
+         </div>
+       {% endif %}
+     </div>
+    
+    <div class="one-half mobile-display-wrap small-down--one-whole relative image-with-text__content" data-cc-animate>
+      <div class="{%- if section.settings.text_alignment == 'center' -%}center {%- elsif section.settings.text_alignment == 'right' -%}right{%- endif -%} ">
+        <h2 class="image-with-text__title {% if section.settings.enlarge_title %} giant-title{% else %} large-title{% endif %}">{{ section.settings.title }}</h2>
+        {% if section.settings.text %}
+          <div class="image-with-text__text {% if section.settings.enlarge_text %}large-text{% endif %}">{{ section.settings.text }}</div>
+        {% endif %}
+
+        {% if section.settings.button_label != blank %}
+          {%- assign inherit_colour = false -%}
+          {%- if section.settings.url_style == 'link_style' -%}
+            {%- assign alpha = section.settings.color_bg | color_extract: 'alpha' -%}
+            {%- if alpha > 0 and section.settings.color_bg != settings.color_body_background -%}
+              {%- assign inherit_colour = true -%}
+            {%- endif -%}
+          {%- endif -%}
+
+          <a class="image-with-text__link {% if section.settings.url_style == 'button_1' %}btn btn--small btn--primary{% elsif section.settings.url_style == 'button_2' %}btn btn--small btn--secondary{% else %}standard-link {% if inherit_colour %}standard-link--inherit-color{% endif %}{% endif %}" href="{{ section.settings.button_link }}">
+            {{ section.settings.button_label }}
+          </a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "FH - Image with text",
+    "tag": "section",
+    "class": "section-image-with-text",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "section_top_margin",
+        "label": "Add section top margin",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "section_bottom_margin",
+        "label": "Add section bottom margin",
+        "default": false
+      },
+      {
+        "type": "image_picker",
+        "id": "background_img_des",
+        "label": "Background Image (Desktop)"
+      },
+       {
+        "type": "image_picker",
+        "id": "background_img_mob",
+        "label": "Background Image (Mobile)"
+      },
+      {
+        "type": "range",
+        "id": "section_height_des",
+        "label": "Desktop Fixed Height",
+        "min": 200,
+        "max": 800,
+        "step": 20,
+        "unit": "px",
+        "default": 400
+      },
+      {
+        "type": "range",
+        "id": "section_height_mob",
+        "label": "Mobile Fixed Height",
+        "min": 200,
+        "max": 800,
+        "step": 20,
+        "unit": "px",
+        "default": 400
+      },
+      {
+        "type": "header",
+        "content": "Image"
+      },
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image (Desktop)"
+      },
+      {
+        "type": "image_picker",
+        "id": "image_small_desktop",
+        "label": "Image (Smaller Desktop)"
+      },
+      {
+        "type": "image_picker",
+        "id": "image_mobile",
+        "label": "Image (Mobile)"
+      },
+      {
+        "type": "url",
+        "id": "image_link",
+        "label": "Link"
+      },
+      {
+        "type": "radio",
+        "id": "image_position",
+        "label": "Alignment",
+        "options": [
+          { "value": "left", "label": "Left" },
+          { "value": "right", "label": "Right" }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "Text"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "Image with text"
+
+      },
+      {
+        "type": "richtext",
+        "id": "text",
+        "label": "Text",
+        "default": "<p>Advertise a sale! Or tell your shoppers something about yourself.<\/p>"
+      },
+      {
+        "type": "text",
+        "id": "button_label",
+        "label": "Button",
+        "default": "Optional button"
+      },
+      {
+        "type": "url",
+        "id": "button_link",
+        "label": "Button link"
+      },
+      {
+        "type": "color",
+        "id": "button_link_color",
+        "label": "Button Color"
+      },
+      {
+        "type": "color",
+        "id": "button_link_background",
+        "label": "Button Background"
+      },
+      {
+        "type": "radio",
+        "id": "url_style",
+        "label": "Button style",
+        "options": [
+          { "value": "button_1", "label": "Button - primary" },
+          { "value": "button_2", "label": "Button - secondary" },
+          { "value": "link_style", "label": "Link"}
+        ],
+        "default": "button_1"
+      },
+      {
+        "type": "checkbox",
+        "id": "enlarge_title",
+        "label": "Enlarge heading",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "enlarge_text",
+        "label": "Enlarge text",
+        "default": false
+      },
+      {
+        "type": "radio",
+        "id": "text_alignment",
+        "label": "Text alignment",
+        "options": [
+          { "value": "center", "label": "Center" },
+          { "value": "left", "label": "Left" },
+          { "value": "right", "label": "Right" }
+        ]
+      },
+      {
+        "type": "color",
+        "id": "color_text",
+        "label": "Text color",
+        "default": "#333333"
+      }
+    ],
+    "presets": [
+      {
+        "name": "FH - image with text"
+      }
+    ],
+    "disabled_on": {
+      "groups": [
+        "aside"
+      ]
+    }
+  }
+{% endschema %}

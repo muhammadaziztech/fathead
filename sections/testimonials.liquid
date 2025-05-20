@@ -1,0 +1,332 @@
+<div class="relative container container--no-mobile-padding large-row section-{{ section.id }}" data-section-id="{{ section.id }}" data-section-type="testimonials">
+  {% style %}
+    .section-{{ section.id }} .testimonials {
+      background: {{ section.settings.gradient_bg | default: section.settings.color_bg}};
+      color: {{ section.settings.color_text }};
+    }
+    .section-{{ section.id }} .testimonials .large-title,
+    .section-{{ section.id }} .testimonials .giant-title {
+      color: {{ section.settings.color_title }};
+    }
+    .section-{{ section.id }} .testimonials .large-title {
+      font-size: 32px;
+    }
+    .section-{{ section.id }} .testimonials .slick-dots li button {
+      background-color: {{ section.settings.color_title }};
+    }
+    .section-{{ section.id }} .testimonials .slick-dots li.slick-active button {
+      background-color: transparent;
+      border-color: {{ section.settings.color_title }};
+    }
+    .section-{{ section.id }} .testimonials .feather-star {
+      stroke: {{ section.settings.color_star }};
+      fill: {{ section.settings.color_star }};
+    }
+    {% if section.settings.circle_images == true %}
+    .section-{{ section.id }} .testimonials .testimonial-author-image {
+      border-radius: 50%;
+    }
+    {% endif %}
+    .heading-date{
+      display:flex;
+      justify-content:space-around;
+      align-items:center;
+    }
+    .section-{{ section.id }} .heading-date p{
+      border:1px solid #ccc;
+      border-radius:20px;
+      padding:0 10px;
+    }
+    .testimonial-footer-news .news-row{
+      display:flex;
+      justify-content:center;
+      gap:30px;
+      padding-top:30px;
+    }
+    .testimonial-footer-news{
+      padding-top:40px;
+    }
+    .section-image{
+      position:absolute;
+      bottom:-7px;
+      right:30px;
+      width:34%;
+    }
+    .testimonial-footer{
+      padding-top:60px;
+    }
+    @media(max-width:768px){
+     .section-image{
+       position:unset;
+       margin:20px auto 0 auto;
+       width:80%;
+     }
+    }
+    {% if section.settings.section_top_margin %}
+      #shopify-section-{{ section.id }} {
+        margin-top: 30px;
+      }
+    {% endif %}
+    {% if section.settings.section_bottom_margin %}
+      #shopify-section-{{ section.id }} {
+        margin-bottom: 30px;
+      }
+    {% endif %}
+
+    #shopify-section-{{ section.id }} .grid-flex__item {
+      border-radius: 0;
+    }
+  {% endstyle %}
+
+  <div class="page-width testimonials large-section global-border-radius">
+    {%- if section.settings.title != blank or section.settings.enable_carousel == true -%}
+      <div class="testimonials--title text-center" data-cc-animate>
+        {% if section.settings.title != blank %}
+          <h2 class="{% if section.settings.enlarge_title %}giant-title{% else %}large-title{% endif%}">{{ section.settings.title | escape }}</h2>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    <div class="grid-flex js-testimonials-section" data-autoplay="{{ section.settings.autoplay }}" data-autoplayspeed="{{ section.settings.autoplay_speed }}000">
+      {% for block in section.blocks %}
+        <div class="grid-flex__item testimonial one-half small-down--one-whole" {{ block.shopify_attributes }} data-cc-animate="fade-in-up" data-cc-animate-delay="{{ forloop.index | times: 0.2 }}s">
+          <div class="heading-date">
+            <h5>{{ block.settings.heading }}</h5>
+            {% if block.settings.date !=blank %}
+            <p>{{ block.settings.date }}</p>
+              {% endif %}
+          </div>
+         
+          <blockquote class="testimonial-content rte {% if section.settings.enlarge_text %} large-text{% else %} standard-text{% endif %}">
+            {{ block.settings.testimonial }}
+             <div class="testimonial-stars">
+            {% for i in (1..block.settings.star_rating) %}
+              <span class="icon feather-icon testimonial-star">{% render 'feather-star' %}</span>
+            {% endfor %}
+             </div>
+            <footer class="testimonial-author-info">
+              {%- if block.settings.image != blank -%}
+                <div class="testimonial-author-image lazyload rimage-background global-border-radius"
+                     data-bgset="{% render 'bgset', image: block.settings.image %}"
+                     data-sizes="auto"
+                     data-parent-fit="cover"
+                     style="background-position: {{ block.settings.image.presentation.focal_point }}">
+                </div>
+              {%- endif -%}
+              {%- if block.settings.author != blank -%}
+                <div class="testimonial-author-name">{{ block.settings.author }}<P class="flex" style="font-size:12px; gap:10px;align-items:center;margin-top:0;">{% render 'verified-icon' %}Verified Buyer</P></div>
+              {%- endif -%}
+            </footer>
+          </blockquote>
+        </div>
+      {% endfor %}
+    </div>
+    {% comment %}
+    <div class="testimonial-footer">
+      <h2 class="center">{{ section.settings.news-heading }}</h2>
+      <div class="testimonial-footer-news">
+        <div class="news-row">
+          {% if section.settings.media-img-1 !=blank %}
+          <img src="{{ section.settings.media-img-1 |img_url: '100x100' }}" alt="{{ section.settings.media-img-1.alt }}" width="80" height="50">
+          {% endif %}
+          {% if section.settings.media-img-2 !=blank %}
+          <img src="{{ section.settings.media-img-2 |img_url: '100x100' }}" alt="{{ section.settings.media-img-2.alt }}" width="80" height="50">
+          {% endif %}
+          {% if section.settings.media-img-3 !=blank %}
+          <img src="{{ section.settings.media-img-3 |img_url: '100x100' }}" alt="{{ section.settings.media-img-3.alt }}" width="80" height="50">
+          {% endif %}
+          </div>
+          {% if section.settings.section-img !=blank %}
+          <div class="section-image">
+          <img src="{{ section.settings.section-img |img_url: 'master' }}" alt="{{ section.settings.section-img.alt }}" style="max-width:100%;height:auto;">
+          </div>
+          {% endif %}
+      </div>
+    </div>
+    {% endcomment %}
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Testimonials",
+    "tag": "section",
+    "class": "section-testimonials",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "section_top_margin",
+        "label": "Add section top margin",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "section_bottom_margin",
+        "label": "Add section bottom margin",
+        "default": false
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "Testimonials"
+      },
+      {
+        "type": "color",
+        "id": "color_title",
+        "label": "Heading color",
+        "default": "#333333"
+      },
+      {
+        "type": "color",
+        "id": "color_text",
+        "label": "Text color",
+        "default": "#333333"
+      },
+      {
+        "type": "color",
+        "id": "color_bg",
+        "label": "Background color",
+        "default": "#ecf1f2"
+      },
+      {
+        "type": "color_background",
+        "id": "gradient_bg",
+        "label": "Background gradient",
+        "info": "If set, replaces background color"
+      },
+      {
+        "type": "color",
+        "id": "color_star",
+        "label": "Stars color",
+        "default": "#ffdd00"
+      },
+      {
+        "type": "checkbox",
+        "id": "enlarge_title",
+        "label": "Enlarge heading",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "enlarge_text",
+        "label": "Enlarge text",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "autoplay",
+        "label": "Autoplay",
+        "default": false
+      },
+      {
+        "type": "range",
+        "id": "autoplay_speed",
+        "label": "Change slides every",
+        "min": 4,
+        "max": 10,
+        "unit": "s",
+        "step": 1,
+        "default": 6
+      },
+      {
+        "type": "checkbox",
+        "id": "circle_images",
+        "label": "Circular author images",
+        "default": false
+      },
+      {
+        "type": "header",
+        "content": "Testimonial footer"
+      },
+      {
+        "type": "text",
+        "id": "news-heading",
+        "label": "News Heading"
+      },
+      {
+        "type": "image_picker",
+        "id": "media-img-1",
+        "label": "Meadi Image 1"
+      },
+      {
+        "type": "image_picker",
+        "id": "media-img-2",
+        "label": "Meadi Image 2"
+      },
+      {
+        "type": "image_picker",
+        "id": "media-img-3",
+        "label": "Meadi Image 3"
+      },
+      {
+        "type": "image_picker",
+        "id": "section-img",
+        "label": "Section Image"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "testimonial",
+        "name": "Testimonial",
+        "settings": [
+          {
+            "type": "text",
+            "id": "heading",
+            "label": "Heading"
+          },
+          {
+            "type": "text",
+            "id": "date",
+            "label": "Date"
+          },
+          {
+            "type": "richtext",
+            "id": "testimonial",
+            "label": "Text",
+            "default": "<p>We couldn't be more pleased, the products and services are absolutely fantastic!</p>",
+            "info": "For best results, keep the word count consistent in each testimonial."
+          },
+           {
+            "type": "range",
+            "id": "star_rating",
+            "min": 0,
+            "max": 5,
+            "step": 1,
+            "label": "Star rating",
+            "default": 5
+          },
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Author's image"
+          },
+          {
+            "type": "text",
+            "id": "author",
+            "label": "Author"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Testimonials",
+        "blocks": [
+          {
+            "type": "testimonial"
+          },
+          {
+            "type": "testimonial"
+          }
+        ]
+      }
+    ],
+    "disabled_on": {
+      "groups": [
+        "aside"
+      ]
+    }
+  }
+
+{% endschema %}

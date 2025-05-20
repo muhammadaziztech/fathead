@@ -1,0 +1,137 @@
+<section class="section et-about-us-banner-section">
+    <div class="page-width">
+        <div class="et-about-us-banner">
+            <div class="logo-title">
+                <h2>{{section.settings.section_title}}</h2>
+                {%- unless section.settings.logo == blank -%}
+                <div class="logo">
+                    {{ section.settings.logo | image_url: width: 350 | image_tag }}
+                </div>
+                {% endunless %}
+            </div>
+            <div class="description">
+                {{section.settings.des}}
+                <a class="button margin" href="{{section.settings.banner_cta}}">{{section.settings.banner_cta_label}}</a>
+            </div>
+            {%- unless section.settings.banner_bottom_img == blank -%}
+            <div class="banner-bottom">
+                {{ section.settings.banner_bottom_img | image_url: width: full | image_tag }}
+            </div>
+            {% endunless %}
+        </div>
+    </div>
+</section>
+
+
+
+{%- style -%}
+    .et-about-us-banner {
+        background-color: {{section.settings.section_bg}};
+    }
+    .et-about-us-banner .logo-title h2,
+    .et-about-us-banner .description,
+    .et-about-us-banner .description p {
+        color: {{section.settings.content_clr}};
+    }
+    .et-about-us-banner .description a.button {
+        background-color: {{section.settings.banner_cta_bg}};
+        color: {{section.settings.banner_cta_clr}};
+    }
+    .et-about-us-banner-section {
+      padding-left: 40px;
+      padding-right: 40px;
+    }
+    {% if section.settings.section_top_margin %}
+      #shopify-section-{{ section.id }} {
+        margin-top: 30px;
+      }
+    {% endif %}
+    {% if section.settings.section_bottom_margin %}
+      #shopify-section-{{ section.id }} {
+        margin-bottom: 30px;
+      }
+    {% endif %}
+{%- endstyle -%}
+
+  
+  {% schema %}
+    {
+      "name": "ET About Us Banner",
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "section_top_margin",
+          "label": "Add section top margin",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "section_bottom_margin",
+          "label": "Add section bottom margin",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "section_title",
+          "label": "Section Title",
+          "default": "We are"
+        },
+        {
+            "type": "image_picker",
+            "id": "logo",
+            "label": "Logo"
+        },
+        {
+          "type": "richtext",
+          "id": "des",
+          "label": "Description"
+        },
+        {
+          "type": "url",
+          "id": "banner_cta",
+          "label": "Banner CTA"
+        },
+        {
+          "type": "text",
+          "id": "banner_cta_label",
+          "label": "Banner CTA Label",
+          "default": "Find your fandom!"
+        },
+        {
+            "type": "image_picker",
+            "id": "banner_bottom_img",
+            "label": "Banner Bottom Image"
+        },
+        {
+            "type": "color",
+            "id": "section_bg",
+            "label": "Section Background color",
+            "default": "#0258B7"
+        },
+        {
+            "type": "color",
+            "id": "content_clr",
+            "label": "Section Content Color",
+            "default": "#fff"
+        },
+        {
+            "type": "color",
+            "id": "banner_cta_bg",
+            "label": "CTA Background Color",
+            "default": "#D33901"
+        },
+        {
+            "type": "color",
+            "id": "banner_cta_clr",
+            "label": "CTA label Color",
+            "default": "#fff"
+        }
+      ],
+      "presets": [
+        {
+          "name": "ET About Us Banner",
+          "category": "fathead"
+        }
+      ]
+    }
+  {% endschema %}

@@ -1,0 +1,159 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": { "show_title": false, "title_alignment": "left" }
+    },
+    "slideshow_iRqYkp": {
+      "type": "slideshow",
+      "blocks": {
+        "image_Pyay74": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/NFL_landing_1600.png",
+            "image_link": "",
+            "color_overlay_bg": "#ffffff",
+            "overlay_opacity": 80,
+            "color_overlay_text": "#333333",
+            "text_alignment": "center",
+            "overlay_position_x": 50,
+            "overlay_position_y": 80,
+            "overlay_title": "",
+            "enlarge_title": false,
+            "overlay_title_width": 100,
+            "styled_words": "",
+            "words_style": "stencil",
+            "highlight_words_top": 10,
+            "highlight_color": "#ffffff",
+            "styled_word_color": "#1c1c1c",
+            "overlay_text": "",
+            "enlarge_text": false,
+            "overlay_url_text_1": "",
+            "overlay_url_1": "",
+            "overlay_url_text_2": "",
+            "overlay_url_2": "",
+            "overlay_url_style": "button_1",
+            "color_label_background": "#ffffff",
+            "color_label_text": "#333333",
+            "show_chevron": true,
+            "product_id_1": "",
+            "chevron_position_1": "right",
+            "label_position_x_1": 20,
+            "label_position_y_1": 30,
+            "product_id_2": "",
+            "chevron_position_2": "right",
+            "label_position_x_2": 80,
+            "label_position_y_2": 50
+          }
+        }
+      },
+      "block_order": ["image_Pyay74"],
+      "custom_css": [
+        ".full-width-slideshow {padding-left: 0; padding-right: 0; margin-top: 0;}",
+        ".full-width-slideshow .slick-track {width: 100% !important;}",
+        ".full-width-slideshow .slick-initialized .slide {width: 100% !important;}"
+      ],
+      "settings": {
+        "height": "adapt",
+        "height_desktop": 600,
+        "height_mobile": 500,
+        "mobile_text_below": true,
+        "slide_transition": "fade",
+        "slideshow_autoplay": true,
+        "slideshow_autoplay_speed": 6
+      }
+    },
+    "logo_list_4jFEW6": {
+      "type": "logo-list",
+      "blocks": {
+        "logo_jYz6MB": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/NFL_Logo_Kansas_City_Chiefs.png",
+            "image_width": 60,
+            "link": "shopify://pages/kansas-city-chiefs",
+            "title": ""
+          }
+        }
+      },
+      "block_order": ["logo_jYz6MB"],
+      "settings": {
+        "title": "",
+        "color_bg": "#ffffff",
+        "color_title": "#333333",
+        "color_text": "#333333",
+        "enlarge_title": false,
+        "enlarge_text": false,
+        "image_opacity": 75
+      }
+    },
+    "split_image_KdaRNX": {
+      "type": "split-image",
+      "blocks": {
+        "image_R4qt4x": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Jalen_Hurts_Promo_2x_885ab709-ae29-4c88-b703-b2f30cf8ae22.png",
+            "image_link": "",
+            "color_overlay_bg": "#ffffff",
+            "overlay_opacity": 0,
+            "color_overlay_text": "#ffffff",
+            "overlay_title": "Jalen Hurts",
+            "overlay_text": "",
+            "overlay_url_text": "",
+            "overlay_url": "",
+            "overlay_url_style": "button_1",
+            "enlarge_title": false,
+            "enlarge_text": false,
+            "overlay_position_x": 20,
+            "overlay_position_y": 10,
+            "mobile_text_below": false,
+            "color_label_background": "#ffffff",
+            "color_label_text": "#333333",
+            "product_id": "jalen-hurts-celebration-realbig-collection-official-nfl-philadelphia-eagles-reusable-vinyl-wall-decals",
+            "show_chevron": true,
+            "chevron_position": "right",
+            "label_position_x": 20,
+            "label_position_y": 80
+          }
+        },
+        "image_Cx8LCm": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Travis_Kelce_Promo_2x_2ed2c937-dc43-4e8c-9762-9e3f0d6f09c7.png",
+            "image_link": "",
+            "color_overlay_bg": "#ffffff",
+            "overlay_opacity": 0,
+            "color_overlay_text": "#ffffff",
+            "overlay_title": "Patrick Mahomes",
+            "overlay_text": "",
+            "overlay_url_text": "",
+            "overlay_url": "",
+            "overlay_url_style": "button_1",
+            "enlarge_title": false,
+            "enlarge_text": false,
+            "overlay_position_x": 20,
+            "overlay_position_y": 10,
+            "mobile_text_below": false,
+            "color_label_background": "#ffffff",
+            "color_label_text": "#333333",
+            "product_id": "patrick-mahomes-ii-realbig-collection-official-nfl-kansas-city-chiefs-reusable-vinyl-wall-decals-6",
+            "show_chevron": true,
+            "chevron_position": "right",
+            "label_position_x": 20,
+            "label_position_y": 80
+          }
+        }
+      },
+      "block_order": ["image_R4qt4x", "image_Cx8LCm"],
+      "settings": { "height_desktop": 300, "height_mobile": 300 }
+    }
+  },
+  "order": [
+    "main",
+    "slideshow_iRqYkp",
+    "logo_list_4jFEW6",
+    "split_image_KdaRNX"
+  ]
+}

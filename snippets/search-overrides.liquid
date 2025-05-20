@@ -1,0 +1,351 @@
+<style>
+
+  .template-collection .snize-main-panel {
+    {% if collection.metafields.custom.sort_filter_background != blank %}
+      background-image:url({{ collection.metafields.custom.sort_filter_background | img_url: 'original'}}) !important;
+    {% endif %}
+    background-repeat: no-repeat !important;
+    background-size: 100% 100% !important;
+  }
+  .template-collection .snize-horizontal-wrapper {
+    {% if collection.metafields.custom.sort_filter_background != blank %}
+      background-image:url({{ collection.metafields.custom.sort_filter_background | img_url: 'original'}}) !important;
+    {% endif %}
+    background-repeat: no-repeat !important;
+    background-size: 100% 100% !important;
+    padding: 20px 40px !important;
+  }
+  .template-collection .snize-main-panel-collection-results-found, #search-results .snize-search-results-header {
+    color: white !important;
+    font-size: 16px !important;
+    font-weight: 500 !important;
+  }
+  .snize-search-results-main-content {
+    padding: 0 40px !important;
+  }
+  .template-collection .large-section:has(#snize_results) {
+    padding-top: 0rem !important;
+    padding-left: 0;
+    padding-right: 0;
+    padding: 0;
+  }
+  .template-collection .snize-price-list {
+    font-size: 20px;
+    font-family: sans-serif !important;
+    font-weight: 100;
+  }
+  #snize_results {
+    padding: 0px !important;
+  }
+  .snize-search-results .snize-main-panel {
+    margin: 0 auto !important;
+    margin: 0 -40px 20px !important;
+    position: sticky !important;
+    top: 0;
+    z-index: 99;
+  }
+  .snize-main-panel-collection-results-found .filter-button, #search-results .snize-search-results-header .filter-button {
+    width: 98px;
+    padding-right: 10px;
+    margin-right: 10px;
+    border-right: 1px solid white;
+    padding-top: 4px;
+    align-items: center;
+    cursor: pointer;
+    height: 32px;
+    min-width: initial;
+    margin-top: 0 !important;
+    padding-bottom: 4px;
+  }
+  .snize-main-panel-collection-results-found .filter-button span, #search-results .snize-search-results-header .filter-button span{
+    font-size:14px;
+  }
+  .snize-filters-sidebar {
+    display: none;
+    margin-left: 40px !important;
+    margin-right: 0px  !important;
+  }
+  .snize-search-results-main-content.filters_visible {
+    display: flex;
+  } 
+  
+  @media (max-width: 930px) {
+    .snize-main-panel-collection-results-found {
+      text-align: center !important;
+      visibility: visible !important;
+      margin: 0 auto !important;
+    }
+    .snize-main-panel-mobile-filters::after {
+      filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(27%) hue-rotate(40deg) brightness(106%) contrast(108%);
+    }
+    
+    #snize_results {
+      padding: 0px;
+    }
+    .snize-main-panel-mobile-filters a {
+      color: white !important;
+    }
+    .snize-search-results .snize-main-panel {
+      margin: 0 0px !important;
+      padding: 10px;
+      display: flex !important;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+    }
+    div.snize div.snize-main-panel:empty {
+      display: none !important;
+    }
+    #snize_results.snize-mobile-design.snize-new-version div.snize-main-panel-dropdown {
+      display: block;
+      margin-bottom: 0;
+      margin-top: 6px !important;
+    }
+  }
+  @media screen and (max-width: 820px) {
+    .template-collection .snize-horizontal-wrapper {
+      display: none !important;
+    }
+    .snize-search-results .snize-main-panel .snize-main-panel-collection-results-found {
+      width: 100%;
+    }
+  }
+  @media (max-width: 820px) {
+    .snize-main-panel-collection-results-found .filter-button {
+      display: none !important;
+    }
+  }
+
+</style>
+{% if template.name == "collection" %}
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+      if (isSafari) return; // Stop execution for Safari
+
+      const config = { attributes: true, childList: true, subtree: true };
+
+      function addFilterButton() {
+        const resultsText = document.querySelector(".snize-main-panel-collection-results-found");
+        if (resultsText && !resultsText.querySelector(".filter-button")) {
+          resultsText.insertAdjacentHTML(
+            "afterbegin",
+            `<div class="filter-button">
+               <img src="https://cdn.shopify.com/s/files/1/0279/0234/5304/files/Icon_FilterWhite.svg?v=1730071725">
+               <span>FILTERS</span>
+             </div>`
+          );
+        }
+      }
+
+      function setupObserver() {
+        const observerTarget = document.body;
+        if (!observerTarget) return;
+
+        const checkForResults = () => {
+          const resultsText = document.querySelector(".snize-main-panel-collection-results-found");
+          if (resultsText) {
+            addFilterButton();
+          } else {
+            setTimeout(checkForResults, 500);
+          }
+        };
+
+        const mutationCallback = (mutationList) => {
+          for (const mutation of mutationList) {
+            if (mutation.type === 'childList') {
+              checkForResults();
+            }
+          }
+        };
+
+        const observer = new MutationObserver(mutationCallback);
+        observer.observe(observerTarget, config);
+
+        checkForResults();
+      }
+
+      setupObserver();
+    });
+  </script>
+{% elsif template.name == "page" %}
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+      if (isSafari) return; // Stop execution for Safari
+
+      const config = { attributes: true, childList: true, subtree: true };
+
+      function addFilterButton() {
+        const resultsText = document.querySelector(".snize-search-results-header");
+        if (resultsText && !resultsText.querySelector(".filter-button")) {
+          resultsText.insertAdjacentHTML(
+            "afterbegin",
+            `<div class="filter-button">
+               <img src="https://cdn.shopify.com/s/files/1/0279/0234/5304/files/Icon_FilterWhite.svg?v=1730071725">
+               <span>FILTERS</span>
+             </div>`
+          );
+        }
+      }
+
+      function setupObserver() {
+        const observerTarget = document.body;
+        if (!observerTarget) return;
+
+        const checkForResults = () => {
+          const resultsText = document.querySelector(".snize-search-results-header");
+          if (resultsText) {
+            addFilterButton();
+          } else {
+            setTimeout(checkForResults, 500);
+          }
+        };
+
+        const mutationCallback = (mutationList) => {
+          for (const mutation of mutationList) {
+            if (mutation.type === 'childList') {
+              checkForResults();
+            }
+          }
+        };
+
+        const observer = new MutationObserver(mutationCallback);
+        observer.observe(observerTarget, config);
+
+        checkForResults();
+      }
+
+      setupObserver();
+    });
+  </script>
+{% endif %}
+
+{% if template.name == "collection" %}
+
+<script>
+   const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+    if (isSafari){
+    const config = { attributes: true, childList: true, subtree: true };
+    const snizeResults = document.querySelector("#MainContent [id*=searchanise_search_filter_app_block]");
+    const checkForResults = (mutationList, observer) => {
+      for (const mutation of mutationList) {
+        if (mutation.type === 'childList') {
+          // Check if the target element was added
+          if (mutation.addedNodes.length) {
+            mutation.addedNodes.forEach(node => {
+              if (node.id === 'snize_results') {
+                console.log("node:", node);
+                const resultsText = document.querySelector(".snize-main-panel-collection-results-found");
+                resultsText.insertAdjacentHTML("afterbegin", `<div class="filter-button"><img src="https://cdn.shopify.com/s/files/1/0279/0234/5304/files/Icon_FilterWhite.svg?v=1730071725"><span>FILTERS</span></div>`)
+                const checkForFilterButton = (mutationList, observer) => {
+                  for (const mutation of mutationList) {
+                    if (mutation.type === 'childList') {
+                      // Check if the target element was added
+                      if (mutation.removedNodes.length) {
+                        mutation.removedNodes.forEach(node => {
+                          if (node.classList.contains("filter-button")) {
+                            resultsText.insertAdjacentHTML("afterbegin", `<div class="filter-button"><img src="https://cdn.shopify.com/s/files/1/0279/0234/5304/files/Icon_FilterWhite.svg?v=1730071725"><span>FILTERS</span></div>`)
+                          }
+                        })
+                      }
+                    }
+                  }
+                };
+                if (resultsText) {
+                  const filterButtonObserver = new MutationObserver(checkForFilterButton);
+                  filterButtonObserver.observe(resultsText, config);
+                }
+                observer.disconnect();
+              }
+            });
+          }
+        }
+      }
+    };
+    const resultsObserver = new MutationObserver(checkForResults);
+    resultsObserver.observe(snizeResults, config);
+      document.addEventListener('click', function(event) {
+    if (event.target.closest('.filter-button')) {
+        if (window.innerWidth < 820) {
+            document.querySelector('.snize-main-panel-mobile-filters')?.click();
+        } else {
+            const sidebar = document.querySelector('.snize-filters-sidebar.snize-product-filters');
+            const mainContent = document.querySelector('.snize-search-results-main-content');
+
+            if (sidebar) {
+                sidebar.style.display = (sidebar.style.display === 'none' || !sidebar.style.display) ? 'block' : 'none';
+            }
+
+            if (mainContent) {
+                mainContent.classList.toggle('filters_visible');
+            }
+        }
+    }
+});
+    }
+</script>
+{% elsif template.name == "page" %}
+  <script>
+        const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+    if (isSafari){
+    const config = { attributes: true, childList: true, subtree: true };
+    const snizeResults = document.querySelector("#MainContent .shopify-section--main-page");
+    const checkForResults = (mutationList, observer) => {
+      for (const mutation of mutationList) {
+        if (mutation.type === 'childList') {
+          // Check if the target element was added
+          if (mutation.addedNodes.length) {
+            mutation.addedNodes.forEach(node => {
+              if (node.id === 'snize_results') {
+                console.log("node:", node);
+                const resultsText = document.querySelector(".snize-search-results-header");
+                resultsText.insertAdjacentHTML("afterbegin", `<div class="filter-button"><img src="https://cdn.shopify.com/s/files/1/0279/0234/5304/files/Icon_FilterWhite.svg?v=1730071725"><span>FILTERS</span></div>`)
+                const checkForFilterButton = (mutationList, observer) => {
+                  for (const mutation of mutationList) {
+                    if (mutation.type === 'childList') {
+                      // Check if the target element was added
+                      if (mutation.removedNodes.length) {
+                        mutation.removedNodes.forEach(node => {
+                          if (node.classList.contains("filter-button")) {
+                            resultsText.insertAdjacentHTML("afterbegin", `<div class="filter-button"><img src="https://cdn.shopify.com/s/files/1/0279/0234/5304/files/Icon_FilterWhite.svg?v=1730071725"><span>FILTERS</span></div>`)
+                          }
+                        })
+                      }
+                    }
+                  }
+                };
+                if (resultsText) {
+                  const filterButtonObserver = new MutationObserver(checkForFilterButton);
+                  filterButtonObserver.observe(resultsText, config);
+                }
+                observer.disconnect();
+              }
+            });
+          }
+        }
+      }
+    };
+    const resultsObserver = new MutationObserver(checkForResults);
+    resultsObserver.observe(snizeResults, config);
+      document.addEventListener('click', function(event) {
+    if (event.target.closest('.filter-button')) {
+        if (window.innerWidth < 820) {
+            document.querySelector('.snize-main-panel-mobile-filters')?.click();
+        } else {
+            const sidebar = document.querySelector('.snize-filters-sidebar.snize-product-filters');
+            const mainContent = document.querySelector('.snize-search-results-main-content');
+
+            if (sidebar) {
+                sidebar.style.display = (sidebar.style.display === 'none' || !sidebar.style.display) ? 'block' : 'none';
+            }
+
+            if (mainContent) {
+                mainContent.classList.toggle('filters_visible');
+            }
+        }
+    }
+});
+    }
+  </script>
+{% endif %}

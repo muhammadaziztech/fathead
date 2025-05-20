@@ -1,0 +1,614 @@
+{% assign showMenuItem = true %}
+{% if menuItem.schedulePublishing %}
+{% assign now = "now" | date: "%s" | plus: 0 %}
+
+{{menuItem.fromDate | replace: "T", " " | append: ":00"}} - {{"now" | date: "%Y-%m-%d %H:%M:00"}} - {{menuItem.to_date | replace: "T", " " | append: ":00"}}
+{% assign publishingFrom = menuItem.fromDate | replace: "T", " " | append: ":00" | date: "%s" | plus: 0 %}
+{% assign publishingTo = menuItem.toDate | replace: "T", " " | append: ":00" | date: "%s" | plus: 0 %}
+{{publishingFrom}} - {{now}} - {{publishingTo}}
+{% if publishingFrom > 0 and now < publishingFrom %}{% assign showMenuItem = false %}{% endif %}
+{% if publishingTo > 0 and now > publishingTo %}{% assign showMenuItem = false %}{% endif %}
+{% endif %}
+
+{% if showMenuItem %}
+
+{% assign widths = "165,360,533,720,1000,1500" | split: "," %}
+{% assign languageCode = "" %}
+{%- assign shopLocale = 'null' -%}
+{%- for locale in shop.published_locales -%}
+  {%- if locale.primary -%}
+    {%- assign shopLocale = locale.iso_code -%}
+  {%- endif -%}
+{%- endfor -%}
+{% if request.locale.iso_code != shopLocale %}
+{% assign languageCode = "_" | append: request.locale.iso_code %}
+{% endif %}
+{% capture menuItemClass %}gm-item{% if menuItem.hideOnDesktop %} gm-hidden-desktop{% endif %}{% if menuItem.hideOnMobile %} gm-hidden-mobile{% endif %}{% if menuItem.noPadding %} gm-no-padding{% endif %}{% if menuItem.level and menuItem.level == 0 %} gm-level-{{ menuItem.level }}{% endif %}{% if menuItem.width %} gm-grid-item gmcol-{{ menuItem.width }}{% endif %}{% if menuItem.is_heading or menuItem.submenu.type == 'products-list' %} gm-heading{% endif %}{% if menuItem.submenu.items.size > 0 %} gm-has-submenu{% if menuItem.submenu.type and menuItem.submenu.type != "tabContents" %} gm-submenu-{{ menuItem.submenu.type }}{% endif %}{% if menuItem.submenu.alignment %}{% if menuItem.submenu.type == "dropdown" and menuItem.submenu.orientation == "horizontal" %} gm-submenu-align-full{% else %} gm-submenu-align-{{ menuItem.submenu.alignment }}{% endif %}{% endif %}{% endif %}{% if menuItem.active %} gm-active{% endif %}{% if menuItem.class %} {{ menuItem.class }}{% endif %}{% if menuItem.extraClass %} {{ menuItem.extraClass }}{% endif %}{% endcapture %}
+
+{% assign menuItemTitle = menuItem.title %}
+{% assign menuItemDescription = menuItem.description %}
+{% assign menuItemImage = menuItem.image %}
+{% assign menuItemBadgeTitle = menuItem.badge.title %}
+{% assign menuItemIcon = menuItem.icon %}
+{% assign menuItemUrl = menuItem.url %}
+{% assign menuItemUrlTag = menuItem.urlTag %}
+
+{% if languageCode != "" %}
+  {% assign titleLanguageCode = 'title' | append: languageCode %}
+  {% if menuItem[titleLanguageCode] %}
+  {% assign menuItemTitle = menuItem[titleLanguageCode] %}
+  {% endif %}
+  {% assign descriptionLanguageCode = 'description' | append: languageCode %}
+  {% if menuItem[descriptionLanguageCode] %}
+  {% assign menuItemDescription = menuItem[descriptionLanguageCode] %}
+  {% endif %}
+  {% assign imageLanguageCode = 'image' | append: languageCode %}
+  {% if menuItem[imageLanguageCode] %}
+  {% assign menuItemImage = menuItem[imageLanguageCode] %}
+  {% endif %}
+  {% assign badgeTitleLanguageCode = 'title' | append: languageCode %}
+  {% if menuItem[badgeTitleLanguageCode] %}
+  {% assign menuItemBadgeTitle = menuItem.badge[badgeTitleLanguageCode] %}
+  {% endif %}
+  {% assign iconLanguageCode = 'icon' | append: languageCode %}
+  {% if menuItem[iconLanguageCode] %}
+  {% assign menuItemIcon = menuItem[iconLanguageCode] %}
+  {% endif %}
+  {% assign urlLanguageCode = 'url' | append: languageCode %}
+  {% if menuItem[urlLanguageCode] %}
+  {% assign menuItemUrl = menuItem[urlLanguageCode] %}
+  {% endif %}
+  {% assign urlTagLanguageCode = 'urlTag' | append: languageCode %}
+  {% if menuItem[urlTagLanguageCode] %}
+  {% assign menuItemUrlTag = menuItem[urlTagLanguageCode] %}
+  {% endif %}
+{% endif %}
+
+{% if menuItemUrl and menuItemUrlTag and menuItemUrl contains '/collections/' %}
+  {% assign menuItemUrlTag = menuItemUrlTag | split: ',' %}
+  {% capture menuItemUrl %}{{ menuItemUrl }}/{% for tag in menuItemUrlTag %}{{ tag | strip | replace: " ", "-" | url_encode }}{% unless forloop.last %}+{% endunless %}{% endfor %}{% endcapture %}
+{% endif %}
+
+{% assign addToCartText = settings.language.add_to_cart_default | default: settings.language.add_to_cart %}
+{% assign soldOutText = settings.language.sold_out_default | default: settings.language.sold_out %}
+{% assign saleText = settings.language.sale_default | default: settings.language.sale %}
+{% if languageCode != "" %}
+  {% assign atcLanguageCode = 'add_to_cart' | append: languageCode %}
+  {% if settings.language[atcLanguageCode] %}
+  {% assign addToCartText = settings.language[atcLanguageCode] %}
+  {% endif %}
+  {% assign soldLanguageCode = 'sold_out' | append: languageCode %}
+  {% if settings.language[soldLanguageCode] %}
+  {% assign soldOutText = settings.language[soldLanguageCode] %}
+  {% endif %}
+  {% assign saleLanguageCode = 'sale' | append: languageCode %}
+  {% if settings.language[saleLanguageCode] %}
+  {% assign saleText = settings.language[saleLanguageCode] %}
+  {% endif %}
+{% endif %}
+
+{% case menuItem.type %}
+  {% when 'links' %}
+    <li class="{{ menuItemClass }}">
+      <ul class="gm-links{% if menuItem.justifyContent %}  gm-jc-{{ menuItem.justifyContent }}{% endif %}">
+        {% assign linkGroup = 0 %}
+        {% for item in menuItem.submenu.items %}
+          {% if item.is_heading %}{% assign linkGroup = linkGroup | plus: 1 %}{% endif %}
+          {% render 'globo.menu.item', menuItem: item, linkGroup: linkGroup %}
+        {% endfor %}
+      </ul>
+    </li>
+  {% when 'tabs' %}
+    <li class="{{ menuItemClass }}">
+      <div class="gm-tabs gm-tabs-{{ menuItem.alignment }} {% if menuItem.alignment != 'top' and menuItem.submenu.alignment %}gm-jc-{{ menuItem.submenu.alignment }}{% endif %}">
+        <ul class="gm-tab-links{% if menuItem.alignment == 'top' and menuItem.submenu.alignment %}gm-jc-{{ menuItem.submenu.alignment }}{% endif %}">
+          {% for item in menuItem.submenu.items %}
+            {% render 'globo.menu.item', menuItem: item, dataTabIndex: forloop.index0, noSubMenu: true %}
+          {% endfor %}
+        </ul>
+        <ul class="gm-tab-contents">
+          {% for item in menuItem.submenu.items %}
+          <li data-tab-index="{{ forloop.index0 }}" class="gm-tab-content{% if item.submenu.items.size > 0 %} hc{% endif %}{% if item.active %} gm-active{% endif %}">
+            <ul class="gm-tab-panel">
+              {% for subItem in item.submenu.items %}
+                {% render 'globo.menu.item', menuItem: subItem %}
+              {% endfor %}
+              {%- unless shop.metafields.globo_menu.remove_watermark %}
+              {%- if aliExpress %}<p style="text-align:right;display:flex !important;flex:0 0 100%;font-size:11px;padding:3px;margin:0;justify-content:flex-end;opacity:0.7;background:transparent">Powered by <a style="margin: 0 0 0 3px !important;padding: 0 !important;color: #5c6ac4 !important;font-weight: bold !important;font-size: 12px !important;" href="https://apps.shopify.com/globo-mega-menu">Globo Mega Menu</a></p>{% endif -%}
+              {% endunless -%}
+            </ul>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </li>
+  {% when 'image' %}
+   {%- capture imageWidth -%}--gm-item-image-width:{%- if menuItem.image_width -%}{{- menuItem.image_width -}}{%- else -%}{{- "auto" -}}{%- endif -%}{%- endcapture -%}
+    <li class="{{ menuItemClass }}">
+      <div class="gm-image" {% if imageWidth != "" %} style="{{- imageWidth -}}"{% endif %}>
+        <a title="{{ menuItemTitle | escape }}"{% if menuItem.targetBlank %} target='_blank'{% endif %} href="{{ menuItemUrl }}">
+          {%- if menuItemImage -%} 
+            <img
+              {% if settings.general.lazy_load_enable %}srcSet="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="{% endif %}
+              data-sizes="auto"
+              {% if settings.general.lazy_load_enable %}data-src="{{ menuItemImage | file_img_url: 'large' | replace: '_large.', imgLz | replace: '.JPG', '.jpg' | replace: '.jpeg', '.jpg' }}"{% else %}src="{{ menuItemImage | file_img_url: '2048x' | replace: '.JPG', '.jpg' | replace: '.jpeg', '.jpg' }}"{% endif %}
+              width="{{ menuItemImage.width }}"
+              height="{{ menuItemImage.height }}"
+              loading="lazy"
+              data-widths="[40, 100, 140, 180, 250, 260, 275, 305, 440, 610, 720, 930, 1080]"
+              class="{% if settings.general.lazy_load_enable %}gmlazyload {% endif %}{% if class %} {{ class }}{% endif %}"
+              alt="{{ menuItemTitle | escape }}"
+            />
+          {%- endif -%}
+          {%- if menuItemTitle or menuItemBadgeTitle or menuItemDescription -%}
+          <div class="gm-target{% if menuItem.justifyContent %} gm-jc-{{ menuItem.justifyContent }}{% endif %}">
+            {% assign text = menuItemTitle | split: "-" %}
+            <div class="snize">
+              <div class="snize-title-line1">{{ text[0] }}</div>
+              <div class="snize-title-line2">{{ text[1] }}</div>
+              <div class="snize-title-line3">{{ text[2] }}</div>
+            </div>
+            {% comment %}
+              <span class="gm-text">
+                {%- if menuItemBadgeEnable and menuItemBadgeTitle -%}
+                <span class="gm-badge gm-badge-{% if menuItem.level == 0 %}top{% else %}left{% endif %}" style="color: {{ menuItem.badge.backgroundColor }}">
+                  <span style="background: {{ menuItem.badge.backgroundColor }}; color: {{ menuItem.badge.color }}">{{ menuItemBadgeTitle }}</span>
+                </span>
+                {%- endif -%}
+                {%- if menuItemDescription -%}<span class="gm-description">{{ menuItemDescription }}</span>{%- endif -%}
+              </span>
+            {% endcomment %}
+          </div>
+          {%- endif -%}
+        </a>
+      </div>
+    </li>
+  {% when 'product' %}
+    {% assign pClass = "" %}
+    {% if menuItem.display == "image_left" %}
+      {% assign pClass = "gm-single-product" %}
+    {% endif %}
+    <li class="{{ menuItemClass }}">
+      {% render 'globo.menu.item.product', menuItem: item, layout: menuItem.display, handle: menuItem.product.handle, class: pClass, saleText: saleText, soldOutText: soldOutText, addToCartText: addToCartText %}
+    </li>
+  {% when 'products' %}
+    {% if menuItem.view == "carousel" %}
+      {% assign carouselMaxItem = 4 %}
+      {% if menuItem.itemWidth > 0 %}
+        {% assign carouselMaxItem = 12 | divided_by: menuItem.itemWidth %}
+      {% endif %}
+      <li class="{{ menuItemClass }}">
+        <ul class="gm-products-carousel{% if menuItemTitle %} no-heading{% endif %}">
+          {% if menuItemTitle %}
+          <li class="gm-heading">
+            <a class="gm-target"{% if menuItem.targetBlank %} target="_blank"{% endif %} href="{{ menuItemUrl }}">{{menuItemTitle}}</a>
+          </li>
+          {% endif %}
+          <li id="gm-owlcarousel-outer" class="gm-owlcarousel-outer">
+            <div class="gm-owlcarousel owl-carousel" data-show="{{ carouselMaxItem }}">
+              {% if menuItem.products %}
+                {% for product in menuItem.products %}
+                  {% render 'globo.menu.item.product', menuItem: menuItem, layout: menuItem.display, handle: product.handle, saleText: saleText, soldOutText: soldOutText, addToCartText: addToCartText %}
+                {% endfor %}
+              {% endif %}
+            </div>
+          </li>
+        </ul>
+      </li>
+    {% elsif menuItem.view == 'grid' %}
+      <li class="{{ menuItemClass }}">
+        <ul class="gm-products-grid gm-grid">
+          {% if menuItemTitle %}
+            <li class="gmcol-12">
+              <div class="gm-heading">
+                <a class="gm-target"{% if menuItem.targetBlank %} target="_blank"{% endif %} href="{{ menuItemUrl }}">{{menuItemTitle}}</a>
+              </div>
+            </li>
+          {% endif %}
+          {% for product in menuItem.products %}
+            {% if menuItem.itemView == 'image_left' %}
+              <li class="gm-grid-item {% if menuItem.itemWidth %} gmcol-{{ menuItem.itemWidth }}{% else %} gmcol{% endif %}">
+                {% render 'globo.menu.item.product', menuItem: menuItem, layout: menuItem.itemView, handle: product.handle, saleText: saleText, soldOutText: soldOutText, addToCartText: addToCartText %}
+              </li>
+            {% else %}
+              <li class="gm-grid-item {% if menuItem.itemWidth %} gmcol-{{ menuItem.itemWidth }}{% else %} gmcol{% endif %}">
+                {% render 'globo.menu.item.product', menuItem: menuItem, layout: menuItem.itemView, handle: product.handle, saleText: saleText, soldOutText: soldOutText, addToCartText: addToCartText %}
+              </li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+      </li>
+    {% else %}
+      <li class="{{ menuItemClass }}">
+        <ul class="gm-products-list gm-grid">
+          {% if menuItemTitle %}
+            <li class="gmcol-12">
+              <div class="gm-heading">
+                <a class="gm-target"{% if menuItem.targetBlank %} target="_blank"{% endif %} href="{{ menuItemUrl }}">{{menuItemTitle}}</a>
+              </div>
+            </li>
+          {% endif %}
+          {% for product in menuItem.products %}
+            <li class="gm-grid-item gmcol-12">
+              {% render 'globo.menu.item.product', menuItem: menuItem, layout: menuItem.layout, handle: product.handle, saleText: saleText, soldOutText: soldOutText, addToCartText: addToCartText %}
+            </li>
+          {% endfor %}
+        </ul>
+      </li>
+    {% endif %}
+  {% when 'articles' or 'blog' %}
+    {% if menuItem.view == "carousel" %}
+      {% assign carouselMaxItem = 4 %}
+      {% if menuItem.itemWidth > 0 %}
+        {% assign carouselMaxItem = 12 | divided_by: menuItem.itemWidth %}
+      {% endif %}
+      <li class="{{ menuItemClass }}">
+        <ul class="gm-products-carousel{% if menuItemTitle %} no-heading{% endif %}">
+          {% if menuItemTitle %}
+          <li class="gm-heading">
+            <a class="gm-target"{% if menuItem.targetBlank %} target="_blank"{% endif %} href="{{ menuItemUrl }}">{{ menuItemTitle }}</a>
+          </li>
+          {% endif %}
+          <li id="gm-owlcarousel-outer" class="gm-owlcarousel-outer">
+            <div class="gm-owlcarousel owl-carousel" data-show={{ carouselMaxItem }}>
+              {% if menuItem.type == 'articles' and menuItem.articles %}
+                {% for article in menuItem.articles %}
+                  {% assign article = articles[article.handle] %}
+                  {% render 'globo.menu.item.article', article: article, layout: menuItem.itemView %}
+                {% endfor %}
+              {% elsif menuItem.type == 'blog' and menuItem.blog.handle and blogs[menuItem.blog.handle].articles.size > 0 %}
+                {% for article in blogs[menuItem.blog.handle].articles limit: menuItem.limit %}
+                  {% render 'globo.menu.item.article', article: article, layout: menuItem.itemView %}
+                {% endfor %}
+              {% endif %}
+            </div>
+          </li>
+        </ul>
+      </li>
+    {% elsif menuItem.view == 'grid' %}
+      <li class="{{ menuItemClass }}">
+        <ul class="gm-products-grid gm-grid">
+          {% if menuItemTitle %}
+            <li class="gmcol-12">
+              <div class="gm-heading">
+                <a class="gm-target"{% if menuItem.targetBlank %} target="_blank"{% endif %} href="{{ menuItemUrl }}">{{ menuItemTitle }}</a>
+              </div>
+            </li>
+          {% endif %}
+          {% if menuItem.type == 'articles' and menuItem.articles %}
+            {% for article in menuItem.articles %}
+              {% assign article = articles[article.handle] %}
+              <li class="gm-grid-item{% if menuItem.itemWidth %} gmcol-{{ menuItem.itemWidth }}{% else %} gmcol{% endif %}">
+                {% render 'globo.menu.item.article', article: article, layout: menuItem.itemView %}
+              </li>
+            {% endfor %}
+          {% elsif menuItem.type == 'blog' and menuItem.blog.handle and blogs[menuItem.blog.handle].articles.size > 0 %}
+            {% for article in blogs[menuItem.blog.handle].articles limit: menuItem.limit %}
+              <li class="gm-grid-item{% if menuItem.itemWidth %} gmcol-{{ menuItem.itemWidth }}{% else %} gmcol{% endif %}">
+                {% render 'globo.menu.item.article', article: article, layout: menuItem.itemView %}
+              </li>
+            {% endfor %}
+          {% endif %}
+        </ul>
+      </li>
+    {% else %}
+      <li class="{{ menuItemClass }}">
+        <ul class="gm-products-list gm-grid">
+          {% if menuItemTitle %}
+          <li class="gmcol-12">
+            <div class="gm-heading">
+              <a class="gm-target"{% if menuItem.targetBlank %} target="_blank"{% endif %} href="{{ menuItemUrl }}">{{ menuItemTitle }}</a>
+            </div>
+          </li>
+          {% endif %}
+          {% if menuItem.type == 'articles' and menuItem.articles %}
+            {% for article in menuItem.articles %}
+              {% assign article = articles[article.handle] %}
+              <li class="gm-grid-item gmcol-12">
+                {% render 'globo.menu.item.article', article: article, layout: 'image_left' %}
+              </li>
+            {% endfor %}
+          {% elsif menuItem.type == 'blog' and menuItem.blog.handle and blogs[menuItem.blog.handle].articles.size > 0 %}
+            {% for article in blogs[menuItem.blog.handle].articles limit: menuItem.limit %}
+              <li class="gm-grid-item gmcol-12">
+                {% render 'globo.menu.item.article', article: article, layout: 'image_left' %}
+              </li>
+            {% endfor %}
+          {% endif %}
+        </ul>
+      </li>
+    {% endif %}
+  {% when 'collections' %}
+    <li class="{{ menuItemClass }}">
+      <div class="gm-collections gm-grid">
+        {% for collection in menuItem.collections %}
+          {% assign menuItemTitle = collection.title %}
+          {% if collections[collection.handle] %}
+            {% assign collectionLiquid = collections[collection.handle] %}
+          {% endif %}
+        {% endfor %}
+        {% if menuItem.display == "image_left" %}
+          <div class="gm-grid-item gm-collection gm-collection-left{% if menuItem.itemWidth %} gmcol-{{ menuItem.itemWidth }}{% else %} gmcol{% endif %}">
+            <a class="gm-target" href="{{ collectionLiquid.url }}">
+              <div class="gm-collection-img">
+                {% if collectionLiquid.featured_image %}
+                <img
+                  srcSet="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                  data-sizes="auto"
+                  loading="lazy"
+                  data-src="{{ collectionLiquid.image.src | img_url: 'large' | replace: '_large', imgLz }}"
+                  width="{{ collectionLiquid.image.width }}"
+                  height="{{ collectionLiquid.image.height }}"
+                  alt="{{ collectionLiquid.title | escape }}"
+                  data-widths="[40, 100, 140, 180, 250, 260, 275, 305, 440, 610, 720, 930, 1080]"
+                  class="gmlazyload gm-product-img{% if class %} {{ class }}{% endif %}"
+                >
+                {% else %}
+                  <svg class="gm-collection-img gm-placeholder-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 525.5 525.5"><path d="M375.5 345.2c0-.1 0-.1 0 0 0-.1 0-.1 0 0-1.1-2.9-2.3-5.5-3.4-7.8-1.4-4.7-2.4-13.8-.5-19.8 3.4-10.6 3.6-40.6 1.2-54.5-2.3-14-12.3-29.8-18.5-36.9-5.3-6.2-12.8-14.9-15.4-17.9 8.6-5.6 13.3-13.3 14-23 0-.3 0-.6.1-.8.4-4.1-.6-9.9-3.9-13.5-2.1-2.3-4.8-3.5-8-3.5h-54.9c-.8-7.1-3-13-5.2-17.5-6.8-13.9-12.5-16.5-21.2-16.5h-.7c-8.7 0-14.4 2.5-21.2 16.5-2.2 4.5-4.4 10.4-5.2 17.5h-48.5c-3.2 0-5.9 1.2-8 3.5-3.2 3.6-4.3 9.3-3.9 13.5 0 .2 0 .5.1.8.7 9.8 5.4 17.4 14 23-2.6 3.1-10.1 11.7-15.4 17.9-6.1 7.2-16.1 22.9-18.5 36.9-2.2 13.3-1.2 47.4 1 54.9 1.1 3.8 1.4 14.5-.2 19.4-1.2 2.4-2.3 5-3.4 7.9-4.4 11.6-6.2 26.3-5 32.6 1.8 9.9 16.5 14.4 29.4 14.4h176.8c12.9 0 27.6-4.5 29.4-14.4 1.2-6.5-.5-21.1-5-32.7zm-97.7-178c.3-3.2.8-10.6-.2-18 2.4 4.3 5 10.5 5.9 18h-5.7zm-36.3-17.9c-1 7.4-.5 14.8-.2 18h-5.7c.9-7.5 3.5-13.7 5.9-18zm4.5-6.9c0-.1.1-.2.1-.4 4.4-5.3 8.4-5.8 13.1-5.8h.7c4.7 0 8.7.6 13.1 5.8 0 .1 0 .2.1.4 3.2 8.9 2.2 21.2 1.8 25h-30.7c-.4-3.8-1.3-16.1 1.8-25zm-70.7 42.5c0-.3 0-.6-.1-.9-.3-3.4.5-8.4 3.1-11.3 1-1.1 2.1-1.7 3.4-2.1l-.6.6c-2.8 3.1-3.7 8.1-3.3 11.6 0 .2 0 .5.1.8.3 3.5.9 11.7 10.6 18.8.3.2.8.2 1-.2.2-.3.2-.8-.2-1-9.2-6.7-9.8-14.4-10-17.7 0-.3 0-.6-.1-.8-.3-3.2.5-7.7 3-10.5.8-.8 1.7-1.5 2.6-1.9h155.7c1 .4 1.9 1.1 2.6 1.9 2.5 2.8 3.3 7.3 3 10.5 0 .2 0 .5-.1.8-.3 3.6-1 13.1-13.8 20.1-.3.2-.5.6-.3 1 .1.2.4.4.6.4.1 0 .2 0 .3-.1 13.5-7.5 14.3-17.5 14.6-21.3 0-.3 0-.5.1-.8.4-3.5-.5-8.5-3.3-11.6l-.6-.6c1.3.4 2.5 1.1 3.4 2.1 2.6 2.9 3.5 7.9 3.1 11.3 0 .3 0 .6-.1.9-1.5 20.9-23.6 31.4-65.5 31.4h-43.8c-41.8 0-63.9-10.5-65.4-31.4zm91 89.1h-7c0-1.5 0-3-.1-4.2-.2-12.5-2.2-31.1-2.7-35.1h3.6c.8 0 1.4-.6 1.4-1.4v-14.1h2.4v14.1c0 .8.6 1.4 1.4 1.4h3.7c-.4 3.9-2.4 22.6-2.7 35.1v4.2zm65.3 11.9h-16.8c-.4 0-.7.3-.7.7 0 .4.3.7.7.7h16.8v2.8h-62.2c0-.9-.1-1.9-.1-2.8h33.9c.4 0 .7-.3.7-.7 0-.4-.3-.7-.7-.7h-33.9c-.1-3.2-.1-6.3-.1-9h62.5v9zm-12.5 24.4h-6.3l.2-1.6h5.9l.2 1.6zm-5.8-4.5l1.6-12.3h2l1.6 12.3h-5.2zm-57-19.9h-62.4v-9h62.5c0 2.7 0 5.8-.1 9zm-62.4 1.4h62.4c0 .9-.1 1.8-.1 2.8H194v-2.8zm65.2 0h7.3c0 .9.1 1.8.1 2.8H259c.1-.9.1-1.8.1-2.8zm7.2-1.4h-7.2c.1-3.2.1-6.3.1-9h7c0 2.7 0 5.8.1 9zm-7.7-66.7v6.8h-9v-6.8h9zm-8.9 8.3h9v.7h-9v-.7zm0 2.1h9v2.3h-9v-2.3zm26-1.4h-9v-.7h9v.7zm-9 3.7v-2.3h9v2.3h-9zm9-5.9h-9v-6.8h9v6.8zm-119.3 91.1c-2.1-7.1-3-40.9-.9-53.6 2.2-13.5 11.9-28.6 17.8-35.6 5.6-6.5 13.5-15.7 15.7-18.3 11.4 6.4 28.7 9.6 51.8 9.6h6v14.1c0 .8.6 1.4 1.4 1.4h5.4c.3 3.1 2.4 22.4 2.7 35.1 0 1.2.1 2.6.1 4.2h-63.9c-.8 0-1.4.6-1.4 1.4v16.1c0 .8.6 1.4 1.4 1.4H256c-.8 11.8-2.8 24.7-8 33.3-2.6 4.4-4.9 8.5-6.9 12.2-.4.7-.1 1.6.6 1.9.2.1.4.2.6.2.5 0 1-.3 1.3-.8 1.9-3.7 4.2-7.7 6.8-12.1 5.4-9.1 7.6-22.5 8.4-34.7h7.8c.7 11.2 2.6 23.5 7.1 32.4.2.5.8.8 1.3.8.2 0 .4 0 .6-.2.7-.4 1-1.2.6-1.9-4.3-8.5-6.1-20.3-6.8-31.1H312l-2.4 18.6c-.1.4.1.8.3 1.1.3.3.7.5 1.1.5h9.6c.4 0 .8-.2 1.1-.5.3-.3.4-.7.3-1.1l-2.4-18.6H333c.8 0 1.4-.6 1.4-1.4v-16.1c0-.8-.6-1.4-1.4-1.4h-63.9c0-1.5 0-2.9.1-4.2.2-12.7 2.3-32 2.7-35.1h5.2c.8 0 1.4-.6 1.4-1.4v-14.1h6.2c23.1 0 40.4-3.2 51.8-9.6 2.3 2.6 10.1 11.8 15.7 18.3 5.9 6.9 15.6 22.1 17.8 35.6 2.2 13.4 2 43.2-1.1 53.1-1.2 3.9-1.4 8.7-1 13-1.7-2.8-2.9-4.4-3-4.6-.2-.3-.6-.5-.9-.6h-.5c-.2 0-.4.1-.5.2-.6.5-.8 1.4-.3 2 0 0 .2.3.5.8 1.4 2.1 5.6 8.4 8.9 16.7h-42.9v-43.8c0-.8-.6-1.4-1.4-1.4s-1.4.6-1.4 1.4v44.9c0 .1-.1.2-.1.3 0 .1 0 .2.1.3v9c-1.1 2-3.9 3.7-10.5 3.7h-7.5c-.4 0-.7.3-.7.7 0 .4.3.7.7.7h7.5c5 0 8.5-.9 10.5-2.8-.1 3.1-1.5 6.5-10.5 6.5H210.4c-9 0-10.5-3.4-10.5-6.5 2 1.9 5.5 2.8 10.5 2.8h67.4c.4 0 .7-.3.7-.7 0-.4-.3-.7-.7-.7h-67.4c-6.7 0-9.4-1.7-10.5-3.7v-54.5c0-.8-.6-1.4-1.4-1.4s-1.4.6-1.4 1.4v43.8h-43.6c4.2-10.2 9.4-17.4 9.5-17.5.5-.6.3-1.5-.3-2s-1.5-.3-2 .3c-.1.2-1.4 2-3.2 5 .1-4.9-.4-10.2-1.1-12.8zm221.4 60.2c-1.5 8.3-14.9 12-26.6 12H174.4c-11.8 0-25.1-3.8-26.6-12-1-5.7.6-19.3 4.6-30.2H197v9.8c0 6.4 4.5 9.7 13.4 9.7h105.4c8.9 0 13.4-3.3 13.4-9.7v-9.8h44c4 10.9 5.6 24.5 4.6 30.2z"></path><path d="M286.1 359.3c0 .4.3.7.7.7h14.7c.4 0 .7-.3.7-.7 0-.4-.3-.7-.7-.7h-14.7c-.3 0-.7.3-.7.7zm5.3-145.6c13.5-.5 24.7-2.3 33.5-5.3.4-.1.6-.5.4-.9-.1-.4-.5-.6-.9-.4-8.6 3-19.7 4.7-33 5.2-.4 0-.7.3-.7.7 0 .4.3.7.7.7zm-11.3.1c.4 0 .7-.3.7-.7 0-.4-.3-.7-.7-.7H242c-19.9 0-35.3-2.5-45.9-7.4-.4-.2-.8 0-.9.3-.2.4 0 .8.3.9 10.8 5 26.4 7.5 46.5 7.5h38.1zm-7.2 116.9c.4.1.9.1 1.4.1 1.7 0 3.4-.7 4.7-1.9 1.4-1.4 1.9-3.2 1.5-5-.2-.8-.9-1.2-1.7-1.1-.8.2-1.2.9-1.1 1.7.3 1.2-.4 2-.7 2.4-.9.9-2.2 1.3-3.4 1-.8-.2-1.5.3-1.7 1.1s.2 1.5 1 1.7z"></path><path d="M275.5 331.6c-.8 0-1.4.6-1.5 1.4 0 .8.6 1.4 1.4 1.5h.3c3.6 0 7-2.8 7.7-6.3.2-.8-.4-1.5-1.1-1.7-.8-.2-1.5.4-1.7 1.1-.4 2.3-2.8 4.2-5.1 4zm5.4 1.6c-.6.5-.6 1.4-.1 2 1.1 1.3 2.5 2.2 4.2 2.8.2.1.3.1.5.1.6 0 1.1-.3 1.3-.9.3-.7-.1-1.6-.8-1.8-1.2-.5-2.2-1.2-3-2.1-.6-.6-1.5-.6-2.1-.1zm-38.2 12.7c.5 0 .9 0 1.4-.1.8-.2 1.3-.9 1.1-1.7-.2-.8-.9-1.3-1.7-1.1-1.2.3-2.5-.1-3.4-1-.4-.4-1-1.2-.8-2.4.2-.8-.3-1.5-1.1-1.7-.8-.2-1.5.3-1.7 1.1-.4 1.8.1 3.7 1.5 5 1.2 1.2 2.9 1.9 4.7 1.9z"></path><path d="M241.2 349.6h.3c.8 0 1.4-.7 1.4-1.5s-.7-1.4-1.5-1.4c-2.3.1-4.6-1.7-5.1-4-.2-.8-.9-1.3-1.7-1.1-.8.2-1.3.9-1.1 1.7.7 3.5 4.1 6.3 7.7 6.3zm-9.7 3.6c.2 0 .3 0 .5-.1 1.6-.6 3-1.6 4.2-2.8.5-.6.5-1.5-.1-2s-1.5-.5-2 .1c-.8.9-1.8 1.6-3 2.1-.7.3-1.1 1.1-.8 1.8 0 .6.6.9 1.2.9z"></path></svg>
+                {% endif %}
+              </div>
+              <div class="gm-collection-details">
+                <div class="gm-collection-name">{{ collectionLiquid.title }}</div>
+              </div>
+            </a>
+          </div>
+        {% else %}
+          <div class="gm-collection gm-collection-top{% if menuItem.itemWidth %} gmcol-{{ menuItem.itemWidth }}{% else %} gmcol{% endif %}">
+            <a class="gm-target" href={{ collectionLiquid.url }}>
+              {% if collectionLiquid.image %}
+              <img
+                srcSet="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                data-sizes="auto"
+                loading="lazy"
+                data-src="{{ collectionLiquid.image.src | img_url: 'large' | replace: '_large', imgLz }}"
+                width="{{ collectionLiquid.image.width }}"
+                height="{{ collectionLiquid.image.height }}"
+                alt="{{ collectionLiquid.title | escape }}"
+                data-widths="[40, 100, 140, 180, 250, 260, 275, 305, 440, 610, 720, 930, 1080]"
+                class="gmlazyload gm-product-img{% if class %} {{ class }}{% endif %}"
+              >
+              {% else %}
+                <svg class="gm-collection-img gm-placeholder-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 525.5 525.5"><path d="M375.5 345.2c0-.1 0-.1 0 0 0-.1 0-.1 0 0-1.1-2.9-2.3-5.5-3.4-7.8-1.4-4.7-2.4-13.8-.5-19.8 3.4-10.6 3.6-40.6 1.2-54.5-2.3-14-12.3-29.8-18.5-36.9-5.3-6.2-12.8-14.9-15.4-17.9 8.6-5.6 13.3-13.3 14-23 0-.3 0-.6.1-.8.4-4.1-.6-9.9-3.9-13.5-2.1-2.3-4.8-3.5-8-3.5h-54.9c-.8-7.1-3-13-5.2-17.5-6.8-13.9-12.5-16.5-21.2-16.5h-.7c-8.7 0-14.4 2.5-21.2 16.5-2.2 4.5-4.4 10.4-5.2 17.5h-48.5c-3.2 0-5.9 1.2-8 3.5-3.2 3.6-4.3 9.3-3.9 13.5 0 .2 0 .5.1.8.7 9.8 5.4 17.4 14 23-2.6 3.1-10.1 11.7-15.4 17.9-6.1 7.2-16.1 22.9-18.5 36.9-2.2 13.3-1.2 47.4 1 54.9 1.1 3.8 1.4 14.5-.2 19.4-1.2 2.4-2.3 5-3.4 7.9-4.4 11.6-6.2 26.3-5 32.6 1.8 9.9 16.5 14.4 29.4 14.4h176.8c12.9 0 27.6-4.5 29.4-14.4 1.2-6.5-.5-21.1-5-32.7zm-97.7-178c.3-3.2.8-10.6-.2-18 2.4 4.3 5 10.5 5.9 18h-5.7zm-36.3-17.9c-1 7.4-.5 14.8-.2 18h-5.7c.9-7.5 3.5-13.7 5.9-18zm4.5-6.9c0-.1.1-.2.1-.4 4.4-5.3 8.4-5.8 13.1-5.8h.7c4.7 0 8.7.6 13.1 5.8 0 .1 0 .2.1.4 3.2 8.9 2.2 21.2 1.8 25h-30.7c-.4-3.8-1.3-16.1 1.8-25zm-70.7 42.5c0-.3 0-.6-.1-.9-.3-3.4.5-8.4 3.1-11.3 1-1.1 2.1-1.7 3.4-2.1l-.6.6c-2.8 3.1-3.7 8.1-3.3 11.6 0 .2 0 .5.1.8.3 3.5.9 11.7 10.6 18.8.3.2.8.2 1-.2.2-.3.2-.8-.2-1-9.2-6.7-9.8-14.4-10-17.7 0-.3 0-.6-.1-.8-.3-3.2.5-7.7 3-10.5.8-.8 1.7-1.5 2.6-1.9h155.7c1 .4 1.9 1.1 2.6 1.9 2.5 2.8 3.3 7.3 3 10.5 0 .2 0 .5-.1.8-.3 3.6-1 13.1-13.8 20.1-.3.2-.5.6-.3 1 .1.2.4.4.6.4.1 0 .2 0 .3-.1 13.5-7.5 14.3-17.5 14.6-21.3 0-.3 0-.5.1-.8.4-3.5-.5-8.5-3.3-11.6l-.6-.6c1.3.4 2.5 1.1 3.4 2.1 2.6 2.9 3.5 7.9 3.1 11.3 0 .3 0 .6-.1.9-1.5 20.9-23.6 31.4-65.5 31.4h-43.8c-41.8 0-63.9-10.5-65.4-31.4zm91 89.1h-7c0-1.5 0-3-.1-4.2-.2-12.5-2.2-31.1-2.7-35.1h3.6c.8 0 1.4-.6 1.4-1.4v-14.1h2.4v14.1c0 .8.6 1.4 1.4 1.4h3.7c-.4 3.9-2.4 22.6-2.7 35.1v4.2zm65.3 11.9h-16.8c-.4 0-.7.3-.7.7 0 .4.3.7.7.7h16.8v2.8h-62.2c0-.9-.1-1.9-.1-2.8h33.9c.4 0 .7-.3.7-.7 0-.4-.3-.7-.7-.7h-33.9c-.1-3.2-.1-6.3-.1-9h62.5v9zm-12.5 24.4h-6.3l.2-1.6h5.9l.2 1.6zm-5.8-4.5l1.6-12.3h2l1.6 12.3h-5.2zm-57-19.9h-62.4v-9h62.5c0 2.7 0 5.8-.1 9zm-62.4 1.4h62.4c0 .9-.1 1.8-.1 2.8H194v-2.8zm65.2 0h7.3c0 .9.1 1.8.1 2.8H259c.1-.9.1-1.8.1-2.8zm7.2-1.4h-7.2c.1-3.2.1-6.3.1-9h7c0 2.7 0 5.8.1 9zm-7.7-66.7v6.8h-9v-6.8h9zm-8.9 8.3h9v.7h-9v-.7zm0 2.1h9v2.3h-9v-2.3zm26-1.4h-9v-.7h9v.7zm-9 3.7v-2.3h9v2.3h-9zm9-5.9h-9v-6.8h9v6.8zm-119.3 91.1c-2.1-7.1-3-40.9-.9-53.6 2.2-13.5 11.9-28.6 17.8-35.6 5.6-6.5 13.5-15.7 15.7-18.3 11.4 6.4 28.7 9.6 51.8 9.6h6v14.1c0 .8.6 1.4 1.4 1.4h5.4c.3 3.1 2.4 22.4 2.7 35.1 0 1.2.1 2.6.1 4.2h-63.9c-.8 0-1.4.6-1.4 1.4v16.1c0 .8.6 1.4 1.4 1.4H256c-.8 11.8-2.8 24.7-8 33.3-2.6 4.4-4.9 8.5-6.9 12.2-.4.7-.1 1.6.6 1.9.2.1.4.2.6.2.5 0 1-.3 1.3-.8 1.9-3.7 4.2-7.7 6.8-12.1 5.4-9.1 7.6-22.5 8.4-34.7h7.8c.7 11.2 2.6 23.5 7.1 32.4.2.5.8.8 1.3.8.2 0 .4 0 .6-.2.7-.4 1-1.2.6-1.9-4.3-8.5-6.1-20.3-6.8-31.1H312l-2.4 18.6c-.1.4.1.8.3 1.1.3.3.7.5 1.1.5h9.6c.4 0 .8-.2 1.1-.5.3-.3.4-.7.3-1.1l-2.4-18.6H333c.8 0 1.4-.6 1.4-1.4v-16.1c0-.8-.6-1.4-1.4-1.4h-63.9c0-1.5 0-2.9.1-4.2.2-12.7 2.3-32 2.7-35.1h5.2c.8 0 1.4-.6 1.4-1.4v-14.1h6.2c23.1 0 40.4-3.2 51.8-9.6 2.3 2.6 10.1 11.8 15.7 18.3 5.9 6.9 15.6 22.1 17.8 35.6 2.2 13.4 2 43.2-1.1 53.1-1.2 3.9-1.4 8.7-1 13-1.7-2.8-2.9-4.4-3-4.6-.2-.3-.6-.5-.9-.6h-.5c-.2 0-.4.1-.5.2-.6.5-.8 1.4-.3 2 0 0 .2.3.5.8 1.4 2.1 5.6 8.4 8.9 16.7h-42.9v-43.8c0-.8-.6-1.4-1.4-1.4s-1.4.6-1.4 1.4v44.9c0 .1-.1.2-.1.3 0 .1 0 .2.1.3v9c-1.1 2-3.9 3.7-10.5 3.7h-7.5c-.4 0-.7.3-.7.7 0 .4.3.7.7.7h7.5c5 0 8.5-.9 10.5-2.8-.1 3.1-1.5 6.5-10.5 6.5H210.4c-9 0-10.5-3.4-10.5-6.5 2 1.9 5.5 2.8 10.5 2.8h67.4c.4 0 .7-.3.7-.7 0-.4-.3-.7-.7-.7h-67.4c-6.7 0-9.4-1.7-10.5-3.7v-54.5c0-.8-.6-1.4-1.4-1.4s-1.4.6-1.4 1.4v43.8h-43.6c4.2-10.2 9.4-17.4 9.5-17.5.5-.6.3-1.5-.3-2s-1.5-.3-2 .3c-.1.2-1.4 2-3.2 5 .1-4.9-.4-10.2-1.1-12.8zm221.4 60.2c-1.5 8.3-14.9 12-26.6 12H174.4c-11.8 0-25.1-3.8-26.6-12-1-5.7.6-19.3 4.6-30.2H197v9.8c0 6.4 4.5 9.7 13.4 9.7h105.4c8.9 0 13.4-3.3 13.4-9.7v-9.8h44c4 10.9 5.6 24.5 4.6 30.2z"></path><path d="M286.1 359.3c0 .4.3.7.7.7h14.7c.4 0 .7-.3.7-.7 0-.4-.3-.7-.7-.7h-14.7c-.3 0-.7.3-.7.7zm5.3-145.6c13.5-.5 24.7-2.3 33.5-5.3.4-.1.6-.5.4-.9-.1-.4-.5-.6-.9-.4-8.6 3-19.7 4.7-33 5.2-.4 0-.7.3-.7.7 0 .4.3.7.7.7zm-11.3.1c.4 0 .7-.3.7-.7 0-.4-.3-.7-.7-.7H242c-19.9 0-35.3-2.5-45.9-7.4-.4-.2-.8 0-.9.3-.2.4 0 .8.3.9 10.8 5 26.4 7.5 46.5 7.5h38.1zm-7.2 116.9c.4.1.9.1 1.4.1 1.7 0 3.4-.7 4.7-1.9 1.4-1.4 1.9-3.2 1.5-5-.2-.8-.9-1.2-1.7-1.1-.8.2-1.2.9-1.1 1.7.3 1.2-.4 2-.7 2.4-.9.9-2.2 1.3-3.4 1-.8-.2-1.5.3-1.7 1.1s.2 1.5 1 1.7z"></path><path d="M275.5 331.6c-.8 0-1.4.6-1.5 1.4 0 .8.6 1.4 1.4 1.5h.3c3.6 0 7-2.8 7.7-6.3.2-.8-.4-1.5-1.1-1.7-.8-.2-1.5.4-1.7 1.1-.4 2.3-2.8 4.2-5.1 4zm5.4 1.6c-.6.5-.6 1.4-.1 2 1.1 1.3 2.5 2.2 4.2 2.8.2.1.3.1.5.1.6 0 1.1-.3 1.3-.9.3-.7-.1-1.6-.8-1.8-1.2-.5-2.2-1.2-3-2.1-.6-.6-1.5-.6-2.1-.1zm-38.2 12.7c.5 0 .9 0 1.4-.1.8-.2 1.3-.9 1.1-1.7-.2-.8-.9-1.3-1.7-1.1-1.2.3-2.5-.1-3.4-1-.4-.4-1-1.2-.8-2.4.2-.8-.3-1.5-1.1-1.7-.8-.2-1.5.3-1.7 1.1-.4 1.8.1 3.7 1.5 5 1.2 1.2 2.9 1.9 4.7 1.9z"></path><path d="M241.2 349.6h.3c.8 0 1.4-.7 1.4-1.5s-.7-1.4-1.5-1.4c-2.3.1-4.6-1.7-5.1-4-.2-.8-.9-1.3-1.7-1.1-.8.2-1.3.9-1.1 1.7.7 3.5 4.1 6.3 7.7 6.3zm-9.7 3.6c.2 0 .3 0 .5-.1 1.6-.6 3-1.6 4.2-2.8.5-.6.5-1.5-.1-2s-1.5-.5-2 .1c-.8.9-1.8 1.6-3 2.1-.7.3-1.1 1.1-.8 1.8 0 .6.6.9 1.2.9z"></path></svg>
+              {% endif %}
+              <div class="gm-target{% if menuItem.justifyContent %} gm-jc-{{ menuItem.justifyContent }}{% endif %}">
+                <span class="gm-text">{{ collectionLiquid.title }}</span>
+              </div>
+            </a>
+          </div>
+        {% endif %}
+      </div>
+    </li>
+  {% when 'contact' %}
+    <li class="{{ menuItemClass }}">
+      <div class="gm-contact">
+        {% if menuItemTitle %}<div class="gm-heading">{{menuItemTitle}}</div>{% endif %}
+        {% if menuItemDescription %}<div class="gm-text">{{menuItemDescription}}</div>{% endif %}
+        {%- form 'contact' -%}
+          <input type="hidden" name="form_type" value="contact"/>
+          <input type="hidden" name="utf8" value="✓"/>
+          {% if form.posted_successfully? %}
+            <p class="form-message form-message--success" data-form-status="">
+              {% assign thanksPlaceholder = menuItem.thanks | default: settings.language.thanks %}
+              {% if languageCode != "" %}
+                {% assign thanksLanguageCode = 'thanks' | append: languageCode %}
+                {% assign thanksPlaceholder = menuItem[thanksLanguageCode] %}
+              {% endif %}
+              {{ thanksPlaceholder }}
+            </p>
+          {% endif %}
+          <div class="gm-grid">
+            <div class="gm-grid-item gmcol-6">
+              {%- assign namePlaceholder = menuItem.name | default: settings.language.name -%}
+              {%- assign emailPlaceholder = menuItem.email | default: settings.language.email -%}
+              {%- assign phonePlaceholder = menuItem.phone_number | default: settings.language.phone_number -%}
+              {%- assign messagePlaceholder = menuItem.message | default: settings.language.message -%}
+              {%- assign sendPlaceholder = menuItem.send | default: settings.language.send -%}
+              {%- if languageCode != "" -%}
+                {%- assign nameLocale = 'name' | append: languageCode -%}
+                {%- if menuItem[nameLocale] -%}
+                {%- assign namePlaceholder = menuItem[nameLocale] -%}
+                {%- endif -%}
+                {%- assign emailLocale = 'email' | append: languageCode -%}
+                {%- if menuItem[emailLocale] -%}
+                {%- assign emailPlaceholder = menuItem[emailLocale] -%}
+                {%- endif -%}
+                {%- assign phoneLocale = 'phone_number' | append: languageCode -%}
+                {%- if menuItem[phoneLocale] -%}
+                {%- assign phonePlaceholder = menuItem[phoneLocale] -%}
+                {%- endif -%}
+                {%- assign messageLocale = 'message' | append: languageCode -%}
+                {%- if menuItem[messageLocale] -%}
+                {%- assign messagePlaceholder = menuItem[messageLocale] -%}
+                {%- endif -%}
+                {%- assign sendLocale = 'send' | append: languageCode -%}
+                {%- if menuItem[sendLocale] -%}
+                {%- assign sendPlaceholder = menuItem[sendLocale] -%}
+                {%- endif -%}
+              {%- endif -%}
+              <input type="text" class="gm-form-control" name="contact[Name]" auto-complete="name" placeholder="{{ namePlaceholder }}"/>
+            </div>
+            <div class="gm-grid-item gmcol-6">
+              <input type="email" class="gm-form-control" name="contact[email]" auto-complete="email" placeholder="{{ emailPlaceholder }}" auto-correct="off" auto-capitalize="off"/>
+            </div>
+            <div class="gm-grid-item gmcol-12">
+              <input type="tel" class="gm-form-control" name="contact[Phone Number]" auto-complete="tel-national" placeholder="{{ phonePlaceholder }}"/>
+            </div>
+            <div class="gm-grid-item gmcol-12">
+              <textarea rows="5" class="gm-form-control" name="contact[Message]" placeholder="{{ messagePlaceholder }}"></textarea>
+            </div>
+            <div class="gm-grid-item gmcol-12">
+              <input type="submit" class="gm-btn" value="{{ sendPlaceholder }}"/>
+            </div>
+          </div>
+        {% endform %}
+      </div>
+    </li>
+  {% when 'html' %}
+    <li class="{{ menuItemClass }}">
+      <div class="gm-html">
+        {% if menuItemTitle %}<div class="gm-heading">{{menuItemTitle}}</div>{% endif %}
+        {% if menuItemDescription %}<div class="gm-html-inner">{{ menuItemDescription | newline_to_br }}</div>{% endif %}
+      </div>
+    </li>
+  {% when 'group' %}
+    <li class="{{ menuItemClass }}">
+      <ul class="gm-group">
+        {% for item in menuItem.submenu.items %}
+          {% render 'globo.menu.item', menuItem: item %}
+        {% endfor %}
+      </ul>
+    </li>
+  {% else %}
+  <li {% if liIndex %}data-gmmi="{{ liIndex }}" data-gmdi="{{ liIndex }}"{% endif %} class="{{ menuItemClass }}"{% if settings.general.mobile_hide_linklist_submenu and menuItem.linkGroup %} data-link-group="{{ menuItem.linkGroup }}"{% endif %}{% if menuItem.tabIndex %} data-tab-index="{{ menuItem.tabIndex }}"{% endif %}>
+    {% assign titleTag = "a" %}
+    {% if menuItem.is_heading %}
+      {% unless menuItemUrl %}
+        {% assign titleTag = "div" %}
+      {% endunless %}
+    {% endif %}
+
+    {% assign randomId = "" %}
+    {% if menuItem.color %}
+      {%- assign min = 1 -%}
+      {%- assign max = 100 -%}
+      {%- assign diff = max | minus: min -%}
+      {%- assign randomNumber = "now" | date: "%N" | modulo: diff | plus: min -%}
+      {% assign randomId = "gm-menu-color-" | append: randomNumber %}
+      <style>
+      .gm-menu-installed .gm-menu > .gm-level-0 > a#{{ randomId }}{
+        color: {{ menuItem.color.textColor }} !important;
+        background: {{ menuItem.color.backgroundColor }} !important;
+      }
+      .gm-menu-installed .gm-menu > .gm-level-0 > a#{{ randomId }} .gm-icon, 
+      .gm-menu-installed .gm-menu > .gm-level-0 > a#{{ randomId }} .gm-retractor, 
+      .gm-menu-installed .gm-menu > .gm-level-0 > a#{{ randomId }} .gm-text{
+        color: {{menuItem.color.textColor}} !important;
+      }
+
+      .gm-menu-installed .gm-menu > .gm-level-0.gm-active > a#{{ randomId }},
+      .gm-menu-installed .gm-menu > .gm-level-0:hover > a#{{ randomId }}{
+        color: {{ menuItem.color.textHoverColor }} !important;
+        background: {{ menuItem.color.backgroundHoverColor }} !important;
+      }
+      .gm-menu-installed .gm-menu > .gm-level-0.gm-active > a#{{ randomId }} .gm-icon, 
+      .gm-menu-installed .gm-menu > .gm-level-0.gm-active > a#{{ randomId }} .gm-retractor, 
+      .gm-menu-installed .gm-menu > .gm-level-0.gm-active > a#{{ randomId }} .gm-text,
+      .gm-menu-installed .gm-menu > .gm-level-0:hover > a#{{ randomId }} .gm-icon, 
+      .gm-menu-installed .gm-menu > .gm-level-0:hover > a#{{ randomId }} .gm-retractor, 
+      .gm-menu-installed .gm-menu > .gm-level-0:hover > a#{{ randomId }} .gm-text
+      {
+        color: {{menuItem.color.textHoverColor}} !important;
+      }
+      </style>
+    {% endif %}
+
+    <{{ titleTag }} 
+      {% if menuItem.targetBlank %}target="_blank"{% endif %} 
+      {% if menuItemUrl %}href="{{ menuItemUrl }}"{% endif %} 
+      {% if randomId %}id="{{ randomId }}"{% endif %}
+      class="gm-target"
+      title="{{menuItemTitle | escape}}"
+    >
+      {% if menuItemImage %}
+        {% capture imageTag %}
+          {% if imageTag %} 
+            <img
+              srcSet="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+              data-sizes="auto"
+              loading="lazy"
+              data-src="{{ menuItemImage | file_img_url: 'large' | replace: '_large', imgLz }}"
+              width="{{ menuItemImage.width }}"
+              height="{{ menuItemImage.height }}"
+              alt="{{ menuItemTitle | escape }}"
+              data-widths="[40, 100, 140, 180, 250, 260, 275, 305, 440, 610, 720, 930, 1080]"
+              class="gmlazyload{% if class %} {{ class }}{% endif %}"
+            />
+          {% endif %} 
+        {% endcapture %}
+        {% if menuItemTitle or menuItemDescription %}
+          <span class="gm-icon gm-icon-img" {{ icon }}>
+            {{ imageTag }}
+          </span>
+        {% else %}
+          {{ imageTag }}
+        {% endif %}
+      {% endif %}
+       {%- if menuItemIcon -%}
+       {% render 'globo.menu.icon', icon: menuItemIcon, icon_width: menuItem.icon_width  %}
+      {%- endif -%}
+      <span class="gm-text">
+        {{menuItemTitle}}
+        {% if menuItemBadgeTitle %}
+        <span class="gm-badge gm-badge-{% if menuItem.level == 0 %}top{% else %}left{% endif %}" style="color: {{ menuItem.badge.backgroundColor }}">
+          <span style="background: {{ menuItem.badge.backgroundColor }}; color: {{ menuItem.badge.color }}">{{ menuItemBadgeTitle }}</span>
+        </span>
+        {% endif %}
+        <span class="gm-description">{{ menuItemDescription }}</span>
+      </span>
+      {% if menuItem.is_heading and settings.general.mobile_hide_linklist_submenu %}
+        <span class="gm-retractor"></span>
+      {% elsif menuItem.submenu.items.size > 0 %}
+        <span class="gm-retractor"></span>
+      {% endif %}
+    </{{ titleTag }}>
+    {% if noSubMenu != true and menuItem.submenu.type != 'none' and menuItem.submenu.items.size > 0 %}
+      {% if menuItem.submenu.type == 'dropdown' %}
+        <ul class="gm-submenu gm-dropdown{% if settings.general.submenu_border %} gm-submenu-bordered{% endif %}{% if menuItem.submenu.orientation %} gm-orientation-{{ menuItem.submenu.orientation }}{% endif %} {% if menuItem.submenu.justifyContent and menuItem.submenu.orientation == 'horizontal' %} gm-jc-{{ menuItem.submenu.justifyContent }}{% endif %}">
+          {% for subMenuItem in menuItem.submenu.items %}
+            {% assign subMenuItem.level = menuItem.level | plus: 1 %}
+            {% if subMenuItem.submenu %}
+              {% if menuItem.submenu.orientation %}
+                {% assign subMenuItem.submenu.orientation = menuItem.submenu.orientation %}
+              {% endif %}
+              {% if subMenuItem.submenu.orientation == "vertical" and subMenuItem.submenu.alignment == "full" %}
+                {% assign subMenuItem.submenu.alignment = "left" %}
+              {% elsif subMenuItem.submenu.orientation == "horizontal" %}
+                {% assign subMenuItem.submenu.alignment = "full" %}
+              {% elsif menuItem.level != 0 %}
+                {% assign subMenuItem.submenu.alignment = menuItem.submenu.alignment %}
+              {% endif %}
+            {% else %}
+              {% assign subMenuItem.submenu = menuItem.submenu %}
+              {% assign subMenuItem.submenu.alignment = menuItem.submenu.alignment %}
+            {% endif %}
+            {% render 'globo.menu.item', menuItem: subMenuItem %}
+          {% endfor %}
+        </ul>
+      {% elsif menuItem.submenu.type == 'mega' %}
+        <div 
+          class="gm-submenu gm-mega{% if settings.general.submenu_border %} gm-submenu-bordered{% endif %}" 
+          style="{% if menuItem.submenu.maxWidth %}width: {{menuItem.submenu.maxWidth}}px;{% endif %}{% if menuItem.submenu.backgroundColor %}backgroundColor: {{ menuItem.submenu.backgroundColor }} !important;{% endif %}{% if menuItem.submenu.backgroundImage %}backgroundImage: url('{{ menuItem.submenu.backgroundImage | downcase | replace: '.jpeg', '.jpg'}}') !important{% endif %}"
+        >
+          <div style="{% if menuItem.submenu.backgroundColor %}backgroundColor: {{ menuItem.submenu.backgroundColor }}{% endif %}" class="submenu-background"></div>
+          <ul class="gm-grid">
+            {% for item in menuItem.submenu.items %}
+              {% render 'globo.menu.item', menuItem: item %}
+            {% endfor %}
+          </ul>
+          {% unless shop.metafields.globo_menu.remove_watermark %}
+          <p style="text-align:right;display:flex !important;flex:0 0 100%;font-size:11px;padding:3px;margin:0;justify-content:flex-end;opacity:0.7;background:transparent">Powered by <a style="margin: 0 0 0 3px !important;padding: 0 !important;color: #5c6ac4 !important;font-weight: bold !important;font-size: 12px !important;" href="https://apps.shopify.com/globo-mega-menu">Globo Mega Menu</a></p>
+          {% endunless %}
+        </div>
+      {% elsif menuItem.submenu.type == 'aliexpress' %}
+        <div 
+          class="gm-submenu gm-aliexpress" 
+          style="{% if menuItem.submenu.maxWidth %}width: {{menuItem.submenu.maxWidth}}px;{% endif %}{% if menuItem.submenu.backgroundColor %}backgroundColor: {{ menuItem.submenu.backgroundColor }} !important;{% endif %}{% if menuItem.submenu.backgroundImage %}backgroundImage: url('{{ menuItem.submenu.backgroundImage | downcase | replace: '.jpeg', '.jpg'}}') !important{% endif %}"
+        >
+          <div style="{% if menuItem.submenu.backgroundColor %}backgroundColor: {{ menuItem.submenu.backgroundColor }}{% endif %}" class="submenu-background"></div>
+          <ul class="gm-grid">
+            {% for item in menuItem.submenu.items %}
+              {% render 'globo.menu.item', menuItem: item, dataTabIndex: forloop.index0, aliExpress: true %}
+            {% endfor %}
+          </ul>
+        </div>
+      {% elsif menuItem.submenu.type %}
+        <ul class="gm-{{ menuItem.submenu.type }}">
+          {% for item in menuItem.submenu.items %}
+            {% render 'globo.menu.item', menuItem: item %}
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endif %}
+  </li>
+{% endcase %}
+{% endif %}

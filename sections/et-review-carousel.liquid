@@ -1,0 +1,151 @@
+{% style %}
+  {% if section.settings.section_top_margin %}
+    #shopify-section-{{ section.id }}{
+      margin-top: 30px;
+    }
+  {% endif %}
+  {% if section.settings.section_bottom_margin %}
+    #shopify-section-{{ section.id }} {
+      margin-bottom: 30px;
+    }
+  {% endif %}
+{% endstyle %}
+<section class="et-review-carousel-section">
+    <div class="page-width">
+        {%- unless section.settings.section_title == blank -%}
+        <div class="et-section-title">
+            <h2>{{section.settings.section_title}}</h2>
+        </div>
+        {% endunless %}
+        <div class="et-review-carousel-wrap et-review-carousel-wrap-{{ section.id }}">
+            {% for block in section.blocks %}
+            <div class="review-carousel-item">
+                <div class="review-carousel-item_inner">
+                    {%- unless block.settings.review_item_img == blank -%}
+                    <div class="review-item_img">
+                        {{ block.settings.review_item_img | image_url: width: 350 | image_tag }}
+                    </div>
+                    {% endunless %}
+                    <div class="review-item_cont">
+                        <h3>{{block.settings.review_heading}}</h3>
+                        <div class="review-stars">
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                        </div>
+                        <p>{{block.settings.review_des}}</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+
+<script>
+
+    $('.et-review-carousel-wrap-{{ section.id }}').slick({
+    slidesToShow: 5,
+    slidesToScroll: 4,
+    dots: false,
+    centerMode: true,
+    centerPadding: "{{section.settings.center_padding}}px",
+    focusOnSelect: true,
+    arrows: false,
+    infinite: true,
+    autoplay: true,
+    responsive: [
+        {
+        breakpoint: 1600,
+          settings: {
+              slidesToShow: 4,
+              slidesToScroll: 4
+          }
+        },
+        {
+        breakpoint: 1200,
+          settings: {
+              slidesToShow: 3,
+              slidesToScroll: 3
+          }
+        },
+        {
+        breakpoint: 480,
+          settings: {
+              slidesToShow: 1,
+              slidesToScroll: 1
+          }
+        }
+    ]
+    });
+
+</script>
+
+  
+  {% schema %}
+    {
+      "name": "ET Review Carousel",
+      "max_blocks": 10,
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "section_top_margin",
+          "label": "Add section top margin",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "section_bottom_margin",
+          "label": "Add section bottom margin",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "section_title",
+          "label": "Section Title",
+          "default": "Fathead Nation Inspiration"
+        },
+        {
+          "type": "number",
+          "id": "center_padding",
+          "label": "Center Padding",
+          "default": 80
+        }
+      ],
+      "blocks": [
+        {
+          "type": "Review",
+          "name": "Review item",
+          "limit": 20,
+          "settings": [
+            {
+              "type": "image_picker",
+              "id": "review_item_img",
+              "label": "Review Image"
+            },
+            {
+              "type": "text",
+              "id": "review_heading",
+              "label": "Heading",
+              "default": "I Love it!!"
+            },
+            {
+              "type": "textarea",
+              "id": "review_des",
+              "label": "Review Text",
+              "default": "I LOVE IT. AMAZING QUALITY"
+            }
+          ]
+        }
+      ],
+      "presets": [
+        {
+          "name": "ET Review Carousel",
+          "category": "fathead"
+        }
+      ]
+    }
+  {% endschema %}

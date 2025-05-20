@@ -1,0 +1,62 @@
+{% style %}
+  {% if section.settings.section_top_margin %}
+    #shopify-section-{{ section.id }}{
+      margin-top: 30px;
+    }
+  {% endif %}
+  {% if section.settings.section_bottom_margin %}
+    #shopify-section-{{ section.id }} {
+      margin-bottom: 30px;
+    }
+  {% endif %}
+{% endstyle %}
+{% render 'content.5d76937b643140ddbb31a4966a228d30.builder' %}
+
+{% schema %}
+{
+  "name": "Marvel scroll",
+  "tag": "section",
+  "settings":[
+    {
+      "type": "checkbox",
+      "id": "section_top_margin",
+      "label": "Add section top margin",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "section_bottom_margin",
+      "label": "Add section bottom margin",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Custom Builder.io Section"
+    },
+    {
+      "type": "paragraph",
+      "content": "To edit and customize this section, visit the [model in Builder](https://builder.io/content?model=e6c85afb6b4a49c7b63c4d102d33e75e). To learn more about how sections in Builder work with Shopify, [visit the docs](https://www.builder.io/c/docs/shopify/sections-everywhere)."
+    },
+    {
+      "type": "select",
+      "id": "builder_content_entry_preview",
+      "label": "Content Entry Preview",
+      "info": "Targeting is not used while previewing sections in the Shopify theme editor, meaning this preview will not change based on the targeting you have set. If you are using targeting, you need to manually select an entry to preview it. This setting only affects the preview, not what displays on your live site.",
+      "options": [
+        { "value": "5d76937b643140ddbb31a4966a228d30", "label": "Marvel License Scroll"}
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Builder entries used"
+    },
+    {
+  "type": "paragraph",
+  "content": "Name: Marvel License Scroll. Targeting: no targeting. Visit the [entry in Builder](https://builder.io/content/5d76937b643140ddbb31a4966a228d30)"
+}
+  ],
+  "presets":[{
+    "name": "Marvel scroll"
+  }]
+}
+{% endschema %}

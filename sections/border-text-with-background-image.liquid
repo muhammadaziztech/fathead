@@ -1,0 +1,178 @@
+<style>
+  .cbt-main-banner{
+    max-width:100%;
+    position:relative;
+  }
+  .desktop-img__wrap{
+    display:block;
+    max-width:100%;
+  }
+  
+  .mobile-img__wrap{
+    display:none;
+  }
+  .cbt_{{ section.id }} .cbt-text-column{
+    {% if section.settings.cbt_txt %}
+    border:1px solid {{section.settings.cbt_txt_color}};
+    color:{{section.settings.cbt_txt_color}};
+    {% endif %}
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    text-align: center;
+  }
+  .cbt-text-column h1{
+    letter-spacing:1px;
+  }
+  .cbt_{{ section.id }} .cbt-text-column h1{
+    font-size:{{section.settings.cbt_txt_size_des}}px;
+  }
+  .cbt-label{
+    position:absolute;
+    bottom: -27px;
+    right: 5px;
+    margin-bottom: 0;
+    font-style: italic;
+  }
+  @media(max-width:1024px){
+  .cbt_{{ section.id }} .cbt-text-column h1{
+    font-size:{{section.settings.cbt_txt_size_tab}}px;
+  }
+  }
+  @media(max-width:768px){
+  .mobile-img__wrap{
+    display:block;
+  }
+  .desktop-img__wrap{
+    display:none;
+  }
+  .cbt_{{ section.id }} .cbt-text-column{
+    width:80%;
+  }
+  }
+  @media(max-width:550px){
+  .cbt_{{ section.id }} .cbt-text-column h1{
+    font-size:{{section.settings.cbt_txt_size_mob}}px;
+  }
+  .cbt_{{ section.id }} .cbt-text-column{
+    top:51%;
+  }
+  }
+  {% if section.settings.section_top_margin %}
+    #shopify-section-{{ section.id }} {
+      margin-top: 30px;
+    }
+  {% endif %}
+  {% if section.settings.section_bottom_margin %}
+    #shopify-section-{{ section.id }} {
+      margin-bottom: 30px;
+    }
+  {% endif %}
+</style>
+
+<div class="cbt-main-banner cbt_{{ section.id }}" data-cc-animate="fade-in-up">
+  {% if section.settings.cbt_background_img_des != blank %}
+    <img
+      data-src="{{ section.settings.cbt_background_img_des |img_url: 'master' }}"
+      alt="{{ section.settings.cbt_background_img_des.alt }}"
+      class="desktop-img__wrap lazyload fade-in"
+      style="pointer-events: none;"
+      width=""
+      height=""
+    >
+  {% endif %}
+  {% if section.settings.cbt_background_img_mob != blank %}
+    <img
+      data-src="{{ section.settings.cbt_background_img_mob |img_url: 'master' }}"
+      alt="{{ section.settings.cbt_background_img_mob.alt }}"
+      class="mobile-img__wrap lazyload fade-in"
+      style="pointer-events: none;"
+      width=""
+      height=""
+    >
+  {% endif %}
+  <div class="cbt-text-column">
+    <h1 style="font-weight:500;">{{ section.settings.cbt_txt }}</h1>
+    <p class="cbt-label">{{ section.settings.cbt_label }}</p>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "FH - Border Text",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "section_top_margin",
+      "label": "Add section top margin",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "section_bottom_margin",
+      "label": "Add section bottom margin",
+      "default": false
+    },
+    {
+      "type": "image_picker",
+      "id": "cbt_background_img_des",
+      "label": "Background Image (Desktop)"
+    },
+    {
+      "type": "image_picker",
+      "id": "cbt_background_img_mob",
+      "label": "Background Image (Mobile)"
+    },
+    {
+      "type": "textarea",
+      "id": "cbt_txt",
+      "label": "Text"
+    },
+    {
+      "type": "text",
+      "id": "cbt_label",
+      "label": "Label"
+    },
+    {
+      "type": "color",
+      "id": "cbt_txt_color",
+      "label": "Text Color"
+    },
+    {
+      "type": "range",
+      "id": "cbt_txt_size_des",
+      "label": "Text Size (Desktop)",
+      "max": 50,
+      "min": 10,
+      "step": 1,
+      "unit": "px",
+      "default": 45,
+    },
+    {
+      "type": "range",
+      "id": "cbt_txt_size_tab",
+      "label": "Text Size (Tablet)",
+      "max": 50,
+      "min": 10,
+      "step": 1,
+      "unit": "px",
+      "default": 30,
+    },
+    {
+      "type": "range",
+      "id": "cbt_txt_size_mob",
+      "label": "Text Size (Mobile)",
+      "max": 50,
+      "min": 10,
+      "step": 1,
+      "unit": "px",
+      "default": 25,
+    }
+  ],
+  "presets": [
+    {"name": "FH - Border Text"}
+  ]
+}
+{% endschema %}

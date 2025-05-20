@@ -1,0 +1,108 @@
+<style>
+  .custom-b-wrapper{
+     display: flex;
+     width: 51.33%;
+     align-items: center;
+     justify-content: space-between;
+     box-shadow: 73px 2px 20px 0px #d3d3d345;
+     background: #d3d3d338;
+     border-radius: 50px 0px 0px 50px;
+  }
+  .c-breadcrumb-txt{
+     font-size:18px;
+  }
+  .slash{
+     font-size: 16px;
+     width: auto;
+     font-family: auto !important;
+     padding: 0px 3px;
+     opacity: 1 !important;
+  }
+  .breadcrumbs-list{
+     text-transform:uppercase;
+     font-size:14px;
+     width:48.67%;
+     margin-right:0 !important;
+  }
+  @media(max-width:810px){
+  .c-breadcrumb-txt{
+     font-size:14px !important;
+  }
+  }
+  @media(max-width:768px){
+  .custom-b-wrapper{
+     width: 100%;
+     justify-content: center;
+     padding-right: 0;
+     gap: 10px;
+     box-shadow: unset;
+     background: unset;
+     border-radius: unset;
+  }
+  .breadcrumbs-list{
+     display:none;
+  }
+  .custom-breadcrumbs-container{
+     box-shadow: inset 0px 0px 20px 0px #d3d3d39c;
+  }
+  }
+  @media(max-width:402px){
+  .custom-breadcrumbs-container{
+    padding-left:6px;
+    padding-right:6px;
+  }
+  .custom-breadcrumbs-container .custom-b-wrapper img{
+    width:23px !important;
+    height:23px !important;
+  }
+  .custom-breadcrumbs-container .custom-b-wrapper .c-breadcrumb-txt{
+    font-size:12px !important;
+  }
+  }
+  {% if section.settings.section_top_margin %}
+    #shopify-section-{{ section.id }}{
+      margin-top: 30px;
+    }
+  {% endif %}
+  {% if section.settings.section_bottom_margin %}
+    #shopify-section-{{ section.id }} {
+      margin-bottom: 30px;
+    }
+  {% endif %}
+  </style>
+  
+  <div class="custom-breadcrumbs-container container">
+    {% render 'custom-breadcrumbs' %}
+  </div>
+  {% schema %}
+    {
+      "name": "Breadcrumbs Team Bar",
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "section_top_margin",
+          "label": "Add section top margin",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "section_bottom_margin",
+          "label": "Add section bottom margin",
+          "default": false
+        },
+        {
+          "type": "image_picker",
+          "id": "custom_breadcrumbs_icon",
+          "label": "Breadcrumbs Icon"
+        },
+        {
+          "type": "richtext",
+          "id": "custom_breadcrumbs_text",
+          "label": "Breadcrumbs Text"
+        }
+      ],
+      "presets": [
+        {"name": "breadcrumbs team bar"}
+      ]
+    }
+  {% endschema %}

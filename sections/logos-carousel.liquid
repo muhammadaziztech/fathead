@@ -1,0 +1,240 @@
+{{ 'splide.min.css' | asset_url | stylesheet_tag }}
+{{ 'section-logos-carousel.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'splide.min.js' | asset_url }}" defer="defer"></script>
+<style>
+    #Carousel-{{ section.id }},
+    #Carousel-{{ section.id }} .splide__arrow,
+    #Carousel-{{ section.id }} .title-wrapper h2 {
+        {%- if section.settings.background_color != blank -%}
+            background-color: {{ section.settings.background_color }};
+        {%- endif -%}
+        {%- if section.settings.text_color != blank -%}
+            color: {{ section.settings.text_color }};
+        {%- endif -%}
+    }
+    #Carousel-{{ section.id }} {
+        margin-top: {{ section.settings.margin_top | times: 0.75 | round: 0 }}px;
+        margin-bottom: {{ section.settings.margin_bottom | times: 0.75 | round: 0 }}px;
+    }
+    @media screen and (min-width: 750px) {
+        #Carousel-{{ section.id }} {
+            margin-top: {{ section.settings.margin_top }}px;
+            margin-bottom: {{ section.settings.margin_bottom }}px;
+        }
+    }
+    {% if section.settings.section_top_margin %}
+      #shopify-section-{{ section.id }}{
+        margin-top: 30px;
+      }
+    {% endif %}
+    {% if section.settings.section_bottom_margin %}
+      #shopify-section-{{ section.id }} {
+        margin-bottom: 30px;
+      }
+    {% endif %}
+</style>
+<div id="Carousel-{{ section.id }}" class="container section-logos-carousel carousel__heading--{{ section.settings.heading_position }}">
+    <div class="page-width">
+        <div class="section-logos-carousel__inner">
+            {%- unless section.settings.title == blank -%}
+                <div class="title-wrapper title-wrapper--no-top-margin">
+                    <h2 class="h1">{{ section.settings.title | escape }}</h2>
+                </div>
+            {%- endunless -%}
+            <div class="splide__wrapper">
+                <div class="splide" aria-label="{{ section.settings.title | default: "Carousel" }}">
+                    <div class="splide__track">
+                        <ul class="splide__list">
+                            {%- for block in section.blocks -%}
+                                <li class="splide__slide">
+                                    {%- if block.settings.url != blank -%}<a href="{{ block.settings.url }}">{%- endif -%}
+                                        {%- if block.settings.image != blank -%}
+                                            <img 
+                                                srcset="{% if block.settings.image.width >= 70 %}{{ block.settings.image | image_url: width: 70 }} 70w,{% endif %}
+                                                {% if block.settings.image.width >= 140 %}{{ block.settings.image | image_url: width: 140 }} 140w,{% endif %}
+                                                {% if block.settings.image.width >= 210 %}{{ block.settings.image | image_url: width: 210 }} 210w,{% endif %}
+                                                {{ block.settings.image | image_url }} {{ block.settings.image.width }}w"
+                                            src="{{ block.settings.image | image_url: width: 70 }}"
+                                            width="70" 
+                                            height="{{ 70 | divided_by: block.settings.image.aspect_ratio }}" 
+                                            loading="lazy"
+                                            >
+                                        {%- else -%}
+                                            {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                                        {%- endif -%}
+                                    {%- if block.settings.url != blank -%}</a>{%- endif -%}
+                                </li>
+                            {%- endfor -%}
+                        </ul>
+                    </div>
+                    <div class="splide__arrows">
+                        <button class="splide__arrow splide__arrow--prev" aria-label="{{ 'sections.slideshow.previous_slideshow' | t }}">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="27" fill="none"><path d="M14 .1413c7.3604.008 13.3252 5.9729 13.3333 13.3333v.2667c-.1466 7.3273-6.1794 13.1627-13.5075 13.0655C6.4976 26.7096.6218 20.7161.6696 13.3875.7175 6.0589 6.6712.1428 14 .1413Zm0 24c5.891 0 10.6666-4.7756 10.6666-10.6667C24.6666 7.5836 19.891 2.808 14 2.808c-5.891 0-10.6667 4.7756-10.6667 10.6666C3.34 19.3629 8.1117 24.1347 14 24.1413ZM14 6.808l1.88 1.88-3.44 3.4533h8.2266v2.6667H12.44l3.44 3.4533-1.88 1.88-6.6667-6.6667L14 6.808Z" fill="currentColor"/></svg>
+                        </button>
+                        <button class="splide__arrow splide__arrow--next"  aria-label="{{ 'sections.slideshow.next_slideshow' | t }}">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="27" fill="none"><path d="M14 26.8079C6.6396 26.7998.6748 20.835.6667 13.4746v-.2667C.8133 5.8806 6.846.0452 14.1742.1424c7.3282.0973 13.2041 6.0907 13.1562 13.4193C27.2825 20.8903 21.3288 26.8065 14 26.8079Zm0-24c-5.891 0-10.6667 4.7757-10.6667 10.6667 0 5.891 4.7757 10.6667 10.6667 10.6667 5.8911 0 10.6667-4.7757 10.6667-10.6667C24.6601 7.5863 19.8883 2.8146 14 2.8079Zm0 17.3334-1.88-1.88 3.44-3.4534H7.3334v-2.6666H15.56l-3.44-3.4534L14 6.808l6.6667 6.6667L14 20.1413Z" fill="currentColor"/></svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const splideOptions = {
+            pagination: false,
+            type: 'loop',
+            gap: 80,
+            speed: 1000,
+            focus: 'center',
+            perMove: 1,
+            autoWidth: true,
+            {% if section.settings.autoplay %}
+            autoplay: true,
+            interval: 5000,
+            {% endif %}
+            breakpoints: {
+                749: {
+                    pagination: true,
+                    arrows: false,
+                    gap: 20
+                }
+            }
+        };
+
+        const splide = new Splide('#Carousel-{{ section.id }} .splide', splideOptions);
+        splide.mount();
+
+        {%- if request.design_mode -%}
+        document.addEventListener('shopify:section:load', function(event) {
+            const sectionSelector = `#Carousel-${event.detail.sectionId} .splide`;
+            const sectionElement = event.target.querySelector(sectionSelector);
+            
+            if (sectionElement) {
+                const splide = new Splide(sectionSelector, splideOptions);
+                splide.mount();
+            }
+        });
+        {%- endif -%}
+    });
+</script>
+
+{% schema %}
+{
+	"name":"Logos Slider",
+	"class":"section",
+	"settings":[
+        {
+          "type": "checkbox",
+          "id": "section_top_margin",
+          "label": "Add section top margin",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "section_bottom_margin",
+          "label": "Add section bottom margin",
+          "default": false
+        },
+        {
+            "type": "text",
+            "id": "title",
+            "label": "Heading"
+        },
+        {
+            "type": "select",
+            "id": "heading_position",
+            "label": "Heading position",
+            "options": [
+                {
+                "value": "left",
+                "label": "Left of the carousel"
+                },
+                {
+                "value": "middle",
+                "label": "Middle Top of the carousel"
+                },
+                {
+                "value": "top",
+                "label": "Top of the carousel"
+                }
+            ],
+            "default": "left"
+        },
+        {
+            "type": "color",
+            "id": "background_color",
+            "label": "Background color"
+        },
+        {
+            "type": "color",
+            "id": "text_color",
+            "label": "Text color"
+        },
+        {
+            "type":"checkbox",
+            "id":"autoplay",
+            "label":"Autoplay",
+            "default":true
+        },
+        {
+          "type": "range",
+          "id": "margin_top",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Margin top",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "margin_bottom",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "Margin bottom",
+          "default": 0
+        }
+	],
+	"blocks":[
+	   {
+		  "name":"Logo",
+		  "type":"logo",
+		  "settings":[
+			{
+				"type": "image_picker",
+				"id": "image",
+				"label": "Logo image"
+			},
+			{
+                "type": "url",
+                "id": "url",
+                "label": "Logo url"
+            }
+		  ]
+	   }
+	],
+	"presets":[
+	   {
+		  "name":"Logos Slider",
+		  "settings":{
+			 
+		  },
+		  "blocks":[
+                {
+                    "type": "logo"
+                },
+                {
+                    "type": "logo"
+                },
+                {
+                    "type": "logo"
+                }
+		  ]
+	   }
+	]
+ }
+{% endschema %}

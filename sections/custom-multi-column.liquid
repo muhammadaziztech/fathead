@@ -1,0 +1,304 @@
+{% style %}
+  {% for block in section.blocks %}
+    .custom_{{ section.id }} .block_{{ block.id }}{
+      {% if block.settings.cmc_background_1 !=blank %}
+        background-image:url({{block.settings.cmc_background_1 |img_url: 'master'}});
+      {% endif %}
+      background-size:cover;
+      background-repeat:no-repeat;
+      background-position:center;
+      display:flex;
+    }
+    .custom_{{ section.id }} .cmc-text{
+      color:{{section.settings.txt_color}};
+    }
+    .custom_{{ section.id }} .cmc-button a{
+      color:{{section.settings.cmc_btn_color}};
+      background:{{section.settings.cmc_btn_bg}};
+    }
+    @media(min-width:768px){
+      .custom_{{ section.id }} .block_{{ block.id }}{
+        {% if block.settings.text_position == 'top_left' %}
+          justify-content:flex-start;
+        {% elsif block.settings.text_position == 'top_right' %}
+          justify-content:flex-end;
+        {% elsif block.settings.text_position == 'bottom_left' or block.settings.text_position == 'bottom_right' %}
+          justify-content:flex-end;
+          padding-bottom:50px;
+        {% elsif block.settings.text_position == 'center_right' or block.settings.text_position == 'center_left' %}
+          justify-content:center;
+        {% endif %}
+      }
+      .custom_{{ section.id }} .block_{{ block.id }} .cmc-wrapper{
+        {% if  block.settings.text_position == 'top_right' or block.settings.text_position == 'bottom_right' or block.settings.text_position == 'center_right' %}
+          text-align:end;
+        {% elsif block.settings.text_position == 'center_left' %}
+          text-align:start;
+        {% endif %}
+      }
+    }
+  {% endfor %}
+  @media(min-width:1440px){
+    .custom_{{ section.id }} .multi-column-block{
+      height:{{section.settings.large_desktop_height}}px;
+    }
+  }
+  @media(max-width:1439.98px){
+    .custom_{{ section.id }} .multi-column-block{
+      height:{{section.settings.desktop_height}}px;
+    }
+  }
+  @media(max-width:1024px){
+    .custom_{{ section.id }} .multi-column-block{
+      height:{{section.settings.small_desktop_height}}px;
+    }  
+  }
+  @media(max-width:768px){
+    .custom_{{ section.id }} .multi-column-block{
+      height:{{section.settings.tablet_height}}px;
+    } 
+  }
+  @media(max-width:550px){
+    .custom_{{ section.id }} .multi-column-block{
+      height:{{section.settings.mobile_height}}px;
+    }  
+  }
+  .custom-multi-wrap{
+    display:flex;
+  }
+  .cmc-button a{
+    display: block;
+    width: 200px;
+    padding: 10px;
+    text-decoration: unset;
+    font-size: 18px;
+  }
+  .cmc-text p{
+    margin-bottom:0;
+  }
+  .multi-column-block{
+    padding: 50px 40px;
+    width:50%;
+  }
+  @media(max-width:768px){
+    .custom-multi-wrap{
+      flex-wrap:wrap;
+      flex-direction:column;
+    }
+    .multi-column-block{
+      width:100%;
+      padding:30px 20px;
+    }
+    .cmc_1{
+      justify-content:flex-end;
+    }
+    .cmc_1 .cmc-wrapper{
+      text-align:end;
+    }
+    .cmc_2{
+      justify-content:flex-start;
+      padding-left: 20px !important;
+    }
+  }
+  {% if section.settings.section_top_margin %}
+    #shopify-section-{{ section.id }} {
+      margin-top: 30px;
+    }
+  {% endif %}
+  {% if section.settings.section_bottom_margin %}
+    #shopify-section-{{ section.id }} {
+      margin-bottom: 30px;
+    }
+  {% endif %}
+{% endstyle %}
+
+<div class="cmc-container custom_{{ section.id }}">
+  <div class="custom-multi-wrap">
+    {% for block in section.blocks %}
+      <div
+        class="multi-column-block block_{{ block.id }} cmc_{{ forloop.index }}"
+        style="{% if block.settings.text_position == 'bottom_left' or block.settings.text_position == 'bottom_right' or block.settings.text_position == 'center_right' or block.settings.text_position == 'center_left' %}flex-direction:column;{% endif %}{% if block.settings.padding %}padding:0;{% endif %}"
+      >
+        <div class="cmc-wrapper">
+          {% if block.settings.cmc_txt != blank %}
+            <div class="cmc-text">{{ block.settings.cmc_txt }}</div>
+          {% endif %}
+          {% if block.settings.cmc_btn != blank %}
+            <button class="cmc-button" style="padding:0; --button-border-color: transparent;">
+              <a href="{{ block.settings.btn_url }}">
+                {{- block.settings.cmc_btn }}
+                <img
+                  class="c-arrow-ban"
+                  src="https://cdn.shopify.com/s/files/1/0279/0234/5304/files/icon-right-arrow-removebg-preview.png?v=1727979155"
+                  style="height:12px; width:14px; margin-left: 11px;"
+                  width="width"
+                  height="height"
+                  alt="{{ 'SHOW YOUR TEAM SPIRIT WITH FATHEAD' }}"
+              ></a>
+            </button>
+          {% endif %}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "FH - Multi Column",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "section_top_margin",
+      "label": "Add section top margin",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "section_bottom_margin",
+      "label": "Add section bottom margin",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "txt_color",
+      "label": "Text Color"
+    },
+    {
+      "type": "color",
+      "id": "cmc_btn_color",
+      "label": "Button Color"
+    },
+    {
+      "type": "color",
+      "id": "cmc_btn_bg",
+      "label": "Button Background"
+    },
+    {
+      "type": "header",
+      "content": "Section Columns Height"
+    },
+    {
+      "type": "range",
+      "id": "large_desktop_height",
+      "label": "Large Desktop",
+      "max": 800,
+      "min": 200,
+      "step": 10,
+      "unit": "px",
+      "default": 500
+    },
+    {
+      "type": "range",
+      "id": "desktop_height",
+      "label": "Desktop",
+      "max": 800,
+      "min": 200,
+      "step": 10,
+      "unit": "px",
+      "default": 400
+    },
+    {
+      "type": "range",
+      "id": "small_desktop_height",
+      "label": "Small Desktop",
+      "max": 800,
+      "min": 200,
+      "step": 10,
+      "unit": "px",
+      "default": 400
+    },
+    {
+      "type": "range",
+      "id": "tablet_height",
+      "label": "Tablet",
+      "max": 600,
+      "min": 200,
+      "step": 10,
+      "unit": "px",
+      "default": 400
+    },
+    {
+      "type": "range",
+      "id": "mobile_height",
+      "label": "Mobile",
+      "max": 600,
+      "min": 200,
+      "step": 10,
+      "unit": "px",
+      "default": 400
+    }
+  ],
+  "blocks": [
+    {
+      "type": "block",
+      "name": "column",
+      "limit": 2,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "cmc_background_1",
+          "label": "Background Image"
+        },
+        {
+          "type": "richtext",
+          "id": "cmc_txt",
+          "label": "Text"
+        },
+        {
+          "type": "text",
+          "id": "cmc_btn",
+          "label": "Button"
+        },
+        {
+          "type": "url",
+          "id": "btn_url",
+          "label": "Button Url"
+        },
+        {
+          "type": "checkbox",
+          "id": "padding",
+          "label": "Remove padding",
+          "default":false
+        },
+        {
+         "type": "select",
+         "id": "text_position",
+         "label": "Column content Position (Desktop)",
+         "options": [
+       {
+         "value": "top_left",
+         "label": "Top Left"
+       },
+       {
+        "value": "top_right",
+        "label": "Top Right"
+       },
+        {
+         "value": "center_left",
+         "label": "Center Left"
+       },
+       {
+        "value": "center_right",
+        "label": "Center Right"
+       },
+       {
+         "value": "bottom_left",
+         "label": "Bottom Left"
+       },
+       {
+        "value": "bottom_right",
+        "label": "Bottom Right"
+       },
+
+    ],
+    "default": "top_left"
+   }
+      ]
+    }
+  ],
+  "presets": [
+    {"name": "FH - Multi-column"}
+  ]
+}
+{% endschema %}

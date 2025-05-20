@@ -1,0 +1,333 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": { "show_title": false, "title_alignment": "left" }
+    },
+    "slideshow_BFr9Dh": {
+      "type": "slideshow",
+      "blocks": {
+        "image_6w6aPU": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/NFL_landing_1600.png",
+            "image_link": "",
+            "color_overlay_bg": "#ffffff",
+            "overlay_opacity": 80,
+            "color_overlay_text": "#333333",
+            "text_alignment": "center",
+            "overlay_position_x": 50,
+            "overlay_position_y": 80,
+            "overlay_title": "",
+            "enlarge_title": false,
+            "overlay_title_width": 100,
+            "styled_words": "",
+            "words_style": "stencil",
+            "highlight_words_top": 10,
+            "highlight_color": "#ffffff",
+            "styled_word_color": "#1c1c1c",
+            "overlay_text": "",
+            "enlarge_text": false,
+            "overlay_url_text_1": "",
+            "overlay_url_1": "",
+            "overlay_url_text_2": "",
+            "overlay_url_2": "",
+            "overlay_url_style": "button_1",
+            "color_label_background": "#ffffff",
+            "color_label_text": "#333333",
+            "show_chevron": true,
+            "product_id_1": "",
+            "chevron_position_1": "right",
+            "label_position_x_1": 20,
+            "label_position_y_1": 30,
+            "product_id_2": "",
+            "chevron_position_2": "right",
+            "label_position_x_2": 80,
+            "label_position_y_2": 50
+          }
+        }
+      },
+      "block_order": ["image_6w6aPU"],
+      "disabled": true,
+      "custom_css": [
+        ".full-width-slideshow {padding-left: 0; padding-right: 0; margin-top: 0;}",
+        ".full-width-slideshow .slick-track {width: 100% !important;}",
+        ".full-width-slideshow .slick-initialized .slide {width: 100% !important;}"
+      ],
+      "settings": {
+        "height": "adapt",
+        "height_desktop": 600,
+        "height_mobile": 500,
+        "mobile_text_below": true,
+        "slide_transition": "fade",
+        "slideshow_autoplay": true,
+        "slideshow_autoplay_speed": 6
+      }
+    },
+    "image_with_text_overlay_4dmUaT": {
+      "type": "image-with-text-overlay",
+      "disabled": true,
+      "custom_css": [],
+      "settings": {
+        "image": "shopify://shop_images/NFL_landing_1600.png",
+        "image_link": "",
+        "height": "adapt",
+        "height_desktop": 600,
+        "height_mobile": 500,
+        "color_overlay_bg": "#ffffff",
+        "overlay_opacity": 80,
+        "color_overlay_text": "#1c1c1c",
+        "text_alignment": "center",
+        "overlay_position_x": 50,
+        "overlay_position_y": 70,
+        "mobile_text_below": false,
+        "overlay_title": "",
+        "enlarge_title": false,
+        "overlay_title_width": 100,
+        "styled_words": "",
+        "words_style": "stencil",
+        "highlight_words_top": 10,
+        "highlight_color": "#ffffff",
+        "styled_word_color": "#1c1c1c",
+        "overlay_text": "",
+        "enlarge_text": false,
+        "iwto-richtext": "",
+        "overlay_url_text_1": "",
+        "overlay_url_1": "",
+        "overlay_url_text_2": "",
+        "overlay_url_2": "",
+        "overlay_url_style": "button_1",
+        "color_label_background": "#ffffff",
+        "color_label_text": "#333333",
+        "show_chevron": true,
+        "product_id_1": "",
+        "chevron_position_1": "right",
+        "label_position_x_1": 20,
+        "label_position_y_1": 30,
+        "product_id_2": "",
+        "chevron_position_2": "right",
+        "label_position_x_2": 80,
+        "label_position_y_2": 50
+      }
+    },
+    "logo_list_J4YdJL": {
+      "type": "logo-list",
+      "blocks": {
+        "logo_YUHx6X": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/NFL_Logo_Kansas_City_Chiefs.png",
+            "image_width": 60,
+            "link": "shopify://pages/nfl-teams",
+            "title": ""
+          }
+        }
+      },
+      "block_order": ["logo_YUHx6X"],
+      "disabled": true,
+      "settings": {
+        "title": "",
+        "color_bg": "#ffffff",
+        "color_title": "#1c1c1c",
+        "color_text": "#1c1c1c",
+        "enlarge_title": false,
+        "enlarge_text": false,
+        "image_opacity": 100,
+        "en-slider": false,
+        "item-per-row": 7
+      }
+    },
+    "split_image_D8ULQf": {
+      "type": "split-image",
+      "blocks": {
+        "image_irWrER": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Jalen_Hurts_Promo_2x_885ab709-ae29-4c88-b703-b2f30cf8ae22.png",
+            "image_link": "",
+            "color_overlay_bg": "#ffffff",
+            "overlay_opacity": 0,
+            "color_overlay_text": "#ffffff",
+            "overlay_title": "Jalen Hurts",
+            "overlay_text": "",
+            "overlay_url_text": "",
+            "overlay_url": "",
+            "overlay_url_style": "button_2",
+            "enlarge_title": false,
+            "enlarge_text": false,
+            "overlay_position_x": 0,
+            "overlay_position_y": 20,
+            "mobile_text_below": false,
+            "color_label_background": "#ffffff",
+            "color_label_text": "#333333",
+            "product_id": "jalen-hurts-celebration-realbig-collection-official-nfl-philadelphia-eagles-reusable-vinyl-wall-decals",
+            "show_chevron": true,
+            "chevron_position": "right",
+            "label_position_x": 32,
+            "label_position_y": 80
+          }
+        },
+        "image_yfBEaA": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Travis_Kelce_Promo_2x_2ed2c937-dc43-4e8c-9762-9e3f0d6f09c7.png",
+            "image_link": "",
+            "color_overlay_bg": "#ffffff",
+            "overlay_opacity": 0,
+            "color_overlay_text": "#ffffff",
+            "overlay_title": "Travis Kelce",
+            "overlay_text": "",
+            "overlay_url_text": "",
+            "overlay_url": "",
+            "overlay_url_style": "button_1",
+            "enlarge_title": false,
+            "enlarge_text": false,
+            "overlay_position_x": 0,
+            "overlay_position_y": 20,
+            "mobile_text_below": false,
+            "color_label_background": "#ffffff",
+            "color_label_text": "#1c1c1c",
+            "product_id": "travis-kelce-realbig-collection-official-nfl-kansas-city-chiefs-reusable-vinyl-wall-decals-5",
+            "show_chevron": true,
+            "chevron_position": "right",
+            "label_position_x": 20,
+            "label_position_y": 80
+          }
+        }
+      },
+      "block_order": ["image_irWrER", "image_yfBEaA"],
+      "disabled": true,
+      "settings": { "height_desktop": 300, "height_mobile": 300 }
+    },
+    "featured_collection_q3cQjw": {
+      "type": "featured-collection",
+      "disabled": true,
+      "settings": {
+        "title": "NFL TOP 50 PRODUCTS",
+        "enlarge_title": false,
+        "link_text": "Shop now",
+        "collection": "2022-nfl-top-50",
+        "show_vendor": false,
+        "enable_carousel": false,
+        "grid": 4,
+        "row_count": 1,
+        "grid_mobile": "2"
+      }
+    },
+    "app_landing_banner_hTeFVh": {
+      "type": "app-landing-banner",
+      "blocks": {
+        "appdownload_DLrfWx": {
+          "type": "appdownload",
+          "settings": {
+            "app_store_logo": "shopify://shop_images/apple-app-store-logo_363dcb66-6749-4bdc-98ce-7fe079603978.png",
+            "google_play_logo": "shopify://shop_images/Google_Play_Store_badge_EN_svg_e35b7394-1d87-4c10-92e9-0be4acb4510f.png",
+            "app_store_url": "https://apps.apple.com/us/app/fathead/id1515208490",
+            "google_play_url": "https://play.google.com/store/apps/details?id=com.fatheadx.fatheadapp"
+          }
+        }
+      },
+      "block_order": ["appdownload_DLrfWx"],
+      "settings": {
+        "banner_title": "Download the Fathead App!",
+        "banner_title_tt": "capitalize",
+        "banner_des": "<p></p><ul><li>Create Personalized Fatheads</li><li>World's Best Wall Decals, Big Heads + Standouts</li><li>Celebrate Your Fandom in AR</li></ul>",
+        "banner_img": "shopify://shop_images/banner-main-img_8192b25e-8f04-42a8-af13-cf5b25fe68d1.png",
+        "banner_sub_title": "",
+        "banner_bottom_des": "",
+        "banner_bottom_cta_url": "",
+        "banner_bottom_cta_label": "Official Rules",
+        "show_banner_bg": false,
+        "banner_bg": "#055cb2",
+        "content_clr": "#ffffff",
+        "banner_bottom_bg": "#ffb81d",
+        "banner_bottom_cont_clr": "#005ea8"
+      }
+    },
+    "multi_column_qBYTPr": {
+      "type": "multi-column",
+      "blocks": {
+        "text_block_Bcni8p": {
+          "type": "text_block",
+          "settings": {
+            "enable_image": true,
+            "image": "shopify://shop_images/fi_12930690_83fff840-0b8e-4b5d-aed5-608cdfa17de1.png",
+            "image_width": 25,
+            "enable_icon": false,
+            "icon": "award",
+            "icon_size": 48,
+            "icon_color": "",
+            "title": "Personalize",
+            "text": "<p></p><p><br/>Customize your own Fathead<br/><br/></p>",
+            "button_label": "CREATE",
+            "button_link": "https://fathead.com/pages/create",
+            "enlarge_title": false,
+            "enlarge_text": false
+          }
+        },
+        "text_block_q9dzyx": {
+          "type": "text_block",
+          "settings": {
+            "enable_image": true,
+            "image": "shopify://shop_images/fi_4163679_e86b32cf-82df-4f28-9223-06d0a8a43a09.png",
+            "image_width": 25,
+            "enable_icon": false,
+            "icon": "award",
+            "icon_size": 48,
+            "icon_color": "",
+            "title": "The Best in Sports and Entertainment",
+            "text": "<p>We have all your sports and entertainment needs covered.</p>",
+            "button_label": "SHOP COLLECTION",
+            "button_link": "shopify://collections/all",
+            "enlarge_title": false,
+            "enlarge_text": false
+          }
+        },
+        "text_block_CC8HfC": {
+          "type": "text_block",
+          "settings": {
+            "enable_image": true,
+            "image": "shopify://shop_images/fi_4429107_060ed98e-12f9-4f03-b433-b7c15a490deb.png",
+            "image_width": 25,
+            "enable_icon": false,
+            "icon": "award",
+            "icon_size": 48,
+            "icon_color": "",
+            "title": "Your Ultimate DIY Design Solution",
+            "text": "<p>Endless possibilities to create themed environments.</p>",
+            "button_label": "EXPLORE",
+            "button_link": "shopify://pages/reviews-1",
+            "enlarge_title": false,
+            "enlarge_text": false
+          }
+        }
+      },
+      "block_order": [
+        "text_block_Bcni8p",
+        "text_block_q9dzyx",
+        "text_block_CC8HfC"
+      ],
+      "settings": {
+        "title": "MORE FOR YOU...",
+        "enlarge_title": false,
+        "text_alignment": "center",
+        "url_style": "button_1",
+        "enable_custom_colors": false,
+        "color_title": "",
+        "color_text": "",
+        "color_bg": "rgba(0,0,0,0)",
+        "gradient_bg": ""
+      }
+    }
+  },
+  "order": [
+    "main",
+    "slideshow_BFr9Dh",
+    "image_with_text_overlay_4dmUaT",
+    "logo_list_J4YdJL",
+    "split_image_D8ULQf",
+    "featured_collection_q3cQjw",
+    "app_landing_banner_hTeFVh",
+    "multi_column_qBYTPr"
+  ]
+}

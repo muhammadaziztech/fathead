@@ -1,0 +1,1842 @@
+{%- liquid
+  assign standard_custom_shipping_threshold = settings.standard_custom_shipping_threshold
+-%}
+<script>
+
+// This function below applies free shippong only to customs if needed.
+// function toggleFreeShipping() {
+//   setTimeout(() => {
+//     const items = Rebuy.SmartCart.items();
+//     let freeShipping = false;
+//     let currentThreshold = 0; // Default threshold for free shipping
+
+//     items.forEach(item => {
+//       if (item.product?.tags.includes('custom')) {
+//         freeShipping = true;
+//         currentThreshold = {{ standard_custom_shipping_threshold | default: 130 }};
+//         Rebuy.SmartCart.progressBar.tiers[0].minimum = currentThreshold;
+//       }
+//     });
+
+//     if (!freeShipping) {
+//       currentThreshold = 0;
+//       Rebuy.SmartCart.progressBar.tiers[0].minimum = currentThreshold;
+//     }
+//     updateProgressIcons(currentThreshold);
+//   }, 100);
+// }
+  function toggleFreeShipping() {
+  setTimeout(() => {
+    const currentThreshold = {{ standard_custom_shipping_threshold | default: 130 }};
+    Rebuy.SmartCart.progressBar.tiers[0].minimum = currentThreshold;
+    updateProgressIcons(currentThreshold);
+  }, 100);
+}
+
+// function updateProgressIcons(threshold = 0) {
+//   setTimeout(() => {
+//     const progressMeter = document.querySelector('.rebuy-cart__progress-bar-meter-fill');
+//     const progressStepWrappers = document.querySelectorAll('.rebuy-cart__progress-step-icon');
+//     const progressWrapper = document.querySelector('.rebuy-cart__progress-bar-meter');
+//     const progress = parseFloat(progressMeter.style.width);
+
+//     Rebuy.SmartCart.progressBar?.tiers.forEach((tier, index) => {
+//       const iconElement = progressStepWrappers[index];
+//       const stepElement = iconElement.closest('.rebuy-cart__progress-step');
+
+//       if (iconElement) {
+//         iconElement.classList.add('use-image');
+
+//         if (index === 0) {
+//           if (!progressWrapper.classList.contains('no-progress') && progress >= threshold) {
+//             stepElement.classList.add('complete');
+//             iconElement.style.backgroundImage = "url('https://cdn.shopify.com/s/files/1/0279/0234/5304/files/Rebuy_Icons_Complete_200x200_1097fa1b-10fb-4d54-9f56-c65291c59ab8.png?v=1727458610')";
+//           } else {
+//             stepElement.classList.remove('complete');
+//             iconElement.style.backgroundImage = "url('https://cdn.shopify.com/s/files/1/0279/0234/5304/files/Rebuy_Icons_FreeShipping_200x200_eb748d3b-5d81-4456-a214-f82cab0d68b6.png?v=1729536411')";
+//           }
+//         } else {
+//           if (stepElement?.classList.contains('complete')) {
+//             iconElement.style.backgroundImage = "url('https://cdn.shopify.com/s/files/1/0279/0234/5304/files/Rebuy_Icons_Complete_200x200_1097fa1b-10fb-4d54-9f56-c65291c59ab8.png?v=1727458610')";
+//           } else {
+//             if (tier.type === 'product') {
+//               iconElement.style.backgroundImage = "url('https://cdn.shopify.com/s/files/1/0279/0234/5304/files/Rebuy_Icons_FreeGift_200x200_42fac879-ae8b-4463-a21b-65dbe99b1dc2.png?v=1727458610')";
+//             } else if (tier.type === 'shipping') {
+//               iconElement.style.backgroundImage = "url('https://cdn.shopify.com/s/files/1/0279/0234/5304/files/Rebuy_Icons_FreeShipping_200x200_eb748d3b-5d81-4456-a214-f82cab0d68b6.png?v=1729536411')";
+//             } else if (tier.type === 'decorative') {
+//               iconElement.style.backgroundImage = "url('https://cdn.shopify.com/s/files/1/0279/0234/5304/files/Rebuy_Icons_ExpeditedShipping_200x200_b7974d38-503a-48f7-8c5d-a8e0b2634de0.png?v=1727458610')";
+//             } else if (tier.type === 'discount') {
+//               iconElement.style.backgroundImage = "url('https://cdn.shopify.com/s/files/1/0279/0234/5304/files/Rebuy_Icons_DiscountPercentage_200x200_305f685b-6f32-4015-8618-bd2dc51a7e5f.png?v=1727458610')";
+//             }
+//           }
+//         }
+//       }
+//     });
+
+//     checkCustomProductThreshold();
+//   }, 100);
+// }
+function updateProgressIcons(threshold = 0) {
+ setTimeout(() => {
+   const progressMeter = document.querySelector('.rebuy-cart__progress-bar-meter-fill');
+   const progressStepWrappers = document.querySelectorAll('.rebuy-cart__progress-step-icon');
+   const progressWrapper = document.querySelector('.rebuy-cart__progress-bar-meter');
+   const subtotal = Rebuy.SmartCart.progressBarSubtotal();
+   
+   Rebuy.SmartCart.progressBar?.tiers.forEach((tier, index) => {
+     const iconElement = progressStepWrappers[index];
+     const stepElement = iconElement.closest('.rebuy-cart__progress-step');
+
+     if (iconElement) {
+       iconElement.classList.add('use-image');
+
+       if (index === 0) {
+         if (!progressWrapper.classList.contains('no-progress') && subtotal >= threshold * 100) {
+           stepElement.classList.add('complete');
+           iconElement.style.backgroundImage = "url('https://cdn.shopify.com/s/files/1/0279/0234/5304/files/Rebuy_Icons_Complete_200x200_1097fa1b-10fb-4d54-9f56-c65291c59ab8.png?v=1727458610')";
+         } else {
+           stepElement.classList.remove('complete');
+           iconElement.style.backgroundImage = "url('https://cdn.shopify.com/s/files/1/0279/0234/5304/files/Rebuy_Icons_FreeShipping_200x200_eb748d3b-5d81-4456-a214-f82cab0d68b6.png?v=1729536411')";
+         }
+       } else if (tier.type === 'decorative') {
+         if (subtotal >= tier.minimum * 100) {
+           stepElement.classList.add('complete');
+           iconElement.style.backgroundImage = "url('https://cdn.shopify.com/s/files/1/0279/0234/5304/files/Rebuy_Icons_Complete_200x200_1097fa1b-10fb-4d54-9f56-c65291c59ab8.png?v=1727458610')";
+         } else {
+           stepElement.classList.remove('complete');
+           iconElement.style.backgroundImage = "url('https://cdn.shopify.com/s/files/1/0279/0234/5304/files/Rebuy_Icons_ExpeditedShipping_200x200_b7974d38-503a-48f7-8c5d-a8e0b2634de0.png?v=1727458610')";
+         }
+       }
+     }
+   });
+ }, 100);
+}
+
+function checkCustomProductThreshold() {
+  setTimeout(() => {
+    const items = Rebuy.SmartCart.items();
+    const subtotal = Rebuy.SmartCart.progressBarSubtotal();
+    const threshold = {{ standard_custom_shipping_threshold | default: 130 }} * 100; // Convert to cents
+    const progressStepWrappers = document.querySelectorAll('.rebuy-cart__progress-step-icon');
+    const stepElement = progressStepWrappers[0]?.closest('.rebuy-cart__progress-step'); // First tier element
+
+    // Check if there is a custom product in the cart
+    let hasCustomProduct = items.some(item => item.product?.tags.includes('custom'));
+
+    // If custom product is in cart and subtotal meets the threshold, add the complete class
+    if (hasCustomProduct && subtotal >= threshold) {
+      stepElement.classList.add('complete');
+      progressStepWrappers[0].style.backgroundImage = "url('https://cdn.shopify.com/s/files/1/0279/0234/5304/files/Rebuy_Icons_Complete_200x200_1097fa1b-10fb-4d54-9f56-c65291c59ab8.png?v=1727458610')";
+    }
+  }, 100);
+}
+
+// Initialize and update based on cart changes
+toggleFreeShipping();
+document.addEventListener('rebuy:cart.change', () => {
+  toggleFreeShipping();
+});
+
+function formatProductTitle(title = '') {
+  if (!title) return '';
+
+  // Split title into words
+  const words = title.split(' ');
+  let firstPart = '';
+  let secondPart = '';
+  let thirdPart = '';
+  let foundOfficial = false;
+
+  // Iterate through words to build parts
+  words.forEach(word => {
+    if (foundOfficial) {
+      thirdPart += `${word} `;
+    } else if (word.includes('Official') || word.includes('Officially')) {
+      foundOfficial = true;
+      thirdPart += `${word} `;
+    } else {
+      firstPart += `${word} `;
+    }
+  });
+
+  firstPart = firstPart.trim();
+  thirdPart = thirdPart.trim();
+
+  // Split firstPart by the first dash
+  const firstDashIndex = firstPart.split(' - ');
+  let lineOne = '';
+  let lineTwo = '';
+
+  if (firstDashIndex.length > 1) {
+    lineOne = firstDashIndex[0];
+    lineTwo = firstPart.replace(lineOne, '').trim();
+  } else {
+    lineOne = firstPart;
+  }
+
+  // Cleanup dashes and extra spaces
+  lineOne = lineOne.replace(/^-|-\s*$/g, '').trim();
+  lineTwo = lineTwo.replace(/^-|-\s*$/g, '').trim();
+  thirdPart = thirdPart.replace(/-/g, '').trim(); // Remove all hyphens from thirdPart
+
+  // Return formatted HTML
+  return `
+    <div class='title_line_one'>${lineOne}</div>
+    <div class='title_line_two'>${lineTwo}</div>
+    <div class='title_line_three'>${thirdPart}</div>
+  `;
+}
+
+</script>
+
+<!-- General Theme / Rebuy Styling -->
+<style>
+.cart-summary {
+  display: none !important;
+}
+.added-notice {
+  display: none !important;
+}
+.rebuy-cart__flyout {
+    margin: 0px;
+    border-radius: 0px;
+  gap: 0px;
+}
+.rebuy-cart__flyout-note{
+  padding: 10px !important;
+}
+.rebuy-cart__background,
+.rebuy-cart .rebuy-star-rating > * {
+    display: block !important;
+}
+.rebuy-checkbox {
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    padding: 0 0 0 15px !important;
+}
+.rebuy-checkbox:checked:before {
+    appearance: none;
+    -webkit-appearance: none;
+    display: inherit;
+}
+.rebuy-cart__shop-pay-button>svg {
+    height: 20px;
+}
+.rebuy-cart__checkout-button, .rebuy-cart__continue-shopping-button {
+  height: 42px;
+}
+.rebuy-widget .flickity-button {
+  box-shadow: none !important;
+}
+.powered-by-rebuy {
+    display: none;
+}
+ .rebuy-button,
+.rebuy-cart__flyout-empty-cart a, .rebuy-button.outline, .rebuy-widget .rebuy-button.outline, .rebuy-button.secondary, .rebuy-widget .rebuy-button.secondary {
+      background-color: #d43900;
+    color: #ffffff;
+font-size: 16px;
+    letter-spacing: normal !important;
+    text-transform: uppercase !important;
+    font-weight: 400 !important;
+  transition: background-color 250ms ease;
+  border-radius: 50px !important;
+  min-width: inherit !important;
+}
+.rebuy-button:hover,
+.rebuy-cart__flyout-empty-cart a:hover {
+    background: #DD664B !important;
+    color: #FFFFFF !important;
+  border-color: #DD664B;
+}
+/* mobile styling below*/
+@media(max-width: 500px){
+.rebuy-cart__flyout-discount-form, #rebuy-discount-input {
+  height: 30px;
+}
+.rebuy-cart__flyout-discount-container .rebuy-button {
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+}
+</style>
+<!--  Manual Widget Installs BELOW -->
+{% if product %}
+<!-- PDP Complete The Look Widget Install -->
+<div data-rebuy-id="165808" data-rebuy-shopify-product-ids="{{ product.id }}"></div>
+<!-- PDP Carousel Widget Install -->
+<div data-rebuy-id="165809" data-rebuy-shopify-product-ids="{{ product.id }}"></div>
+<!-- PDP Popup Cross-sell Widget Install -->
+<div data-rebuy-id="165810" data-rebuy-shopify-product-ids="{{ product.id }}"></div>
+{% endif %}
+
+<!-- Home Page Widgets installs BELOW-->
+{% if template.name == "index" %}
+<!-- Home Page Carousel Widget Install -->
+<!-- <div data-rebuy-id="165811" data-rebuy-shopify-product-ids="{{ product.id }}"></div> -->
+<!-- Home Page Carousel Widget #2 Install  -->
+<!-- <div data-rebuy-id="168004" data-rebuy-shopify-product-ids="{{ product.id }}"></div> -->
+{% endif %}
+
+
+{% raw %}
+
+<script id="rebuy-widget-165809" type="text/template">
+  <div class="rebuy-widget"
+    v-cloak
+    v-on:click="stopPropagation($event)"
+    v-bind:id="'rebuy-widget-' + id"
+    v-bind:class="['widget-type-' + config.type.replace('_','-'), 'widget-display-' + config.display_type, products.length > 0 ? 'is-visible' : 'is-hidden', 'widget-layout-' + currentLayout()]">
+
+      <div
+          class="rebuy-widget-container"
+          v-cloak
+          v-bind:class="['widget-display-' + config.display_type, visible ? 'is-visible' : 'is-hidden' ]"
+          v-on:click.self="hide()">
+
+          <div class="rebuy-widget-content">
+              <div class="rebuy-modal-close" v-on:click="hide()" aria-label="close modal">
+                  <i class="fas fa-times" aria-hidden="true"></i>
+              </div>
+
+              <div class="rebuy-timer" v-if="hasTimer()">
+                  <p class="rebuy-timer-title" v-if="config.language.timer_title">
+                      <span v-html="config.language.timer_title"></span> <span class="rebuy-timer-minutes" v-html="config.timer.duration_minutes"></span>:<span class="rebuy-timer-seconds" v-html="config.timer.duration_seconds"></span>
+                  </p>
+              </div>
+
+              <h3 class="super-title" v-if="config.language.super_title != ''" v-html="config.language.super_title"></h3>
+
+              <h4 class="primary-title" v-if="config.language.title != ''" v-html="config.language.title"></h4>
+
+              <div class="description" v-if="config.language.description != ''" v-html="config.language.description"></div>
+
+              <div class="rebuy-product-grid" v-bind:class="layoutClasses" tabindex="0" role="list">
+
+                  <div
+                      v-for="(product, product_index) in products"
+                      v-bind:class="[product.handle, 'product-id-' + product.id, cartHasProduct(product) ? 'cart-has-item' : '', productTagClasses(product)]"
+                      aria-label="product"
+                      class="rebuy-product-block"
+                      role="listitem"
+                  >
+  
+                    <!-- Product Block holder start -->
+                    <div class="rebuy-product-block-holder">
+    
+                        <div class="rebuy-product-media">
+                            <a
+                                class="rebuy-product-image"
+                                tabindex="-1"
+                                v-bind:href="learnMoreURL(product)"
+                                v-bind:style="imageStyles"
+                                v-on:click="learnMore(product, $event);"
+                                v-bind:class="[hasLearnMore() ? 'clickable' : '']"
+                                rel="nofollow"
+                            >
+                                <img v-bind:loading="product_index > 1 ? 'lazy' : 'eager'" v-bind:src="itemImage(product, product.selected_variant, '400x400')" v-bind:alt="itemImageAlt(product, product.selected_variant)">
+                            </a>
+                        </div>
+                        <div class="rebuy-product-info">
+<a
+  aria-level="5"
+  class="rebuy-product-title"
+  v-bind:href="learnMoreURL(product)"
+  v-on:click="learnMore(product, $event);"
+  v-html="formatProductTitle(product.title)"
+  v-bind:class="[hasLearnMore() ? 'clickable' : '']"
+  v-bind:aria-label="'View ' + product.title"
+  rel="nofollow"
+ ></a>
+                            <div class="rebuy-variant-title" v-if="showVariantTitle(product)" v-html="product.selected_variant.title"></div>
+                            <div class="rebuy-product-review" v-if="hasProductReviews(product)" aria-label="product star rating">
+                                <span class="rebuy-star-rating">
+                                    <span
+                                        v-if="product.reviews.star_rating"
+                                        class="rebuy-star-rating-value sr-only"
+                                        v-html="product.reviews.star_rating + ' stars out of 5 stars'"
+                                    >
+                                    </span>
+                                    <span class="rebuy-star-rating-background"></span>
+                                    <span class="rebuy-star-rating-foreground" v-bind:style="{ width: productReviewRatingPercentage(product) }"></span>
+                                </span>
+                                <span class="rebuy-review-count" v-html="productReviewCount(product)"></span>
+                            </div>
+  
+                            <div class="rebuy-product-price">
+                                <div v-if="variantOnSale(product, product.selected_variant)">
+                                    <span class="rebuy-money sale">
+                                        <span class="sr-only">Sale price</span>
+                                        <span tabindex="0" v-html="formatMoney(variantPrice(product, product.selected_variant))"></span>
+                                    </span>
+                                    <span class="rebuy-money compare-at">
+                                        <span class="sr-only">Original price</span>
+                                        <span v-html="formatMoney(variantCompareAtPrice(product, product.selected_variant))"></span>
+                                    </span>
+                                </div>
+                                <div v-if="!(variantOnSale(product, product.selected_variant))">
+                                    <span class="rebuy-money">
+                                        <span class="sr-only">Price</span>
+                                        <span tabindex="0" v-html="formatMoney(variantPrice(product, product.selected_variant))"></span>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="rebuy-product-description" v-if="showProductDescription(product)" v-html="text(product.body_html)"></div>
+                        </div>
+                        <div class="rebuy-product-options" v-if="showVariantSelect(product)">
+                            <select
+                                title="Select product variant"
+                                :id="id + '-' + 'select' + '-' + product_index"
+                                :class="{ hide : settings.view_options.variant_selector == 'buttons' }"
+                                class="rebuy-select"
+                                v-bind:aria-label="'variant of ' + product.title"
+                                v-model="product.selected_variant_id"
+                                v-on:change="selectVariant(product)">
+                                <option v-for="variant in product.variants" v-bind:value="variant.id">{{ variant.title }}</option>
+                            </select>
+                            <div v-if="displayColorSwatches(option)" v-for="option in product.options" class="rebuy-color-swatches">
+                                <div v-for="(value, value_index) in filterOOSOptions(option, product)" class="rebuy-color-swatch">
+                                    <input
+                                        :name="id + '-color-' + product_index"
+                                        :id="id + '-color-' + product_index + '-' + value + '-' + value_index"
+                                        :checked="value_index == 0"
+                                        :value="value"
+                                        type="radio"
+                                        class="rebuy-color-input hide"
+                                        v-on:change="selectVariantByColor(product, value, product_index)">
+                                    <label
+                                        :for="id + '-color-' + product_index + '-' + value + '-' + value_index"
+                                        :style="{ backgroundColor: value }"
+                                        :title="value"
+                                        class="rebuy-color-label"></label>
+                                </div>
+                            </div>
+  
+                            <div v-if="displaySizeSwatches(option)" v-for="option in product.options" class="mt-10 rebuy-size-swatches">
+                                <div v-for="(value, value_index) in filterOOSOptions(option, product)" class="rebuy-size-swatch">
+  
+                                    <input
+                                        :name="id + '-size-' + product_index"
+                                        :id="id + '-size-' + product_index + '-' + value"
+                                        :checked="value_index == 0"
+                                        :value="value"
+                                        type="radio"
+                                        class="rebuy-size-input hide"
+                                        v-on:change="selectVariantBySize(product, value, product_index)">
+                                    <label
+                                        :for="id + '-size-' + product_index + '-' + value"
+                                        class="rebuy-size-label">{{ value }}</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="rebuy-product-actions">
+  
+                            <div class="subscription-checkbox" v-if="showSubscriptionOptions(product)">
+                                <label class="rebuy-checkbox-label">
+                                    <input
+                                        class="checkbox-input rebuy-checkbox"
+                                        v-model="product.subscription"
+                                        v-on:change="toggleSubscription(product)"
+                                        type="checkbox" />
+                                    <span class="checkbox-label" v-html="upgradeToSubscriptionLabel(product)"></span>
+                                </label>
+                            </div>
+  
+                            <div class="subscription-frequency" v-if="showSubscriptionFrequency(product)">
+                                <select
+                                    class="rebuy-select"
+                                    aria-label="subscription frequency"
+                                    v-model="product.subscription_frequency"
+                                    v-on:change="updateSubscriptionFrequency(product)">
+                                    <option v-for="frequency in product.subscription_frequencies" v-bind:value="frequency">{{ frequencyLabel(frequency, product.subscription_interval) }}</option>
+                                </select>
+                            </div>
+  
+                            <div class="product-quantity" v-if="hasQuantityInputEnabled()">
+                                <div class="rebuy-select-wrapper">
+                                    <label class="rebuy-label">Quantity</label>
+                                    <select
+                                        class="rebuy-select"
+                                        aria-label="product quantity"
+                                        v-model="product.quantity">
+                                        <option v-for="n in maxQuantityInputValue()" v-bind:value="n">{{ n }}</option>
+                                    </select>
+                                </div>
+                            </div>
+  
+                            <button
+                                class="rebuy-button"
+                                v-bind:class="{ working: (product.status != 'ready' && product.status != 'selecting') }"
+                                v-bind:disabled="!(variantAvailable(product.selected_variant)) || (product.status != 'ready' && product.status != 'selecting')"
+                                v-bind:aria-label="buttonAriaLabel(product)"
+                                v-on:click="addToCart(product)"
+                                type="button">
+                                    <span v-html="buttonLabel(product)"></span>
+                            </button>
+                        </div>
+                    </div>
+                  <!-- End Block holder -->
+                  </div>
+              </div>
+
+              <div class="rebuy-modal-actions" v-if="showContinueButton()">
+                  <button
+                      class="rebuy-button decline"
+                      v-on:click="hide()"
+                      type="button">
+                          <span v-html="continueLabel()"></span>
+                  </button>
+              </div>
+
+              <div class="powered-by-rebuy">
+                  <a v-bind:href="'https://rebuyengine.com/?shop=' + config.shop.myshopify_domain" target="_blank" rel="noopener">
+                      Powered by Rebuy
+                  </a>
+              </div>
+
+          </div>
+
+      </div>
+  </div>
+</script>
+  
+{% endraw %}
+<style>
+#rebuy-widget-165809 .rebuy-product-grid {
+	/* adds more total width to the carousel area*/
+	padding-inline: 0;
+}
+#rebuy-widget-165809 .rebuy-product-block {
+	/* adjusts the space between the blocks 0 padding = no spacing*/
+	padding-inline: 9px;
+	padding-top: 1em;
+}
+#rebuy-widget-165809 .rebuy-product-block-holder {
+	background: white;
+	/* padding for all content inside of the card */
+	padding: 0;
+border: .1rem solid white;
+    box-shadow: 0 0 15px #00000026;
+    border-radius: .2rem !important;
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
+  padding-bottom: 20px;
+}
+#rebuy-widget-165809 .rebuy-product-block {
+    padding-inline: .5rem !important;
+    padding-top: 0px !important;
+}
+#rebuy-widget-165809 .rebuy-product-image img {
+    border-radius: 0px !important;
+  width: 100%;
+}
+#rebuy-widget-165809 .rebuy-product-actions,
+#rebuy-widget-165809 .rebuy-product-options {
+  padding-inline: 20px;
+}
+#rebuy-widget-165809 .rebuy-product-info {
+padding-inline: 10px;
+  text-align: center !important;
+      margin-top: 1.4rem;
+}
+#rebuy-widget-165809 .rebuy-product-title {
+
+    font-family: Roboto, sans-serif;
+font-size: 15px;
+    line-height: calc(1 + .4 / var(--font-body-scale));
+}
+#rebuy-widget-165809 .rebuy-product-price {
+font-size: 20px;
+      font-family: Roboto, sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    line-height: 1.5em;
+    letter-spacing: .025em;
+}
+#rebuy-widget-165809 .title_line_three {
+max-width: 100%;
+  font-size: 14px !important;
+    margin-block: 2px;
+}
+#rebuy-widget-165809 .title_line_two {
+font-family: Roboto, sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+#rebuy-widget-165809 .title_line_one {
+    font-family: Roboto, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: normal;
+  text-transform: uppercase;
+  margin-block: 2px;
+}
+#rebuy-widget-165809 .rebuy-product-grid button.flickity-button.flickity-prev-next-button.previous {
+    left: -15px;
+}
+#rebuy-widget-165809 .rebuy-product-grid button.flickity-button.flickity-prev-next-button.next {
+    right: -15px;
+}
+#rebuy-widget-165809 .primary-title {
+    text-align: center;
+    font-size: 34px;
+    font-family: Roboto, sans-serif !important;
+    font-weight: 700;
+    font-style: normal;
+    line-height: 1.1em;
+    letter-spacing: 0em;
+    text-transform: uppercase;
+}
+</style>
+
+{% raw %}
+
+<script id="rebuy-widget-165811" type="text/template">
+  <div class="rebuy-widget"
+    v-cloak
+    v-on:click="stopPropagation($event)"
+    v-bind:id="'rebuy-widget-' + id"
+    v-bind:class="['widget-type-' + config.type.replace('_','-'), 'widget-display-' + config.display_type, products.length > 0 ? 'is-visible' : 'is-hidden', 'widget-layout-' + currentLayout()]">
+
+      <div
+          class="rebuy-widget-container"
+          v-cloak
+          v-bind:class="['widget-display-' + config.display_type, visible ? 'is-visible' : 'is-hidden' ]"
+          v-on:click.self="hide()">
+
+          <div class="rebuy-widget-content">
+              <div class="rebuy-modal-close" v-on:click="hide()" aria-label="close modal">
+                  <i class="fas fa-times" aria-hidden="true"></i>
+              </div>
+
+              <div class="rebuy-timer" v-if="hasTimer()">
+                  <p class="rebuy-timer-title" v-if="config.language.timer_title">
+                      <span v-html="config.language.timer_title"></span> <span class="rebuy-timer-minutes" v-html="config.timer.duration_minutes"></span>:<span class="rebuy-timer-seconds" v-html="config.timer.duration_seconds"></span>
+                  </p>
+              </div>
+
+              <h3 class="super-title" v-if="config.language.super_title != ''" v-html="config.language.super_title"></h3>
+
+              <h4 class="primary-title" v-if="config.language.title != ''" v-html="config.language.title"></h4>
+
+              <div class="description" v-if="config.language.description != ''" v-html="config.language.description"></div>
+
+              <div class="rebuy-product-grid" v-bind:class="layoutClasses" tabindex="0" role="list">
+
+                  <div
+                      v-for="(product, product_index) in products"
+                      v-bind:class="[product.handle, 'product-id-' + product.id, cartHasProduct(product) ? 'cart-has-item' : '', productTagClasses(product)]"
+                      aria-label="product"
+                      class="rebuy-product-block"
+                      role="listitem"
+                  >
+  
+                    <!-- Product Block holder start -->
+                    <div class="rebuy-product-block-holder">
+    
+                        <div class="rebuy-product-media">
+                            <a
+                                class="rebuy-product-image"
+                                tabindex="-1"
+                                v-bind:href="learnMoreURL(product)"
+                                v-bind:style="imageStyles"
+                                v-on:click="learnMore(product, $event);"
+                                v-bind:class="[hasLearnMore() ? 'clickable' : '']"
+                                rel="nofollow"
+                            >
+                                <img v-bind:loading="product_index > 1 ? 'lazy' : 'eager'" v-bind:src="itemImage(product, product.selected_variant, '400x400')" v-bind:alt="itemImageAlt(product, product.selected_variant)">
+                            </a>
+                        </div>
+                        <div class="rebuy-product-info">
+<a
+  aria-level="5"
+  class="rebuy-product-title"
+  v-bind:href="learnMoreURL(product)"
+  v-on:click="learnMore(product, $event);"
+  v-html="formatProductTitle(product.title)"
+  v-bind:class="[hasLearnMore() ? 'clickable' : '']"
+  v-bind:aria-label="'View ' + product.title"
+  rel="nofollow"
+ ></a>
+                            <div class="rebuy-variant-title" v-if="showVariantTitle(product)" v-html="product.selected_variant.title"></div>
+                            <div class="rebuy-product-review" v-if="hasProductReviews(product)" aria-label="product star rating">
+                                <span class="rebuy-star-rating">
+                                    <span
+                                        v-if="product.reviews.star_rating"
+                                        class="rebuy-star-rating-value sr-only"
+                                        v-html="product.reviews.star_rating + ' stars out of 5 stars'"
+                                    >
+                                    </span>
+                                    <span class="rebuy-star-rating-background"></span>
+                                    <span class="rebuy-star-rating-foreground" v-bind:style="{ width: productReviewRatingPercentage(product) }"></span>
+                                </span>
+                                <span class="rebuy-review-count" v-html="productReviewCount(product)"></span>
+                            </div>
+  
+                            <div class="rebuy-product-price">
+                                <div v-if="variantOnSale(product, product.selected_variant)">
+                                    <span class="rebuy-money sale">
+                                        <span class="sr-only">Sale price</span>
+                                        <span tabindex="0" v-html="formatMoney(variantPrice(product, product.selected_variant))"></span>
+                                    </span>
+                                    <span class="rebuy-money compare-at">
+                                        <span class="sr-only">Original price</span>
+                                        <span v-html="formatMoney(variantCompareAtPrice(product, product.selected_variant))"></span>
+                                    </span>
+                                </div>
+                                <div v-if="!(variantOnSale(product, product.selected_variant))">
+                                    <span class="rebuy-money">
+                                        <span class="sr-only">Price</span>
+                                        <span tabindex="0" v-html="formatMoney(variantPrice(product, product.selected_variant))"></span>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="rebuy-product-description" v-if="showProductDescription(product)" v-html="text(product.body_html)"></div>
+                        </div>
+                        <div class="rebuy-product-options" v-if="showVariantSelect(product)">
+                            <select
+                                title="Select product variant"
+                                :id="id + '-' + 'select' + '-' + product_index"
+                                :class="{ hide : settings.view_options.variant_selector == 'buttons' }"
+                                class="rebuy-select"
+                                v-bind:aria-label="'variant of ' + product.title"
+                                v-model="product.selected_variant_id"
+                                v-on:change="selectVariant(product)">
+                                <option v-for="variant in product.variants" v-bind:value="variant.id">{{ variant.title }}</option>
+                            </select>
+                            <div v-if="displayColorSwatches(option)" v-for="option in product.options" class="rebuy-color-swatches">
+                                <div v-for="(value, value_index) in filterOOSOptions(option, product)" class="rebuy-color-swatch">
+                                    <input
+                                        :name="id + '-color-' + product_index"
+                                        :id="id + '-color-' + product_index + '-' + value + '-' + value_index"
+                                        :checked="value_index == 0"
+                                        :value="value"
+                                        type="radio"
+                                        class="rebuy-color-input hide"
+                                        v-on:change="selectVariantByColor(product, value, product_index)">
+                                    <label
+                                        :for="id + '-color-' + product_index + '-' + value + '-' + value_index"
+                                        :style="{ backgroundColor: value }"
+                                        :title="value"
+                                        class="rebuy-color-label"></label>
+                                </div>
+                            </div>
+  
+                            <div v-if="displaySizeSwatches(option)" v-for="option in product.options" class="mt-10 rebuy-size-swatches">
+                                <div v-for="(value, value_index) in filterOOSOptions(option, product)" class="rebuy-size-swatch">
+  
+                                    <input
+                                        :name="id + '-size-' + product_index"
+                                        :id="id + '-size-' + product_index + '-' + value"
+                                        :checked="value_index == 0"
+                                        :value="value"
+                                        type="radio"
+                                        class="rebuy-size-input hide"
+                                        v-on:change="selectVariantBySize(product, value, product_index)">
+                                    <label
+                                        :for="id + '-size-' + product_index + '-' + value"
+                                        class="rebuy-size-label">{{ value }}</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="rebuy-product-actions">
+  
+                            <div class="subscription-checkbox" v-if="showSubscriptionOptions(product)">
+                                <label class="rebuy-checkbox-label">
+                                    <input
+                                        class="checkbox-input rebuy-checkbox"
+                                        v-model="product.subscription"
+                                        v-on:change="toggleSubscription(product)"
+                                        type="checkbox" />
+                                    <span class="checkbox-label" v-html="upgradeToSubscriptionLabel(product)"></span>
+                                </label>
+                            </div>
+  
+                            <div class="subscription-frequency" v-if="showSubscriptionFrequency(product)">
+                                <select
+                                    class="rebuy-select"
+                                    aria-label="subscription frequency"
+                                    v-model="product.subscription_frequency"
+                                    v-on:change="updateSubscriptionFrequency(product)">
+                                    <option v-for="frequency in product.subscription_frequencies" v-bind:value="frequency">{{ frequencyLabel(frequency, product.subscription_interval) }}</option>
+                                </select>
+                            </div>
+  
+                            <div class="product-quantity" v-if="hasQuantityInputEnabled()">
+                                <div class="rebuy-select-wrapper">
+                                    <label class="rebuy-label">Quantity</label>
+                                    <select
+                                        class="rebuy-select"
+                                        aria-label="product quantity"
+                                        v-model="product.quantity">
+                                        <option v-for="n in maxQuantityInputValue()" v-bind:value="n">{{ n }}</option>
+                                    </select>
+                                </div>
+                            </div>
+  
+                            <button
+                                class="rebuy-button"
+                                v-bind:class="{ working: (product.status != 'ready' && product.status != 'selecting') }"
+                                v-bind:disabled="!(variantAvailable(product.selected_variant)) || (product.status != 'ready' && product.status != 'selecting')"
+                                v-bind:aria-label="buttonAriaLabel(product)"
+                                v-on:click="addToCart(product)"
+                                type="button">
+                                    <span v-html="buttonLabel(product)"></span>
+                            </button>
+                        </div>
+                    </div>
+                  <!-- End Block holder -->
+                  </div>
+              </div>
+
+              <div class="rebuy-modal-actions" v-if="showContinueButton()">
+                  <button
+                      class="rebuy-button decline"
+                      v-on:click="hide()"
+                      type="button">
+                          <span v-html="continueLabel()"></span>
+                  </button>
+              </div>
+
+              <div class="powered-by-rebuy">
+                  <a v-bind:href="'https://rebuyengine.com/?shop=' + config.shop.myshopify_domain" target="_blank" rel="noopener">
+                      Powered by Rebuy
+                  </a>
+              </div>
+
+          </div>
+
+      </div>
+  </div>
+</script>
+  
+{% endraw %}
+<style>
+#rebuy-widget-165811 .rebuy-product-grid {
+	/* adds more total width to the carousel area*/
+	padding-inline: 0;
+}
+#rebuy-widget-165811 .rebuy-product-block {
+	/* adjusts the space between the blocks 0 padding = no spacing*/
+	padding-inline: 9px;
+	padding-top: 1em;
+}
+#rebuy-widget-165811 .rebuy-product-block-holder {
+	background: white;
+	/* padding for all content inside of the card */
+	padding: 0;
+border: .1rem solid white;
+    box-shadow: 0 0 15px #00000026;
+    border-radius: .2rem !important;
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
+  padding-bottom: 20px;
+}
+#rebuy-widget-165811 .rebuy-product-block {
+    padding-inline: .5rem !important;
+    padding-top: 0px !important;
+}
+#rebuy-widget-165811 .rebuy-product-image img {
+    border-radius: 0px !important;
+  width: 100%;
+}
+#rebuy-widget-165811 .rebuy-product-actions,
+#rebuy-widget-165811 .rebuy-product-options {
+  padding-inline: 20px;
+}
+#rebuy-widget-165811 .rebuy-product-info {
+padding-inline: 10px;
+  text-align: center !important;
+      margin-top: 1.4rem;
+}
+#rebuy-widget-165811 .rebuy-product-title {
+
+    font-family: Roboto, sans-serif;
+font-size: 15px;
+    line-height: calc(1 + .4 / var(--font-body-scale));
+}
+#rebuy-widget-165811 .rebuy-product-price {
+font-size: 20px;
+      font-family: Roboto, sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    line-height: 1.5em;
+    letter-spacing: .025em;
+}
+#rebuy-widget-165811 .title_line_three {
+max-width: 100%;
+  font-size: 14px !important;
+    margin-block: 2px;
+}
+#rebuy-widget-165811 .title_line_two {
+font-family: Roboto, sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+#rebuy-widget-165811 .title_line_one {
+    font-family: Roboto, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: normal;
+  text-transform: uppercase;
+  margin-block: 2px;
+}
+#rebuy-widget-165811 .rebuy-product-grid button.flickity-button.flickity-prev-next-button.previous {
+    left: -15px;
+}
+#rebuy-widget-165811 .rebuy-product-grid button.flickity-button.flickity-prev-next-button.next {
+    right: -15px;
+}
+#rebuy-widget-165811 .primary-title {
+    text-align: center;
+    font-size: 34px;
+    font-family: Roboto, sans-serif !important;
+    font-weight: 700;
+    font-style: normal;
+    line-height: 1.1em;
+    letter-spacing: 0em;
+    text-transform: uppercase;
+}
+</style>
+{% raw %}
+
+<script id="rebuy-widget-168004" type="text/template">
+  <div class="rebuy-widget"
+    v-cloak
+    v-on:click="stopPropagation($event)"
+    v-bind:id="'rebuy-widget-' + id"
+    v-bind:class="['widget-type-' + config.type.replace('_','-'), 'widget-display-' + config.display_type, products.length > 0 ? 'is-visible' : 'is-hidden', 'widget-layout-' + currentLayout()]">
+
+      <div
+          class="rebuy-widget-container"
+          v-cloak
+          v-bind:class="['widget-display-' + config.display_type, visible ? 'is-visible' : 'is-hidden' ]"
+          v-on:click.self="hide()">
+
+          <div class="rebuy-widget-content">
+              <div class="rebuy-modal-close" v-on:click="hide()" aria-label="close modal">
+                  <i class="fas fa-times" aria-hidden="true"></i>
+              </div>
+
+              <div class="rebuy-timer" v-if="hasTimer()">
+                  <p class="rebuy-timer-title" v-if="config.language.timer_title">
+                      <span v-html="config.language.timer_title"></span> <span class="rebuy-timer-minutes" v-html="config.timer.duration_minutes"></span>:<span class="rebuy-timer-seconds" v-html="config.timer.duration_seconds"></span>
+                  </p>
+              </div>
+
+              <h3 class="super-title" v-if="config.language.super_title != ''" v-html="config.language.super_title"></h3>
+
+              <h4 class="primary-title" v-if="config.language.title != ''" v-html="config.language.title"></h4>
+
+              <div class="description" v-if="config.language.description != ''" v-html="config.language.description"></div>
+
+              <div class="rebuy-product-grid" v-bind:class="layoutClasses" tabindex="0" role="list">
+
+                  <div
+                      v-for="(product, product_index) in products"
+                      v-bind:class="[product.handle, 'product-id-' + product.id, cartHasProduct(product) ? 'cart-has-item' : '', productTagClasses(product)]"
+                      aria-label="product"
+                      class="rebuy-product-block"
+                      role="listitem"
+                  >
+  
+                    <!-- Product Block holder start -->
+                    <div class="rebuy-product-block-holder">
+    
+                        <div class="rebuy-product-media">
+                            <a
+                                class="rebuy-product-image"
+                                tabindex="-1"
+                                v-bind:href="learnMoreURL(product)"
+                                v-bind:style="imageStyles"
+                                v-on:click="learnMore(product, $event);"
+                                v-bind:class="[hasLearnMore() ? 'clickable' : '']"
+                                rel="nofollow"
+                            >
+                                <img v-bind:loading="product_index > 1 ? 'lazy' : 'eager'" v-bind:src="itemImage(product, product.selected_variant, '400x400')" v-bind:alt="itemImageAlt(product, product.selected_variant)">
+                            </a>
+                        </div>
+                        <div class="rebuy-product-info">
+<a
+  aria-level="5"
+  class="rebuy-product-title"
+  v-bind:href="learnMoreURL(product)"
+  v-on:click="learnMore(product, $event);"
+  v-html="formatProductTitle(product.title)"
+  v-bind:class="[hasLearnMore() ? 'clickable' : '']"
+  v-bind:aria-label="'View ' + product.title"
+  rel="nofollow"
+ ></a>
+                            <div class="rebuy-variant-title" v-if="showVariantTitle(product)" v-html="product.selected_variant.title"></div>
+                            <div class="rebuy-product-review" v-if="hasProductReviews(product)" aria-label="product star rating">
+                                <span class="rebuy-star-rating">
+                                    <span
+                                        v-if="product.reviews.star_rating"
+                                        class="rebuy-star-rating-value sr-only"
+                                        v-html="product.reviews.star_rating + ' stars out of 5 stars'"
+                                    >
+                                    </span>
+                                    <span class="rebuy-star-rating-background"></span>
+                                    <span class="rebuy-star-rating-foreground" v-bind:style="{ width: productReviewRatingPercentage(product) }"></span>
+                                </span>
+                                <span class="rebuy-review-count" v-html="productReviewCount(product)"></span>
+                            </div>
+  
+                            <div class="rebuy-product-price">
+                                <div v-if="variantOnSale(product, product.selected_variant)">
+                                    <span class="rebuy-money sale">
+                                        <span class="sr-only">Sale price</span>
+                                        <span tabindex="0" v-html="formatMoney(variantPrice(product, product.selected_variant))"></span>
+                                    </span>
+                                    <span class="rebuy-money compare-at">
+                                        <span class="sr-only">Original price</span>
+                                        <span v-html="formatMoney(variantCompareAtPrice(product, product.selected_variant))"></span>
+                                    </span>
+                                </div>
+                                <div v-if="!(variantOnSale(product, product.selected_variant))">
+                                    <span class="rebuy-money">
+                                        <span class="sr-only">Price</span>
+                                        <span tabindex="0" v-html="formatMoney(variantPrice(product, product.selected_variant))"></span>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="rebuy-product-description" v-if="showProductDescription(product)" v-html="text(product.body_html)"></div>
+                        </div>
+                        <div class="rebuy-product-options" v-if="showVariantSelect(product)">
+                            <select
+                                title="Select product variant"
+                                :id="id + '-' + 'select' + '-' + product_index"
+                                :class="{ hide : settings.view_options.variant_selector == 'buttons' }"
+                                class="rebuy-select"
+                                v-bind:aria-label="'variant of ' + product.title"
+                                v-model="product.selected_variant_id"
+                                v-on:change="selectVariant(product)">
+                                <option v-for="variant in product.variants" v-bind:value="variant.id">{{ variant.title }}</option>
+                            </select>
+                            <div v-if="displayColorSwatches(option)" v-for="option in product.options" class="rebuy-color-swatches">
+                                <div v-for="(value, value_index) in filterOOSOptions(option, product)" class="rebuy-color-swatch">
+                                    <input
+                                        :name="id + '-color-' + product_index"
+                                        :id="id + '-color-' + product_index + '-' + value + '-' + value_index"
+                                        :checked="value_index == 0"
+                                        :value="value"
+                                        type="radio"
+                                        class="rebuy-color-input hide"
+                                        v-on:change="selectVariantByColor(product, value, product_index)">
+                                    <label
+                                        :for="id + '-color-' + product_index + '-' + value + '-' + value_index"
+                                        :style="{ backgroundColor: value }"
+                                        :title="value"
+                                        class="rebuy-color-label"></label>
+                                </div>
+                            </div>
+  
+                            <div v-if="displaySizeSwatches(option)" v-for="option in product.options" class="mt-10 rebuy-size-swatches">
+                                <div v-for="(value, value_index) in filterOOSOptions(option, product)" class="rebuy-size-swatch">
+  
+                                    <input
+                                        :name="id + '-size-' + product_index"
+                                        :id="id + '-size-' + product_index + '-' + value"
+                                        :checked="value_index == 0"
+                                        :value="value"
+                                        type="radio"
+                                        class="rebuy-size-input hide"
+                                        v-on:change="selectVariantBySize(product, value, product_index)">
+                                    <label
+                                        :for="id + '-size-' + product_index + '-' + value"
+                                        class="rebuy-size-label">{{ value }}</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="rebuy-product-actions">
+  
+                            <div class="subscription-checkbox" v-if="showSubscriptionOptions(product)">
+                                <label class="rebuy-checkbox-label">
+                                    <input
+                                        class="checkbox-input rebuy-checkbox"
+                                        v-model="product.subscription"
+                                        v-on:change="toggleSubscription(product)"
+                                        type="checkbox" />
+                                    <span class="checkbox-label" v-html="upgradeToSubscriptionLabel(product)"></span>
+                                </label>
+                            </div>
+  
+                            <div class="subscription-frequency" v-if="showSubscriptionFrequency(product)">
+                                <select
+                                    class="rebuy-select"
+                                    aria-label="subscription frequency"
+                                    v-model="product.subscription_frequency"
+                                    v-on:change="updateSubscriptionFrequency(product)">
+                                    <option v-for="frequency in product.subscription_frequencies" v-bind:value="frequency">{{ frequencyLabel(frequency, product.subscription_interval) }}</option>
+                                </select>
+                            </div>
+  
+                            <div class="product-quantity" v-if="hasQuantityInputEnabled()">
+                                <div class="rebuy-select-wrapper">
+                                    <label class="rebuy-label">Quantity</label>
+                                    <select
+                                        class="rebuy-select"
+                                        aria-label="product quantity"
+                                        v-model="product.quantity">
+                                        <option v-for="n in maxQuantityInputValue()" v-bind:value="n">{{ n }}</option>
+                                    </select>
+                                </div>
+                            </div>
+  
+                            <button
+                                class="rebuy-button"
+                                v-bind:class="{ working: (product.status != 'ready' && product.status != 'selecting') }"
+                                v-bind:disabled="!(variantAvailable(product.selected_variant)) || (product.status != 'ready' && product.status != 'selecting')"
+                                v-bind:aria-label="buttonAriaLabel(product)"
+                                v-on:click="addToCart(product)"
+                                type="button">
+                                    <span v-html="buttonLabel(product)"></span>
+                            </button>
+                        </div>
+                    </div>
+                  <!-- End Block holder -->
+                  </div>
+              </div>
+
+              <div class="rebuy-modal-actions" v-if="showContinueButton()">
+                  <button
+                      class="rebuy-button decline"
+                      v-on:click="hide()"
+                      type="button">
+                          <span v-html="continueLabel()"></span>
+                  </button>
+              </div>
+
+              <div class="powered-by-rebuy">
+                  <a v-bind:href="'https://rebuyengine.com/?shop=' + config.shop.myshopify_domain" target="_blank" rel="noopener">
+                      Powered by Rebuy
+                  </a>
+              </div>
+
+          </div>
+
+      </div>
+  </div>
+</script>
+  
+{% endraw %}
+<style>
+#rebuy-widget-168004 .rebuy-product-grid {
+	/* adds more total width to the carousel area*/
+	padding-inline: 0;
+}
+#rebuy-widget-168004 .rebuy-product-block {
+	/* adjusts the space between the blocks 0 padding = no spacing*/
+	padding-inline: 9px;
+	padding-top: 1em;
+}
+#rebuy-widget-168004 .rebuy-product-block-holder {
+	background: white;
+	/* padding for all content inside of the card */
+	padding: 0;
+border: .1rem solid white;
+    box-shadow: 0 0 15px #00000026;
+    border-radius: .2rem !important;
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
+  padding-bottom: 20px;
+}
+#rebuy-widget-168004 .rebuy-product-block {
+    padding-inline: .5rem !important;
+    padding-top: 0px !important;
+}
+#rebuy-widget-168004 .rebuy-product-image img {
+    border-radius: 0px !important;
+  width: 100%;
+}
+#rebuy-widget-168004 .rebuy-product-actions,
+#rebuy-widget-168004 .rebuy-product-options {
+  padding-inline: 20px;
+}
+#rebuy-widget-168004 .rebuy-product-info {
+padding-inline: 10px;
+  text-align: center !important;
+      margin-top: 1.4rem;
+}
+#rebuy-widget-168004 .rebuy-product-title {
+
+    font-family: Roboto, sans-serif;
+font-size: 15px;
+    line-height: calc(1 + .4 / var(--font-body-scale));
+}
+#rebuy-widget-168004 .rebuy-product-price {
+font-size: 20px;
+      font-family: Roboto, sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    line-height: 1.5em;
+    letter-spacing: .025em;
+}
+#rebuy-widget-168004 .title_line_three {
+max-width: 100%;
+  font-size: 14px !important;
+    margin-block: 2px;
+}
+#rebuy-widget-168004 .title_line_two {
+font-family: Roboto, sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+#rebuy-widget-168004 .title_line_one {
+    font-family: Roboto, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: normal;
+  text-transform: uppercase;
+  margin-block: 2px;
+}
+#rebuy-widget-168004 .rebuy-product-grid button.flickity-button.flickity-prev-next-button.previous {
+    left: -15px;
+}
+#rebuy-widget-168004 .rebuy-product-grid button.flickity-button.flickity-prev-next-button.next {
+    right: -15px;
+}
+#rebuy-widget-168004 .primary-title {
+    text-align: center;
+    font-size: 34px;
+    font-family: Roboto, sans-serif !important;
+    font-weight: 700;
+    font-style: normal;
+    line-height: 1.1em;
+    letter-spacing: 0em;
+    text-transform: uppercase;
+}
+</style>
+
+{% raw %}
+
+<script id="rebuy-widget-165810" type="text/template">
+  <div class="rebuy-widget"
+    v-cloak
+    v-on:click="stopPropagation($event)"
+    v-bind:id="'rebuy-widget-' + id"
+    v-bind:class="['widget-type-' + config.type.replace('_','-'), 'widget-display-' + config.display_type, products.length > 0 ? 'is-visible' : 'is-hidden', 'widget-layout-' + currentLayout()]">
+
+      <div
+          class="rebuy-widget-container"
+          v-cloak
+          v-bind:class="['widget-display-' + config.display_type, visible ? 'is-visible' : 'is-hidden' ]"
+          v-on:click.self="hide()">
+
+          <div class="rebuy-widget-content">
+              <div class="rebuy-modal-close" v-on:click="hide()" aria-label="close modal">
+                  <i class="fas fa-times" aria-hidden="true"></i>
+              </div>
+
+              <div class="rebuy-timer" v-if="hasTimer()">
+                  <p class="rebuy-timer-title" v-if="config.language.timer_title">
+                      <span v-html="config.language.timer_title"></span> <span class="rebuy-timer-minutes" v-html="config.timer.duration_minutes"></span>:<span class="rebuy-timer-seconds" v-html="config.timer.duration_seconds"></span>
+                  </p>
+              </div>
+
+              <h3 class="super-title" v-if="config.language.super_title != ''" v-html="config.language.super_title"></h3>
+
+              <h4 class="primary-title" v-if="config.language.title != ''" v-html="config.language.title"></h4>
+
+              <div class="description" v-if="config.language.description != ''" v-html="config.language.description"></div>
+
+              <div class="rebuy-product-grid" v-bind:class="layoutClasses" tabindex="0" role="list">
+
+                  <div
+                      v-for="(product, product_index) in products"
+                      v-bind:class="[product.handle, 'product-id-' + product.id, cartHasProduct(product) ? 'cart-has-item' : '', productTagClasses(product)]"
+                      aria-label="product"
+                      class="rebuy-product-block"
+                      role="listitem"
+                  >
+  
+                    <!-- Product Block holder start -->
+                    <div class="rebuy-product-block-holder">
+    
+                        <div class="rebuy-product-media">
+                            <a
+                                class="rebuy-product-image"
+                                tabindex="-1"
+                                v-bind:href="learnMoreURL(product)"
+                                v-bind:style="imageStyles"
+                                v-on:click="learnMore(product, $event);"
+                                v-bind:class="[hasLearnMore() ? 'clickable' : '']"
+                                rel="nofollow"
+                            >
+                                <img v-bind:loading="product_index > 1 ? 'lazy' : 'eager'" v-bind:src="itemImage(product, product.selected_variant, '400x400')" v-bind:alt="itemImageAlt(product, product.selected_variant)">
+                            </a>
+                        </div>
+                        <div class="rebuy-product-info">
+<a
+  aria-level="5"
+  class="rebuy-product-title"
+  v-bind:href="learnMoreURL(product)"
+  v-on:click="learnMore(product, $event);"
+  v-html="formatProductTitle(product.title)"
+  v-bind:class="[hasLearnMore() ? 'clickable' : '']"
+  v-bind:aria-label="'View ' + product.title"
+  rel="nofollow"
+ ></a>
+                            <div class="rebuy-variant-title" v-if="showVariantTitle(product)" v-html="product.selected_variant.title"></div>
+                            <div class="rebuy-product-review" v-if="hasProductReviews(product)" aria-label="product star rating">
+                                <span class="rebuy-star-rating">
+                                    <span
+                                        v-if="product.reviews.star_rating"
+                                        class="rebuy-star-rating-value sr-only"
+                                        v-html="product.reviews.star_rating + ' stars out of 5 stars'"
+                                    >
+                                    </span>
+                                    <span class="rebuy-star-rating-background"></span>
+                                    <span class="rebuy-star-rating-foreground" v-bind:style="{ width: productReviewRatingPercentage(product) }"></span>
+                                </span>
+                                <span class="rebuy-review-count" v-html="productReviewCount(product)"></span>
+                            </div>
+  
+                            <div class="rebuy-product-price">
+                                <div v-if="variantOnSale(product, product.selected_variant)">
+                                    <span class="rebuy-money sale">
+                                        <span class="sr-only">Sale price</span>
+                                        <span tabindex="0" v-html="formatMoney(variantPrice(product, product.selected_variant))"></span>
+                                    </span>
+                                    <span class="rebuy-money compare-at">
+                                        <span class="sr-only">Original price</span>
+                                        <span v-html="formatMoney(variantCompareAtPrice(product, product.selected_variant))"></span>
+                                    </span>
+                                </div>
+                                <div v-if="!(variantOnSale(product, product.selected_variant))">
+                                    <span class="rebuy-money">
+                                        <span class="sr-only">Price</span>
+                                        <span tabindex="0" v-html="formatMoney(variantPrice(product, product.selected_variant))"></span>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="rebuy-product-description" v-if="showProductDescription(product)" v-html="text(product.body_html)"></div>
+                        </div>
+                        <div class="rebuy-product-options" v-if="showVariantSelect(product)">
+                            <select
+                                title="Select product variant"
+                                :id="id + '-' + 'select' + '-' + product_index"
+                                :class="{ hide : settings.view_options.variant_selector == 'buttons' }"
+                                class="rebuy-select"
+                                v-bind:aria-label="'variant of ' + product.title"
+                                v-model="product.selected_variant_id"
+                                v-on:change="selectVariant(product)">
+                                <option v-for="variant in product.variants" v-bind:value="variant.id">{{ variant.title }}</option>
+                            </select>
+                            <div v-if="displayColorSwatches(option)" v-for="option in product.options" class="rebuy-color-swatches">
+                                <div v-for="(value, value_index) in filterOOSOptions(option, product)" class="rebuy-color-swatch">
+                                    <input
+                                        :name="id + '-color-' + product_index"
+                                        :id="id + '-color-' + product_index + '-' + value + '-' + value_index"
+                                        :checked="value_index == 0"
+                                        :value="value"
+                                        type="radio"
+                                        class="rebuy-color-input hide"
+                                        v-on:change="selectVariantByColor(product, value, product_index)">
+                                    <label
+                                        :for="id + '-color-' + product_index + '-' + value + '-' + value_index"
+                                        :style="{ backgroundColor: value }"
+                                        :title="value"
+                                        class="rebuy-color-label"></label>
+                                </div>
+                            </div>
+  
+                            <div v-if="displaySizeSwatches(option)" v-for="option in product.options" class="mt-10 rebuy-size-swatches">
+                                <div v-for="(value, value_index) in filterOOSOptions(option, product)" class="rebuy-size-swatch">
+  
+                                    <input
+                                        :name="id + '-size-' + product_index"
+                                        :id="id + '-size-' + product_index + '-' + value"
+                                        :checked="value_index == 0"
+                                        :value="value"
+                                        type="radio"
+                                        class="rebuy-size-input hide"
+                                        v-on:change="selectVariantBySize(product, value, product_index)">
+                                    <label
+                                        :for="id + '-size-' + product_index + '-' + value"
+                                        class="rebuy-size-label">{{ value }}</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="rebuy-product-actions">
+  
+                            <div class="subscription-checkbox" v-if="showSubscriptionOptions(product)">
+                                <label class="rebuy-checkbox-label">
+                                    <input
+                                        class="checkbox-input rebuy-checkbox"
+                                        v-model="product.subscription"
+                                        v-on:change="toggleSubscription(product)"
+                                        type="checkbox" />
+                                    <span class="checkbox-label" v-html="upgradeToSubscriptionLabel(product)"></span>
+                                </label>
+                            </div>
+  
+                            <div class="subscription-frequency" v-if="showSubscriptionFrequency(product)">
+                                <select
+                                    class="rebuy-select"
+                                    aria-label="subscription frequency"
+                                    v-model="product.subscription_frequency"
+                                    v-on:change="updateSubscriptionFrequency(product)">
+                                    <option v-for="frequency in product.subscription_frequencies" v-bind:value="frequency">{{ frequencyLabel(frequency, product.subscription_interval) }}</option>
+                                </select>
+                            </div>
+  
+                            <div class="product-quantity" v-if="hasQuantityInputEnabled()">
+                                <div class="rebuy-select-wrapper">
+                                    <label class="rebuy-label">Quantity</label>
+                                    <select
+                                        class="rebuy-select"
+                                        aria-label="product quantity"
+                                        v-model="product.quantity">
+                                        <option v-for="n in maxQuantityInputValue()" v-bind:value="n">{{ n }}</option>
+                                    </select>
+                                </div>
+                            </div>
+  
+                            <button
+                                class="rebuy-button"
+                                v-bind:class="{ working: (product.status != 'ready' && product.status != 'selecting') }"
+                                v-bind:disabled="!(variantAvailable(product.selected_variant)) || (product.status != 'ready' && product.status != 'selecting')"
+                                v-bind:aria-label="buttonAriaLabel(product)"
+                                v-on:click="addToCart(product)"
+                                type="button">
+                                    <span v-html="buttonLabel(product)"></span>
+                            </button>
+                        </div>
+                    </div>
+                  <!-- End Block holder -->
+                  </div>
+              </div>
+
+              <div class="rebuy-modal-actions" v-if="showContinueButton()">
+                  <button
+                      class="rebuy-button decline"
+                      v-on:click="hide()"
+                      type="button">
+                          <span v-html="continueLabel()"></span>
+                  </button>
+              </div>
+
+              <div class="powered-by-rebuy">
+                  <a v-bind:href="'https://rebuyengine.com/?shop=' + config.shop.myshopify_domain" target="_blank" rel="noopener">
+                      Powered by Rebuy
+                  </a>
+              </div>
+
+          </div>
+
+      </div>
+  </div>
+</script>
+  
+{% endraw %}
+<style>
+#rebuy-widget-165810 .rebuy-product-grid {
+	/* adds more total width to the carousel area*/
+	padding-inline: 0;
+}
+#rebuy-widget-165810 .rebuy-product-block {
+	/* adjusts the space between the blocks 0 padding = no spacing*/
+	padding-inline: 9px;
+	padding-top: 1em;
+}
+#rebuy-widget-165810 .rebuy-product-block-holder {
+	background: white;
+	/* padding for all content inside of the card */
+	padding: 0;
+border: .1rem solid white;
+    box-shadow: 0 0 15px #00000026;
+    border-radius: .2rem !important;
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
+  padding-bottom: 20px;
+}
+#rebuy-widget-165810 .rebuy-product-block {
+    padding-inline: .5rem !important;
+    padding-top: 0px !important;
+}
+#rebuy-widget-165810 .rebuy-product-image img {
+    border-radius: 0px !important;
+  width: 100%;
+}
+#rebuy-widget-165810 .rebuy-product-actions,
+#rebuy-widget-165810 .rebuy-product-options {
+  padding-inline: 20px;
+}
+#rebuy-widget-165810 .rebuy-product-info {
+padding-inline: 10px;
+  text-align: center !important;
+      margin-top: 1.4rem;
+}
+#rebuy-widget-165810 .rebuy-product-title {
+
+    font-family: Roboto, sans-serif;
+font-size: 15px;
+    line-height: calc(1 + .4 / var(--font-body-scale));
+}
+#rebuy-widget-165810 .rebuy-product-price {
+font-size: 20px;
+      font-family: Roboto, sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    line-height: 1.5em;
+    letter-spacing: .025em;
+}
+#rebuy-widget-165810 .title_line_three {
+max-width: 100%;
+  font-size: 14px !important;
+    margin-block: 2px;
+}
+#rebuy-widget-165810 .title_line_two {
+font-family: Roboto, sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+#rebuy-widget-165810 .title_line_one {
+    font-family: Roboto, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: normal;
+  text-transform: uppercase;
+  margin-block: 2px;
+}
+#rebuy-widget-165810 .rebuy-product-grid button.flickity-button.flickity-prev-next-button.previous {
+    left: -15px;
+}
+#rebuy-widget-165810 .rebuy-product-grid button.flickity-button.flickity-prev-next-button.next {
+    right: -15px;
+}
+#rebuy-widget-165810 .primary-title {
+    text-align: center;
+    font-size: 34px;
+    font-family: Roboto, sans-serif !important;
+    font-weight: 700;
+    font-style: normal;
+    line-height: 1.1em;
+    letter-spacing: 0em;
+    text-transform: uppercase;
+}
+</style>
+
+{% raw %}
+
+<script id="rebuy-widget-165805" type="text/template">
+  <div class="rebuy-widget"
+    v-cloak
+    v-on:click="stopPropagation($event)"
+    v-bind:id="'rebuy-widget-' + id"
+    v-bind:class="['widget-type-' + config.type.replace('_','-'), 'widget-display-' + config.display_type, products.length > 0 ? 'is-visible' : 'is-hidden', 'widget-layout-' + currentLayout()]">
+
+      <div
+          class="rebuy-widget-container"
+          v-cloak
+          v-bind:class="['widget-display-' + config.display_type, visible ? 'is-visible' : 'is-hidden' ]"
+          v-on:click.self="hide()">
+
+          <div class="rebuy-widget-content">
+              <div class="rebuy-modal-close" v-on:click="hide()" aria-label="close modal">
+                  <i class="fas fa-times" aria-hidden="true"></i>
+              </div>
+
+              <div class="rebuy-timer" v-if="hasTimer()">
+                  <p class="rebuy-timer-title" v-if="config.language.timer_title">
+                      <span v-html="config.language.timer_title"></span> <span class="rebuy-timer-minutes" v-html="config.timer.duration_minutes"></span>:<span class="rebuy-timer-seconds" v-html="config.timer.duration_seconds"></span>
+                  </p>
+              </div>
+
+              <h3 class="super-title" v-if="config.language.super_title != ''" v-html="config.language.super_title"></h3>
+
+              <h4 class="primary-title" v-if="config.language.title != ''" v-html="config.language.title"></h4>
+
+              <div class="description" v-if="config.language.description != ''" v-html="config.language.description"></div>
+
+              <div class="rebuy-product-grid" v-bind:class="layoutClasses" tabindex="0" role="list">
+
+                  <div
+                      v-for="(product, product_index) in products"
+                      v-bind:class="[product.handle, 'product-id-' + product.id, cartHasProduct(product) ? 'cart-has-item' : '', productTagClasses(product)]"
+                      aria-label="product"
+                      class="rebuy-product-block"
+                      role="listitem"
+                  >
+  
+                    <!-- Product Block holder start -->
+                    <div class="rebuy-product-block-holder">
+    
+                        <div class="rebuy-product-media">
+                            <a
+                                class="rebuy-product-image"
+                                tabindex="-1"
+                                v-bind:href="learnMoreURL(product)"
+                                v-bind:style="imageStyles"
+                                v-on:click="learnMore(product, $event);"
+                                v-bind:class="[hasLearnMore() ? 'clickable' : '']"
+                                rel="nofollow"
+                            >
+                                <img v-bind:loading="product_index > 1 ? 'lazy' : 'eager'" v-bind:src="itemImage(product, product.selected_variant, '400x400')" v-bind:alt="itemImageAlt(product, product.selected_variant)">
+                            </a>
+                        </div>
+                        <div class="rebuy-product-info">
+<a
+  aria-level="5"
+  class="rebuy-product-title"
+  v-bind:href="learnMoreURL(product)"
+  v-on:click="learnMore(product, $event);"
+  v-html="formatProductTitle(product.title)"
+  v-bind:class="[hasLearnMore() ? 'clickable' : '']"
+  v-bind:aria-label="'View ' + product.title"
+  rel="nofollow"
+ ></a>
+                            <div class="rebuy-variant-title" v-if="showVariantTitle(product)" v-html="product.selected_variant.title"></div>
+                            <div class="rebuy-product-review" v-if="hasProductReviews(product)" aria-label="product star rating">
+                                <span class="rebuy-star-rating">
+                                    <span
+                                        v-if="product.reviews.star_rating"
+                                        class="rebuy-star-rating-value sr-only"
+                                        v-html="product.reviews.star_rating + ' stars out of 5 stars'"
+                                    >
+                                    </span>
+                                    <span class="rebuy-star-rating-background"></span>
+                                    <span class="rebuy-star-rating-foreground" v-bind:style="{ width: productReviewRatingPercentage(product) }"></span>
+                                </span>
+                                <span class="rebuy-review-count" v-html="productReviewCount(product)"></span>
+                            </div>
+  
+                            <div class="rebuy-product-price">
+                                <div v-if="variantOnSale(product, product.selected_variant)">
+                                    <span class="rebuy-money sale">
+                                        <span class="sr-only">Sale price</span>
+                                        <span tabindex="0" v-html="formatMoney(variantPrice(product, product.selected_variant))"></span>
+                                    </span>
+                                    <span class="rebuy-money compare-at">
+                                        <span class="sr-only">Original price</span>
+                                        <span v-html="formatMoney(variantCompareAtPrice(product, product.selected_variant))"></span>
+                                    </span>
+                                </div>
+                                <div v-if="!(variantOnSale(product, product.selected_variant))">
+                                    <span class="rebuy-money">
+                                        <span class="sr-only">Price</span>
+                                        <span tabindex="0" v-html="formatMoney(variantPrice(product, product.selected_variant))"></span>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="rebuy-product-description" v-if="showProductDescription(product)" v-html="text(product.body_html)"></div>
+                        </div>
+                        <div class="rebuy-product-options" v-if="showVariantSelect(product)">
+                            <select
+                                title="Select product variant"
+                                :id="id + '-' + 'select' + '-' + product_index"
+                                :class="{ hide : settings.view_options.variant_selector == 'buttons' }"
+                                class="rebuy-select"
+                                v-bind:aria-label="'variant of ' + product.title"
+                                v-model="product.selected_variant_id"
+                                v-on:change="selectVariant(product)">
+                                <option v-for="variant in product.variants" v-bind:value="variant.id">{{ variant.title }}</option>
+                            </select>
+                            <div v-if="displayColorSwatches(option)" v-for="option in product.options" class="rebuy-color-swatches">
+                                <div v-for="(value, value_index) in filterOOSOptions(option, product)" class="rebuy-color-swatch">
+                                    <input
+                                        :name="id + '-color-' + product_index"
+                                        :id="id + '-color-' + product_index + '-' + value + '-' + value_index"
+                                        :checked="value_index == 0"
+                                        :value="value"
+                                        type="radio"
+                                        class="rebuy-color-input hide"
+                                        v-on:change="selectVariantByColor(product, value, product_index)">
+                                    <label
+                                        :for="id + '-color-' + product_index + '-' + value + '-' + value_index"
+                                        :style="{ backgroundColor: value }"
+                                        :title="value"
+                                        class="rebuy-color-label"></label>
+                                </div>
+                            </div>
+  
+                            <div v-if="displaySizeSwatches(option)" v-for="option in product.options" class="mt-10 rebuy-size-swatches">
+                                <div v-for="(value, value_index) in filterOOSOptions(option, product)" class="rebuy-size-swatch">
+  
+                                    <input
+                                        :name="id + '-size-' + product_index"
+                                        :id="id + '-size-' + product_index + '-' + value"
+                                        :checked="value_index == 0"
+                                        :value="value"
+                                        type="radio"
+                                        class="rebuy-size-input hide"
+                                        v-on:change="selectVariantBySize(product, value, product_index)">
+                                    <label
+                                        :for="id + '-size-' + product_index + '-' + value"
+                                        class="rebuy-size-label">{{ value }}</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="rebuy-product-actions">
+  
+                            <div class="subscription-checkbox" v-if="showSubscriptionOptions(product)">
+                                <label class="rebuy-checkbox-label">
+                                    <input
+                                        class="checkbox-input rebuy-checkbox"
+                                        v-model="product.subscription"
+                                        v-on:change="toggleSubscription(product)"
+                                        type="checkbox" />
+                                    <span class="checkbox-label" v-html="upgradeToSubscriptionLabel(product)"></span>
+                                </label>
+                            </div>
+  
+                            <div class="subscription-frequency" v-if="showSubscriptionFrequency(product)">
+                                <select
+                                    class="rebuy-select"
+                                    aria-label="subscription frequency"
+                                    v-model="product.subscription_frequency"
+                                    v-on:change="updateSubscriptionFrequency(product)">
+                                    <option v-for="frequency in product.subscription_frequencies" v-bind:value="frequency">{{ frequencyLabel(frequency, product.subscription_interval) }}</option>
+                                </select>
+                            </div>
+  
+                            <div class="product-quantity" v-if="hasQuantityInputEnabled()">
+                                <div class="rebuy-select-wrapper">
+                                    <label class="rebuy-label">Quantity</label>
+                                    <select
+                                        class="rebuy-select"
+                                        aria-label="product quantity"
+                                        v-model="product.quantity">
+                                        <option v-for="n in maxQuantityInputValue()" v-bind:value="n">{{ n }}</option>
+                                    </select>
+                                </div>
+                            </div>
+  
+                            <button
+                                class="rebuy-button"
+                                v-bind:class="{ working: (product.status != 'ready' && product.status != 'selecting') }"
+                                v-bind:disabled="!(variantAvailable(product.selected_variant)) || (product.status != 'ready' && product.status != 'selecting')"
+                                v-bind:aria-label="buttonAriaLabel(product)"
+                                v-on:click="addToCart(product)"
+                                type="button">
+                                    <span v-html="buttonLabel(product)"></span>
+                            </button>
+                        </div>
+                    </div>
+                  <!-- End Block holder -->
+                  </div>
+              </div>
+
+              <div class="rebuy-modal-actions" v-if="showContinueButton()">
+                  <button
+                      class="rebuy-button decline"
+                      v-on:click="hide()"
+                      type="button">
+                          <span v-html="continueLabel()"></span>
+                  </button>
+              </div>
+
+              <div class="powered-by-rebuy">
+                  <a v-bind:href="'https://rebuyengine.com/?shop=' + config.shop.myshopify_domain" target="_blank" rel="noopener">
+                      Powered by Rebuy
+                  </a>
+              </div>
+
+          </div>
+
+      </div>
+  </div>
+</script>
+  
+{% endraw %}
+<style>
+#rebuy-widget-165805 .rebuy-product-grid {
+	/* adds more total width to the carousel area*/
+	padding-inline: 0;
+}
+#rebuy-widget-165805 .rebuy-product-block {
+	/* adjusts the space between the blocks 0 padding = no spacing*/
+	padding-inline: 9px;
+	padding-top: 1em;
+}
+#rebuy-widget-165805 .rebuy-product-block-holder {
+	background: white;
+	/* padding for all content inside of the card */
+	padding: 0;
+border: .1rem solid white;
+    box-shadow: 0 0 15px #00000026;
+    border-radius: .2rem !important;
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
+  padding-bottom: 10px;
+}
+#rebuy-widget-165805 .rebuy-product-block {
+    padding-inline: .5rem !important;
+    padding-top: 0px !important;
+}
+#rebuy-widget-165805 .rebuy-product-image img {
+    border-radius: 0px !important;
+  width: 100%;
+}
+#rebuy-widget-165805 .rebuy-product-actions,
+#rebuy-widget-165805 .rebuy-product-options {
+  padding-inline: 20px;
+}
+#rebuy-widget-165805 .rebuy-product-info {
+    padding-inline: 10px;
+    text-align: left !important;
+    margin-top: 0;
+}
+#rebuy-widget-165805 .rebuy-product-title {
+
+    font-family: Roboto, sans-serif;
+font-size: 15px;
+    line-height: calc(1 + .4 / var(--font-body-scale));
+}
+#rebuy-widget-165805 .rebuy-product-price {
+font-size: 20px;
+      font-family: Roboto, sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    line-height: 1.5em;
+    letter-spacing: .025em;
+}
+#rebuy-widget-165805 .title_line_three {
+max-width: 100%;
+  font-size: 14px !important;
+    margin-block: 2px;
+}
+#rebuy-widget-165805 .title_line_two {
+font-family: Roboto, sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+#rebuy-widget-165805 .title_line_one {
+    font-family: Roboto, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: normal;
+  text-transform: uppercase;
+  margin-block: 2px;
+}
+#rebuy-widget-165805 .rebuy-product-grid button.flickity-button.flickity-prev-next-button.previous {
+    left: -15px;
+}
+#rebuy-widget-165805 .rebuy-product-grid button.flickity-button.flickity-prev-next-button.next {
+    right: -15px;
+}
+#rebuy-widget-165805 .primary-title {
+    text-align: center;
+    font-size: 22px;
+    font-family: Roboto, sans-serif !important;
+    font-weight: 700;
+    font-style: normal;
+    line-height: 1.1em;
+    letter-spacing: 0em;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+}
+</style>

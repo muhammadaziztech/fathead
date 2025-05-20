@@ -1,0 +1,29 @@
+      {% form 'customer' %}
+        {% if form.posted_successfully? %}
+          <div class="subscribe-form__response subscribe-form__response--success">
+            <h4>{{ 'general.newsletter.success' | t }}</h4>
+          </div>
+        {% else %}
+          {% if form.errors %}
+            <div class="subscribe-form__response">
+              {% for field in form.errors %}
+              <p class="error-message">{{ field | capitalize }} - {{ form.errors.messages[field] }}</p>
+              {% endfor %}
+            </div>
+          {% endif %}
+          <input type="hidden" id="contact_tags" name="contact[tags]" value="prospect,newsletter"/>
+          <div class="subscribe-form__inputs">
+            <div class="input-wrapper grid__item two-thirds small-down--one-whole">
+              <label class="subscribe-form__label" for="mailinglist_email">{{ 'layout.signup.email' | t }}</label>
+              <input type="email" required class="subscribe-form__email required grid__item one-third" value="" id="mailinglist_email" name="contact[email]" />
+            </div>
+            <div class="subscribe-form__btn-wrapper grid__item one-third small-down--one-whole">
+              <button class="btn {% if section.settings.button_style == 'button_1' %} btn--primary{% else %} btn--secondary{% endif %} subscribe-form__submit" type="submit">
+                <svg viewBox="0 0 14 10" fill="none" aria-hidden="true" focusable="false" role="presentation" class="icon icon-arrow" xmlns="http://www.w3.org/2000/svg" height="20px" width="20px">
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M8.537.808a.5.5 0 01.817-.162l4 4a.5.5 0 010 .708l-4 4a.5.5 0 11-.708-.708L11.793 5.5H1a.5.5 0 010-1h10.793L8.646 1.354a.5.5 0 01-.109-.546z" fill="currentColor">
+                </svg>
+              </button>
+            </div>
+          </div>
+        {% endif %}
+      {% endform %}

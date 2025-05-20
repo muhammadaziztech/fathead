@@ -1,0 +1,204 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "breadcrumbs_team_bar_mNJE7e": {
+      "type": "breadcrumbs-team-bar",
+      "settings": {
+        "section_top_margin": false,
+        "section_bottom_margin": false,
+        "custom_breadcrumbs_icon": "shopify://shop_images/Icon_Thumb_87cceb7f-0e27-43c9-bbd2-3f6416c31252.svg",
+        "custom_breadcrumbs_text": "<p><strong>TRUSTED BY THE BIGGEST NAMES IN SPORTS!</strong></p>"
+      }
+    },
+    "custom_team_banner_k6FCPJ": {
+      "type": "custom-team-banner",
+      "custom_css": [
+        ".team-title {font-family: Inter, sans-serif !important; font-weight: 600; letter-spacing: 0; text-transform: uppercase;}"
+      ],
+      "settings": {
+        "section_top_margin": false,
+        "section_bottom_margin": false,
+        "team-background-img": "{{ collection.metafields.custom.top_banner_background.value }}"
+      }
+    },
+    "team_featured_product_EzUN9w": {
+      "type": "team-featured-product",
+      "blocks": {
+        "block_9P3WBY": {
+          "type": "block",
+          "settings": {
+            "custom-product": "{{ collection.metafields.custom.featured_product_1.value }}",
+            "team-fp-txt": "<p>{{ block.settings[\"custom-product\"].metafields.custom.featured_product_sub_title.value }}</p>",
+            "cfp-btn": "shop now",
+            "team-fp-img": "{{ block.settings[\"custom-product\"].metafields.custom.featured_product_right_side_image.value }}"
+          }
+        },
+        "block_eqMxkE": {
+          "type": "block",
+          "settings": {
+            "custom-product": "{{ collection.metafields.custom.featured_product_2.value }}",
+            "team-fp-txt": "<p>{{ block.settings[\"custom-product\"].metafields.custom.featured_product_sub_title.value }}</p>",
+            "cfp-btn": "shop now",
+            "team-fp-img": "{{ block.settings[\"custom-product\"].metafields.custom.featured_product_right_side_image.value }}"
+          }
+        }
+      },
+      "block_order": [
+        "block_9P3WBY",
+        "block_eqMxkE"
+      ],
+      "custom_css": [
+        ".c_2-title {letter-spacing: 0; font-family: Inter, sans-serif !important; font-weight: 600; line-height: 1;}",
+        ".team-product-price {letter-spacing: 0; font-family: Roboto, sans-serif !important; font-weight: 600;}",
+        "@media (max-width: 426px) {.cfp-label {padding-right: 10px; padding-left: 10px; max-width: 100%; text-align: center; font-family: Roboto, sans-serif !important; font-weight: 600; }}"
+      ],
+      "settings": {
+        "section_top_margin": false,
+        "section_bottom_margin": false
+      }
+    },
+    "main": {
+      "type": "main-collection",
+      "disabled": true,
+      "settings": {
+        "enable_feature_header": false,
+        "grid": 4,
+        "grid_mobile": "2",
+        "pagination_limit": 8,
+        "show_total": true,
+        "show_vendor": false,
+        "show_filters": true,
+        "show_filter_prod_counts": false,
+        "show_sort_by": true,
+        "show_featured": false
+      }
+    },
+    "1728113856f77454f1": {
+      "type": "apps",
+      "blocks": {
+        "searchanise_search_filter_app_block_cUGVKQ": {
+          "type": "shopify://apps/searchanise-search-filter/blocks/app-block/d8f24ada-02b1-458a-bbeb-5bf16d5c921e",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "searchanise_search_filter_app_block_cUGVKQ"
+      ],
+      "custom_css": [],
+      "settings": {}
+    },
+    "et_review_carousel_bqNYnA": {
+      "type": "et-review-carousel",
+      "blocks": {
+        "review_bzhiyw": {
+          "type": "Review",
+          "settings": {
+            "review_item_img": "shopify://shop_images/d13606ed-46f0-4794-bec6-079820ebbb07_full_size.jpg",
+            "review_heading": "Great Addition",
+            "review_des": "Looks amazing in my office!!!"
+          }
+        },
+        "review_YYPPRN": {
+          "type": "Review",
+          "settings": {
+            "review_item_img": "shopify://shop_images/847c9919-4c56-4ff9-9deb-600d7d9f0139_full_size.jpg",
+            "review_heading": "CMC Fathead!",
+            "review_des": "We are big 49er fans and CMC is my sons favorite player so this has been an amazing addition to his room!"
+          }
+        },
+        "review_B4BnpH": {
+          "type": "Review",
+          "settings": {
+            "review_item_img": "shopify://shop_images/aa22b4ba-7f22-4fed-988d-cf51ff24e193_full_size.jpg",
+            "review_heading": "Surpassed expectations!",
+            "review_des": "In an effort to have our cat included in our wedding day, we made these cutouts of her. They came out amazing and are even better than I could have imagined! The ordering process was really easy, the shipping fast, and the quality is great. We got the 10\" x 16.5\" sheet size (the smaller one - perfect for the photo booth) and the 16.5\" x 21.5\" sheet size (larger one - will use on the dance floor)"
+          }
+        },
+        "review_TwN4qG": {
+          "type": "Review",
+          "settings": {
+            "review_item_img": "shopify://shop_images/Screenshot_2024-01-23_140903asdfasdf.png",
+            "review_heading": "Just terrific!",
+            "review_des": "Great image!!! AND lots of other signage to use!"
+          }
+        },
+        "review_ffiKNx": {
+          "type": "Review",
+          "settings": {
+            "review_item_img": "shopify://shop_images/cb4d5e29-7e12-49e3-b4f2-1176c56ecbfa_full_size.jpg",
+            "review_heading": "The Mario Theme fatheads look amazing!",
+            "review_des": "I ended up cutting out the pieces to make it easier to map out and design the room. Easy to attach to the walls and If you don't get it perfect on the first try, it's super easy to remove and reposition. I would love more themes like these, such as Sonic."
+          }
+        },
+        "review_QAABNb": {
+          "type": "Review",
+          "settings": {
+            "review_item_img": "shopify://shop_images/4cd7e4d8-be15-4efb-acbd-c86469c4719e_full_size.jpg",
+            "review_heading": "Miami Dolphins Kids Room",
+            "review_des": "Room was finished off with fat head decals and looks amazing. They are huge and didn't want to make a mistake. Went on wall smooth with some help."
+          }
+        }
+      },
+      "block_order": [
+        "review_bzhiyw",
+        "review_YYPPRN",
+        "review_B4BnpH",
+        "review_TwN4qG",
+        "review_ffiKNx",
+        "review_QAABNb"
+      ],
+      "custom_css": [
+        ".et-section-title h2 {font-family: Inter, sans-serif !important; font-weight: 600; letter-spacing: 0px; font-size: 36px;}"
+      ],
+      "settings": {
+        "section_top_margin": false,
+        "section_bottom_margin": false,
+        "section_title": "Fathead Nation Inspiration",
+        "center_padding": 100
+      }
+    },
+    "newsletter_ec6KtJ": {
+      "type": "newsletter",
+      "disabled": true,
+      "custom_css": [
+        ".subscribe-form__submit {background: #222; padding: 20px; --button-border-color: #222; border-radius: 12px;}",
+        ".subscribe-content {margin-bottom: 30px;}",
+        ".subscribe-form__inputs {border-bottom: none; column-gap: 5px;}",
+        ".subscribe-form__inputs .input-wrapper {background: #ebebeb; border-radius: 12px; padding: 2px;}",
+        ".subscribe-form__label {padding: 7px 0 0 16px;}",
+        "@media (max-width: 768px) {.subscribe-form__submit {width: 100%; }}",
+        "@media (min-width: 769px) {.subscribe-form {padding-left: 150px; padding-right: 150px; }}"
+      ],
+      "settings": {
+        "section_top_margin": false,
+        "section_bottom_margin": false,
+        "title": "Join FATHEAD NATION!",
+        "section_subtitle": "<p>Earn exclusive offers and rewards when you<br/> become a FATHEAD NATION member.</p>",
+        "color_title": "#333333",
+        "color_text": "#333333",
+        "color_bg": "#ffffff",
+        "gradient_bg": "",
+        "button_style": "button_1",
+        "enlarge_title": true,
+        "enlarge_text": false
+      }
+    }
+  },
+  "order": [
+    "breadcrumbs_team_bar_mNJE7e",
+    "custom_team_banner_k6FCPJ",
+    "team_featured_product_EzUN9w",
+    "main",
+    "1728113856f77454f1",
+    "et_review_carousel_bqNYnA",
+    "newsletter_ec6KtJ"
+  ]
+}

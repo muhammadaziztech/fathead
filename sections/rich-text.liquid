@@ -1,0 +1,262 @@
+{% style %}
+  .section-{{ section.id }} .rich-text-section {
+    background: {{ section.settings.gradient_bg | default: section.settings.color_bg }};
+    color: {{ section.settings.color_text }};
+    {% if section.settings.reduce_content_padding %}
+      padding-top:{{section.settings.custom_padding_top}}px;
+      padding-bottom:{{section.settings.custom_padding_bottom}}px;
+    {% endif %}
+  }
+  .section-{{ section.id }} .rich-text-section .large-title,
+  .section-{{ section.id }} .rich-text-section .giant-title {
+    color: {{ section.settings.color_title }};
+  }
+  .section-{{ section.id }} .rte-img img{
+    width:{{section.settings.image-width}}px;
+  }
+  @media(min-width:768px){
+   {% if section.settings.rt-flex %}
+   .section-{{ section.id }} .reading-width{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:30px;
+  }
+  .section-{{ section.id }} .rich-text-section__title,
+  .section-{{ section.id }} .btn--small{
+    margin-bottom:0;
+    margin-top:0 !important;
+  }
+    {% endif %}
+  }
+  {% if section.settings.section_top_margin %}
+    #shopify-section-{{ section.id }} {
+      margin-top: 30px;
+    }
+  {% endif %}
+  {% if section.settings.section_bottom_margin %}
+    #shopify-section-{{ section.id }} {
+      margin-bottom: 30px;
+    }
+  {% endif %}
+  {% if section.settings.full_width_section %}
+    #shopify-section-{{ section.id }} .container {
+      padding-left: 0;
+      padding-right: 0;
+    }
+  {% endif %}
+
+  .section-{{ section.id }} .rte h1, .section-{{ section.id }} .rte h2, .section-{{ section.id }} .rte h3, .section-{{ section.id }} .rte h4, .section-{{ section.id }} .rte h5, .section-{{ section.id }} .rte h6 {
+    margin: 15px 0;
+  }
+{% endstyle %}
+<div
+  class="relative container container--no-mobile-padding large-row section-{{ section.id }}"
+  data-section-id="{{ section.id }}"
+  data-section-type="rich-text-section"
+>
+  <div
+    class="page-width rich-text-section {% if section.settings.reduce_content_padding %}medium-section{% else %}large-section{% endif %} global-border-radius"
+    data-cc-animate
+  >
+    <div class="{% if section.settings.full_width == false %}reading-width{% endif %} text-center">
+      {% if section.settings.image != blank %}
+        <div class="rte-img">
+          <img src="{{ section.settings.image |img_url: 'master' }}" alt="{{ section.settings.image.alt }}">
+        </div>
+      {% endif %}
+
+      {% if section.settings.title != blank %}
+        <h2 class="{% if section.settings.enlarge_title %}giant-title {% else %}large-title {% endif %} rich-text-section__title">
+          {{ section.settings.title | escape }}
+        </h2>
+      {% endif %}
+
+      {% if section.settings.text != blank %}
+        <div class="rte {% if section.settings.enlarge_text %}large-text{% endif %}">
+          {{ section.settings.text }}
+        </div>
+      {% endif %}
+
+      {% if section.settings.button_label != blank %}
+        {%- assign bg_alpha = section.settings.color_bg | color_extract: 'alpha' -%}
+        {%- assign link_inherit_color = false -%}
+        {%- if section.settings.url_style == 'link_style' -%}
+          {%- if bg_alpha > 0 and section.settings.color_bg != settings.color_body_background -%}
+            {%- assign link_inherit_color = true -%}
+          {%- endif -%}
+        {%- endif -%}
+
+        <div class="rich-text-section__btn-row">
+          <a
+            class="{% if section.settings.url_style == 'button_1' %}btn btn--small btn--primary{% elsif section.settings.url_style == 'button_2' %}btn btn--small btn--secondary{% else %}standard-link {% if link_inherit_color == true %}standard-link--inherit-color{% endif %}{% endif %}"
+            href="{{ section.settings.button_link | escape }}"
+          >
+            {{- section.settings.button_label | escape -}}
+          </a>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Rich text",
+  "tag": "section",
+  "class": "section-rich-text",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "section_top_margin",
+      "label": "Add section top margin",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "section_bottom_margin",
+      "label": "Add section bottom margin",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "reduce_content_padding",
+      "label": "Reduce content padding",
+      "default": false
+    },
+     {
+      "type": "range",
+      "id": "custom_padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 0,
+      "info": "If ‘Reduce content padding’ is checked."
+    },
+    {
+      "type": "range",
+      "id": "custom_padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 0,
+      "info": "If ‘Reduce content padding’ is checked."
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width_section",
+      "label": "Full width section",
+      "default": false
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "range",
+      "id": "image-width",
+      "min": 30,
+      "max": 300,
+      "step": 5,
+      "unit": "px",
+      "label": "Image Width",
+      "default": 50
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Rich text"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Use this text to share information about your store with your customers.</p><p>Describe products, share announcements, or welcome customers to your store.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "radio",
+      "id": "url_style",
+      "label": "Button style",
+      "options": [
+        { "value": "button_1", "label": "Button - primary" },
+        { "value": "button_2", "label": "Button - secondary" },
+        { "value": "link_style", "label": "Link"}
+      ],
+      "default": "button_1"
+    },
+    {
+      "type": "checkbox",
+      "id": "enlarge_title",
+      "label": "Enlarge heading",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "enlarge_text",
+      "label": "Enlarge text",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Wide text width",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "rt-flex",
+      "label": "Enable flex"
+    },
+    {
+      "type": "color",
+      "id": "color_title",
+      "label": "Heading color",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "color_text",
+      "label": "Text color",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "color_bg",
+      "label": "Background color",
+      "default": "#ecf1f2"
+    },
+    {
+      "type": "color_background",
+      "id": "gradient_bg",
+      "label": "Background gradient",
+      "info": "If set, replaces background color"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Rich text"
+    }
+  ],
+  "disabled_on": {
+    "groups": [
+      "aside"
+    ]
+  }
+}
+{% endschema %}

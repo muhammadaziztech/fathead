@@ -1,0 +1,627 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": { "show_title": false, "title_alignment": "left" }
+    },
+    "slideshow_BFr9Dh": {
+      "type": "slideshow",
+      "blocks": {
+        "image_6w6aPU": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/NFL_landing_1600.png",
+            "image_link": "",
+            "color_overlay_bg": "#ffffff",
+            "overlay_opacity": 80,
+            "color_overlay_text": "#333333",
+            "text_alignment": "center",
+            "overlay_position_x": 50,
+            "overlay_position_y": 80,
+            "overlay_title": "",
+            "enlarge_title": false,
+            "overlay_title_width": 100,
+            "styled_words": "",
+            "words_style": "stencil",
+            "highlight_words_top": 10,
+            "highlight_color": "#ffffff",
+            "styled_word_color": "#1c1c1c",
+            "overlay_text": "",
+            "enlarge_text": false,
+            "overlay_url_text_1": "",
+            "overlay_url_1": "",
+            "overlay_url_text_2": "",
+            "overlay_url_2": "",
+            "overlay_url_style": "button_1",
+            "color_label_background": "#ffffff",
+            "color_label_text": "#333333",
+            "show_chevron": true,
+            "product_id_1": "",
+            "chevron_position_1": "right",
+            "label_position_x_1": 20,
+            "label_position_y_1": 30,
+            "product_id_2": "",
+            "chevron_position_2": "right",
+            "label_position_x_2": 80,
+            "label_position_y_2": 50
+          }
+        }
+      },
+      "block_order": ["image_6w6aPU"],
+      "disabled": true,
+      "custom_css": [
+        ".full-width-slideshow {padding-left: 0; padding-right: 0; margin-top: 0;}",
+        ".full-width-slideshow .slick-track {width: 100% !important;}",
+        ".full-width-slideshow .slick-initialized .slide {width: 100% !important;}"
+      ],
+      "settings": {
+        "height": "adapt",
+        "height_desktop": 600,
+        "height_mobile": 500,
+        "mobile_text_below": true,
+        "slide_transition": "fade",
+        "slideshow_autoplay": true,
+        "slideshow_autoplay_speed": 6
+      }
+    },
+    "image_with_text_overlay_4dmUaT": {
+      "type": "image-with-text-overlay",
+      "disabled": true,
+      "custom_css": [],
+      "settings": {
+        "image": "shopify://shop_images/NFL_landing_1600.png",
+        "image_link": "",
+        "height": "adapt",
+        "height_desktop": 600,
+        "height_mobile": 500,
+        "color_overlay_bg": "#ffffff",
+        "overlay_opacity": 80,
+        "color_overlay_text": "#1c1c1c",
+        "text_alignment": "center",
+        "overlay_position_x": 50,
+        "overlay_position_y": 70,
+        "mobile_text_below": false,
+        "overlay_title": "",
+        "enlarge_title": false,
+        "overlay_title_width": 100,
+        "styled_words": "",
+        "words_style": "stencil",
+        "highlight_words_top": 10,
+        "highlight_color": "#ffffff",
+        "styled_word_color": "#1c1c1c",
+        "overlay_text": "",
+        "enlarge_text": false,
+        "iwto-richtext": "",
+        "overlay_url_text_1": "",
+        "overlay_url_1": "",
+        "overlay_url_text_2": "",
+        "overlay_url_2": "",
+        "overlay_url_style": "button_1",
+        "color_label_background": "#ffffff",
+        "color_label_text": "#333333",
+        "show_chevron": true,
+        "product_id_1": "",
+        "chevron_position_1": "right",
+        "label_position_x_1": 20,
+        "label_position_y_1": 30,
+        "product_id_2": "",
+        "chevron_position_2": "right",
+        "label_position_x_2": 80,
+        "label_position_y_2": 50
+      }
+    },
+    "logo_list_J4YdJL": {
+      "type": "logo-list",
+      "blocks": {
+        "logo_YUHx6X": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/NFL_Logo_Kansas_City_Chiefs.png",
+            "image_width": 60,
+            "link": "shopify://pages/nfl-teams",
+            "title": ""
+          }
+        }
+      },
+      "block_order": ["logo_YUHx6X"],
+      "disabled": true,
+      "settings": {
+        "title": "",
+        "color_bg": "#ffffff",
+        "color_title": "#1c1c1c",
+        "color_text": "#1c1c1c",
+        "enlarge_title": false,
+        "enlarge_text": false,
+        "image_opacity": 100,
+        "en-slider": false,
+        "item-per-row": 7
+      }
+    },
+    "split_image_D8ULQf": {
+      "type": "split-image",
+      "blocks": {
+        "image_irWrER": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Jalen_Hurts_Promo_2x_885ab709-ae29-4c88-b703-b2f30cf8ae22.png",
+            "image_link": "",
+            "color_overlay_bg": "#ffffff",
+            "overlay_opacity": 0,
+            "color_overlay_text": "#ffffff",
+            "overlay_title": "Jalen Hurts",
+            "overlay_text": "",
+            "overlay_url_text": "",
+            "overlay_url": "",
+            "overlay_url_style": "button_2",
+            "enlarge_title": false,
+            "enlarge_text": false,
+            "overlay_position_x": 0,
+            "overlay_position_y": 20,
+            "mobile_text_below": false,
+            "color_label_background": "#ffffff",
+            "color_label_text": "#333333",
+            "product_id": "jalen-hurts-celebration-realbig-collection-official-nfl-philadelphia-eagles-reusable-vinyl-wall-decals",
+            "show_chevron": true,
+            "chevron_position": "right",
+            "label_position_x": 32,
+            "label_position_y": 80
+          }
+        },
+        "image_yfBEaA": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Travis_Kelce_Promo_2x_2ed2c937-dc43-4e8c-9762-9e3f0d6f09c7.png",
+            "image_link": "",
+            "color_overlay_bg": "#ffffff",
+            "overlay_opacity": 0,
+            "color_overlay_text": "#ffffff",
+            "overlay_title": "Travis Kelce",
+            "overlay_text": "",
+            "overlay_url_text": "",
+            "overlay_url": "",
+            "overlay_url_style": "button_1",
+            "enlarge_title": false,
+            "enlarge_text": false,
+            "overlay_position_x": 0,
+            "overlay_position_y": 20,
+            "mobile_text_below": false,
+            "color_label_background": "#ffffff",
+            "color_label_text": "#1c1c1c",
+            "product_id": "travis-kelce-realbig-collection-official-nfl-kansas-city-chiefs-reusable-vinyl-wall-decals-5",
+            "show_chevron": true,
+            "chevron_position": "right",
+            "label_position_x": 20,
+            "label_position_y": 80
+          }
+        }
+      },
+      "block_order": ["image_irWrER", "image_yfBEaA"],
+      "disabled": true,
+      "settings": { "height_desktop": 300, "height_mobile": 300 }
+    },
+    "featured_collection_q3cQjw": {
+      "type": "featured-collection",
+      "disabled": true,
+      "settings": {
+        "title": "NFL TOP 50 PRODUCTS",
+        "enlarge_title": false,
+        "link_text": "Shop now",
+        "collection": "2022-nfl-top-50",
+        "show_vendor": false,
+        "enable_carousel": false,
+        "grid": 4,
+        "row_count": 1,
+        "grid_mobile": "2"
+      }
+    },
+    "image_with_text_overlay_pprnCk": {
+      "type": "image-with-text-overlay",
+      "custom_css": [
+        ".container .rimage-wrapper {border: 1px solid #e8e8e8; border-radius: 12px;}"
+      ],
+      "settings": {
+        "image": "shopify://shop_images/Fathead_Holiday_Gifting_Guide_Theme_WHITE.png",
+        "image_link": "",
+        "height": "adapt",
+        "height_desktop": 600,
+        "height_mobile": 500,
+        "color_overlay_bg": "#ffffff",
+        "overlay_opacity": 0,
+        "color_overlay_text": "#333333",
+        "text_alignment": "center",
+        "overlay_position_x": 50,
+        "overlay_position_y": 70,
+        "mobile_text_below": false,
+        "overlay_title": "",
+        "enlarge_title": false,
+        "overlay_title_width": 100,
+        "styled_words": "",
+        "words_style": "stencil",
+        "highlight_words_top": 10,
+        "highlight_color": "#ffffff",
+        "styled_word_color": "#b5e0fa",
+        "overlay_text": "",
+        "enlarge_text": false,
+        "iwto-richtext": "",
+        "overlay_url_text_1": "",
+        "overlay_url_1": "",
+        "overlay_url_text_2": "",
+        "overlay_url_2": "",
+        "overlay_url_style": "button_1",
+        "color_label_background": "#ffffff",
+        "color_label_text": "#333333",
+        "show_chevron": true,
+        "product_id_1": "",
+        "chevron_position_1": "right",
+        "label_position_x_1": 20,
+        "label_position_y_1": 30,
+        "product_id_2": "",
+        "chevron_position_2": "right",
+        "label_position_x_2": 80,
+        "label_position_y_2": 50
+      }
+    },
+    "rich_text_z3QCyA": {
+      "type": "rich-text",
+      "custom_css": [".large-section {padding-bottom: 0;}"],
+      "settings": {
+        "image-width": 50,
+        "title": "",
+        "text": "",
+        "button_label": "SHOP FANs FAVORITES!",
+        "button_link": "shopify://collections/all",
+        "url_style": "button_1",
+        "enlarge_title": false,
+        "enlarge_text": false,
+        "full_width": false,
+        "rt-flex": false,
+        "color_title": "#333333",
+        "color_text": "#333333",
+        "color_bg": "rgba(0,0,0,0)",
+        "gradient_bg": ""
+      }
+    },
+    "rich_text_F3NW7A": {
+      "type": "rich-text",
+      "custom_css": [".large-section {padding-top: 0;}"],
+      "settings": {
+        "image-width": 50,
+        "title": "",
+        "text": "",
+        "button_label": "HOLIDAY SHIPPING INFO",
+        "button_link": "",
+        "url_style": "button_1",
+        "enlarge_title": false,
+        "enlarge_text": false,
+        "full_width": false,
+        "rt-flex": true,
+        "color_title": "#333333",
+        "color_text": "#333333",
+        "color_bg": "rgba(0,0,0,0)",
+        "gradient_bg": ""
+      }
+    },
+    "rich_text_8DVhcm": {
+      "type": "rich-text",
+      "settings": {
+        "image-width": 50,
+        "title": "Buy one of anything, save 50% on select Christmas Trees!",
+        "text": "<p>Find the bundling button on any product page to claim the deal!</p>",
+        "button_label": "SHOP TOP GIFTS!",
+        "button_link": "shopify://collections/realbigs",
+        "url_style": "button_1",
+        "enlarge_title": false,
+        "enlarge_text": false,
+        "full_width": false,
+        "rt-flex": false,
+        "color_title": "#333333",
+        "color_text": "#333333",
+        "color_bg": "rgba(0,0,0,0)",
+        "gradient_bg": ""
+      }
+    },
+    "image_with_text_BmLKdy": {
+      "type": "image-with-text",
+      "settings": {
+        "image": "shopify://shop_images/Screen_Shot_2022-11-14_at_5.06.58_PM.png",
+        "image_link": "",
+        "image_size": "60",
+        "image_position": "left",
+        "title": "GIVE THE GIFT OF FATHEAD!",
+        "text": "<p>For that hard-to-shop-for Dad, brother or mother in your life, who already has everything - give the gift of choice. Choose any amount and give the ultimate gift yet. Let your family/friends create their space with their favorite characters, teams, designs, and logos!</p><p><strong>$25-$500!</strong></p>",
+        "button_label": "Shop top gifts!",
+        "button_link": "https://fathead.com/collections/realbigs",
+        "url_style": "button_1",
+        "enlarge_title": false,
+        "enlarge_text": false,
+        "text_alignment": "center",
+        "color_text": "#333333",
+        "color_bg": "rgba(0,0,0,0)",
+        "gradient_bg": ""
+      }
+    },
+    "collection_list_iiJrCH": {
+      "type": "collection-list",
+      "custom_css": [
+        ".container {background: #035ab2; padding-top: 30px; padding-bottom: 30px;}"
+      ],
+      "settings": {
+        "title": "Find the perfect gift for every fan!",
+        "enlarge_title": true,
+        "collection_list": [
+          "group-nfl",
+          "group-star-wars",
+          "nba-1",
+          "mlb-1",
+          "group-nbc-universal",
+          "group-disney",
+          "nhl-1",
+          "godzilla"
+        ],
+        "grid": 4
+      }
+    },
+    "multi_column_mzHcRC": {
+      "type": "multi-column",
+      "blocks": {
+        "text_block_3JMXfA": {
+          "type": "text_block",
+          "settings": {
+            "enable_image": true,
+            "image": "shopify://shop_images/96-96208_marvel_spider_man_2017_swing_realbig_pdp.jpg",
+            "image_width": 90,
+            "enable_icon": false,
+            "icon": "award",
+            "icon_size": 48,
+            "icon_color": "",
+            "title": "WALL DECALS",
+            "text": "<p>THE CLASSIC FATHEAD! NEED WE SAY MORE?!</p>",
+            "button_label": "shop collection",
+            "button_link": "shopify://collections/realbigs",
+            "enlarge_title": false,
+            "enlarge_text": false
+          }
+        },
+        "text_block_dRrF8V": {
+          "type": "text_block",
+          "settings": {
+            "enable_image": true,
+            "image": "shopify://shop_images/i8nxwizq8xjp7xaw1ktf_1437fbd8-f3b3-417d-9f3e-f7def77245e3.jpg",
+            "image_width": 90,
+            "enable_icon": false,
+            "icon": "award",
+            "icon_size": 48,
+            "icon_color": "",
+            "title": "BIG HEADS",
+            "text": "<p>CUSTOM OR YOUR FAVORITE ATHLETES AND CHARACTERS!</p>",
+            "button_label": "shop collection",
+            "button_link": "shopify://collections/big-heads",
+            "enlarge_title": false,
+            "enlarge_text": false
+          }
+        },
+        "text_block_BDDnLA": {
+          "type": "text_block",
+          "settings": {
+            "enable_image": true,
+            "image": "shopify://shop_images/boconsj7njtg7f14p17v_5ded240e-f2b6-4054-a520-157570248fe0.jpg",
+            "image_width": 90,
+            "enable_icon": false,
+            "icon": "award",
+            "icon_size": 48,
+            "icon_color": "",
+            "title": "STANDOUT MINIS",
+            "text": "<p>DRESS UP YOUR DESK OR COFFEE TABLE EASILY!</p>",
+            "button_label": "shop collection",
+            "button_link": "https://fathead.com/collections/stand-out-minis?filter.v.price.gte=&filter.v.price.lte=&sort_by=created-descending",
+            "enlarge_title": false,
+            "enlarge_text": false
+          }
+        }
+      },
+      "block_order": [
+        "text_block_3JMXfA",
+        "text_block_dRrF8V",
+        "text_block_BDDnLA"
+      ],
+      "settings": {
+        "title": "GIFTS BY PRODUCT TYPE",
+        "enlarge_title": false,
+        "text_alignment": "center",
+        "url_style": "link_style",
+        "enable_custom_colors": false,
+        "color_title": "rgba(0,0,0,0)",
+        "color_text": "",
+        "color_bg": "",
+        "gradient_bg": ""
+      }
+    },
+    "multi_column_DRLFbw": {
+      "type": "multi-column",
+      "blocks": {
+        "text_block_izgD9q": {
+          "type": "text_block",
+          "settings": {
+            "enable_image": true,
+            "image": "shopify://shop_images/ragvdrv07y9xkymgjr7d_978d1d89-78fb-43b1-8938-d2cdd25f4a91.jpg",
+            "image_width": 90,
+            "enable_icon": false,
+            "icon": "award",
+            "icon_size": 48,
+            "icon_color": "",
+            "title": "STANDOUTS",
+            "text": "<p>LIFE SIZE STANDOUTS OF ALL OF YOUR FAVORITES!</p>",
+            "button_label": "shop collection",
+            "button_link": "shopify://collections/stand-outs",
+            "enlarge_title": false,
+            "enlarge_text": false
+          }
+        },
+        "text_block_gYzUB7": {
+          "type": "text_block",
+          "settings": {
+            "enable_image": true,
+            "image": "shopify://shop_images/u8ksppywquosaiudtnq9_8e474193-5f86-40e7-bc74-2869dece31a5.jpg",
+            "image_width": 90,
+            "enable_icon": false,
+            "icon": "award",
+            "icon_size": 48,
+            "icon_color": "",
+            "title": "INSTANT WINDOWS",
+            "text": "<p>WINDOWS, BUT MAKE THEM INSTANT!<br/><br/></p>",
+            "button_label": "shop collection",
+            "button_link": "shopify://collections/instant-windows",
+            "enlarge_title": false,
+            "enlarge_text": false
+          }
+        },
+        "text_block_NPizx9": {
+          "type": "text_block",
+          "settings": {
+            "enable_image": true,
+            "image": "shopify://shop_images/zbeugwklwixhntyumamd_6e8679ab-a683-4510-ab43-efd8827aa477.jpg",
+            "image_width": 90,
+            "enable_icon": false,
+            "icon": "award",
+            "icon_size": 48,
+            "icon_color": "",
+            "title": "POSTERS",
+            "text": "<p>INSPIRE YOUR DAY TO DAY ROUTINE!<br/><br/></p>",
+            "button_label": "shop collection",
+            "button_link": "shopify://collections/murals",
+            "enlarge_title": false,
+            "enlarge_text": false
+          }
+        }
+      },
+      "block_order": [
+        "text_block_izgD9q",
+        "text_block_gYzUB7",
+        "text_block_NPizx9"
+      ],
+      "settings": {
+        "title": "",
+        "enlarge_title": false,
+        "text_alignment": "center",
+        "url_style": "link_style",
+        "enable_custom_colors": false,
+        "color_title": "",
+        "color_text": "",
+        "color_bg": "",
+        "gradient_bg": ""
+      }
+    },
+    "multi_column_wL9xBW": {
+      "type": "multi-column",
+      "blocks": {
+        "text_block_hqmeqC": {
+          "type": "text_block",
+          "settings": {
+            "enable_image": true,
+            "image": "shopify://shop_images/Minimalist_Happy_Holidays_Instagram_Post_1.gif",
+            "image_width": 75,
+            "enable_icon": false,
+            "icon": "award",
+            "icon_size": 48,
+            "icon_color": "",
+            "title": "",
+            "text": "",
+            "button_label": "shop now",
+            "button_link": "shopify://collections/gifts-under-25",
+            "enlarge_title": false,
+            "enlarge_text": false
+          }
+        },
+        "text_block_4FEGWJ": {
+          "type": "text_block",
+          "settings": {
+            "enable_image": true,
+            "image": "shopify://shop_images/Minimalist_Happy_Holidays_Instagram_Post_2.gif",
+            "image_width": 75,
+            "enable_icon": false,
+            "icon": "award",
+            "icon_size": 48,
+            "icon_color": "",
+            "title": "",
+            "text": "",
+            "button_label": "shop now",
+            "button_link": "shopify://collections/gifts-under-50",
+            "enlarge_title": false,
+            "enlarge_text": false
+          }
+        },
+        "text_block_nU8gBd": {
+          "type": "text_block",
+          "settings": {
+            "enable_image": true,
+            "image": "shopify://shop_images/Minimalist_Happy_Holidays_Instagram_Post_6.gif",
+            "image_width": 75,
+            "enable_icon": false,
+            "icon": "award",
+            "icon_size": 48,
+            "icon_color": "",
+            "title": "",
+            "text": "",
+            "button_label": "shop now",
+            "button_link": "shopify://collections/gifts-under-100",
+            "enlarge_title": false,
+            "enlarge_text": false
+          }
+        },
+        "text_block_PYAKB6": {
+          "type": "text_block",
+          "settings": {
+            "enable_image": true,
+            "image": "shopify://shop_images/Minimalist_Happy_Holidays_Instagram_Post_5.gif",
+            "image_width": 75,
+            "enable_icon": false,
+            "icon": "award",
+            "icon_size": 48,
+            "icon_color": "",
+            "title": "",
+            "text": "",
+            "button_label": "shop now",
+            "button_link": "shopify://collections/gifts-under-150",
+            "enlarge_title": false,
+            "enlarge_text": false
+          }
+        }
+      },
+      "block_order": [
+        "text_block_hqmeqC",
+        "text_block_4FEGWJ",
+        "text_block_nU8gBd",
+        "text_block_PYAKB6"
+      ],
+      "settings": {
+        "title": "GIFTS BY PRICE",
+        "enlarge_title": false,
+        "text_alignment": "center",
+        "url_style": "link_style",
+        "enable_custom_colors": false,
+        "color_title": "",
+        "color_text": "",
+        "color_bg": "",
+        "gradient_bg": ""
+      }
+    }
+  },
+  "order": [
+    "main",
+    "slideshow_BFr9Dh",
+    "image_with_text_overlay_4dmUaT",
+    "logo_list_J4YdJL",
+    "split_image_D8ULQf",
+    "featured_collection_q3cQjw",
+    "image_with_text_overlay_pprnCk",
+    "rich_text_z3QCyA",
+    "rich_text_F3NW7A",
+    "rich_text_8DVhcm",
+    "image_with_text_BmLKdy",
+    "collection_list_iiJrCH",
+    "multi_column_mzHcRC",
+    "multi_column_DRLFbw",
+    "multi_column_wL9xBW"
+  ]
+}

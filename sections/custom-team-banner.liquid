@@ -1,0 +1,188 @@
+{% liquid
+  assign pdp_license_seal = ''
+  assign pdp_team_color = ''
+  assign pdp_team_logo = ''
+  assign pdp_team_title = ''
+
+  assign product_featured = section.settings.custom-product
+  
+    for tag in product_featured.tags
+      if tag contains 'fh-group-'
+        assign pdp_license_seal = shop.metaobjects.license_seal[tag].image.value
+        assign league = tag | remove: 'fh-group-'
+       endif 
+      if tag contains 'fh-team-'
+        assign team_tag = tag
+      endif
+      assign pdp_team_color = shop.metaobjects[league][team_tag].team_color.value
+      assign pdp_team_logo = shop.metaobjects[league][team_tag].pdp_team_logo.value
+      assign pdp_team_title = shop.metaobjects[league][team_tag].pdp_team_title.value
+    endfor
+
+%}
+
+<style>
+.team_{{ section.id }} .team_background_layer{
+  {% if section.settings.team-background-img !=blank %}
+  background-image: url({{ section.settings.team-background-img |img_url: 'original' }});
+  padding:20px 30px;
+  background-repeat:no-repeat;
+  background-size:cover;
+  height:{{ section.settings.section_height_des }}px;
+  {% endif %}
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.team-left-logo{
+  display:flex;
+  align-items:center;
+  gap:20px;
+  width:80%;
+}
+.team_{{ section.id }} .right-logo,
+.team_{{ section.id }} .left-logo{
+  width:auto;
+  height:{{ section.settings.section_height_des | minus: 15 }}px;
+}
+.team-title{
+  font-size:34px;
+}
+@media(max-width:940px){
+.team_background_layer{
+  padding:10px 20px !important;
+}
+}
+@media(max-width:768px){
+.team_{{ section.id }} .team_background_layer{
+  height:{{ section.settings.section_height_tab }}px;
+  padding:10px 20px;
+}
+.team_{{ section.id }} .right-logo,
+.team_{{ section.id }} .left-logo{
+  height:{{ section.settings.section_height_tab | minus: 15  }}px;
+}
+.team-title{
+  font-size:30px;
+}
+}
+@media(max-width:500px){
+.team_{{ section.id }} .team_background_layer{
+  height:{{ section.settings.section_height_mob }}px;
+}
+.team_{{ section.id }} .right-logo,
+.team_{{ section.id }} .left-logo{
+  height:{{ section.settings.section_height_mob | minus: 15 }}px;
+}
+.team-title{
+  font-size:22px;
+}
+.team-left-logo{
+  gap:14px;
+}
+}
+{% if section.settings.section_top_margin %}
+  #shopify-section-{{ section.id }}{
+    margin-top: 30px;
+  }
+{% endif %}
+{% if section.settings.section_bottom_margin %}
+  #shopify-section-{{ section.id }} {
+    margin-bottom: 30px;
+  }
+{% endif %}
+
+  .snize-product-label{
+    background: {{ pdp_team_color }} !important;
+  }
+  .snize-price-list{
+    color: {{ pdp_team_color }} !important;
+  }
+</style>
+
+
+
+
+<div class="team-main team_{{ section.id }}">
+  <div class="team_background_layer">
+    <div class="team-left-logo with-title">
+      {% if pdp_team_logo != blank %}
+      <img src="{{ pdp_team_logo |img_url: 'original' }}" width="" height="" class="left-logo">
+      {% endif %}
+      <h2 class="team-title text_uppercase" style="color:#fff;">{{ pdp_team_title }}</h2>
+    </div>
+
+    <div class="team-right-logo">
+      {% if pdp_license_seal != blank %}
+      <img src="{{ pdp_license_seal |img_url: 'original' }}" width="" height="" class="right-logo" style="padding-top:4px;">
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "FH - Team Banner",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "section_top_margin",
+      "label": "Add section top margin",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "section_bottom_margin",
+      "label": "Add section bottom margin",
+      "default": false
+    },
+    {
+      "type": "image_picker",
+      "id": "team-background-img",
+      "label": "Background Image"
+    },
+    {
+      "type": "product",
+      "id": "custom-product",
+      "label": "Product"
+    },
+    {
+      "type": "header",
+      "content": "Section Height"
+    },
+    {
+      "type": "range",
+      "id": "section_height_des",
+      "label": "Desktop",
+      "max": 200,
+      "min": 50,
+      "step": 2,
+      "unit": "px",
+      "default": 120
+    },
+     {
+      "type": "range",
+      "id": "section_height_tab",
+      "label": "Tablet",
+      "max": 200,
+      "min": 50,
+      "step": 2,
+      "unit": "px",
+      "default": 110
+    },
+     {
+      "type": "range",
+      "id": "section_height_mob",
+      "label": "Mob",
+      "max": 200,
+      "min": 50,
+      "step": 2,
+      "unit": "px",
+      "default": 100
+    }
+  ],
+  "presets": [
+    {"name": "FH - Team-Banner"}
+  ]
+}
+{% endschema %}

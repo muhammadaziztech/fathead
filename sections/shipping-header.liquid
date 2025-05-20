@@ -1,0 +1,108 @@
+<link rel="stylesheet" href="{{ 'section-main-page.css' | asset_url }}">
+<link rel="stylesheet" href="{{ 'component-rte.css' | asset_url }}">
+{%- style -%}
+    .section-{{ section.id }}{
+        padding: 2rem 2rem 0 2rem;
+    }
+    .section-{{ section.id }} .main-page-title{
+        text-transform: uppercase;
+        max-width: 18ch;
+        line-height: 1.4;
+        text-wrap: nowrap;
+    }
+    .section-{{ section.id }} .prev-page{
+        margin-bottom: 2rem;
+    }
+    .section-{{ section.id }} .prev-page a{
+        text-decoration: none;
+        color: #161616;
+    }
+    .section-{{ section.id }} .prev-page a:hover{
+        opacity: .8;
+    }
+	@media screen and (max-width: 749px){
+        .section-{{ section.id }} .main-page-title{
+        	line-height: 1.1;
+		}
+    }
+{%- endstyle -%}
+<div class="page-width section-{{ section.id }}">
+    <div class="prev-page">
+        <a href="{{ section.settings.link }}">
+            <svg aria-hidden="true" focusable="false" role="presentation" xmlns="http://www.w3.org/2000/svg" width="24" height="10" fill="none"><path d="m5.25 0 1.41 1.41L4.08 4H24v2H4.08l2.58 2.59L5.25 10l-5-5 5-5Z" fill="#161616"/></svg>
+            <span>{{ section.settings.label }} </span>
+        </a>
+    </div>
+    <h1 class="main-page-title page-title h0 {{ section.settings.heading_alignment }}">
+      {{ page.title | escape }}
+    </h1>
+    <div class="rte {{ section.settings.content_alignment }} ">
+      {{ page.content }}
+    </div>
+</div>
+{% schema %}
+{
+	"name": "Page Header",
+	"settings": [
+		{
+			"type": "header",
+			"content": "Previous page link"
+		},
+		{
+			"type": "text",
+			"id": "label",
+			"label": "Label",
+			"default": "Help Center"
+		},
+		{
+			"type": "url",
+			"id": "link",
+			"label": "Link"
+		},
+		{
+			"type": "header",
+			"content": "Page content"
+		},
+		{
+			"type": "select",
+			"id": "heading_alignment",
+			"label": "Heading alignment",
+			"options": [
+				{
+					"value": "left",
+					"label": "Left"
+				},
+				{
+					"value": "center",
+					"label": "Center"
+				},
+				{
+					"value": "right",
+					"label": "Right"
+				}
+			],
+			"default": "left"
+		},
+		{
+			"type": "select",
+			"id": "content_alignment",
+			"label": "Content alignment",
+			"options": [
+				{
+					"value": "left",
+					"label": "Left"
+				},
+				{
+					"value": "center",
+					"label": "Center"
+				},
+				{
+					"value": "right",
+					"label": "Right"
+				}
+			],
+			"default": "left"
+		}
+	]
+}
+{% endschema %}

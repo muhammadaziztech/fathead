@@ -1,0 +1,148 @@
+<style>
+  .faq-items {
+    margin-top: 20px;
+    display: flex;
+    column-gap: 20px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  .faq-item {
+    flex: 1 1 calc(50% - 20px);
+    margin-top: 1rem;
+    position: relative;
+  }
+  .faq-question {
+    width: 100%;
+    background: #FFF;
+    padding: 15px 35px 15px 15px;
+    text-align: left;
+    font-weight: bold;
+    border: 1px solid #c6c6c6;
+    cursor: pointer;
+    border-radius: 0;
+    box-shadow: none;
+    position:relative;
+    color: #000;
+  }
+  .faq-answer {
+    width: 100%;
+    padding: 10px;
+    background: #FFF;
+    display: none; /* Initially hidden */
+    border: 1px solid #c6c6c6;
+    border-top: none;
+  }
+  .faq-plus-icon, .faq-minus-icon {
+    position: absolute;
+    right: 0.8rem;
+    top: 46%;
+    transform: translateY(-50%);
+  }
+  .faq-minus-icon {
+    top: 50%;
+    display: none;
+  }
+  @media (max-width: 767px) {
+    .faq-items {
+      display: block;
+    }
+  }
+  {% if section.settings.section_top_margin %}
+    #shopify-section-{{ section.id }} {
+      margin-top: 30px;
+    }
+  {% endif %}
+  {% if section.settings.section_bottom_margin %}
+    #shopify-section-{{ section.id }} {
+      margin-bottom: 30px;
+    }
+  {% endif %}
+</style>
+
+<div class="relative container container--no-mobile-padding large-row section-{{ section.id }}">
+  <h2 class="text-center">Frequently Asked Questions</h2>
+  <div class="faq-items">
+    {% for block in section.blocks %}
+      {% if block.settings.question != blank %}
+        {% assign selected_faq = block.id %}
+        <div class="faq-item">
+          <button class="faq-question {{ selected_faq }}" onclick="toggleAnswer(this, '{{ selected_faq }}')">
+            {{ block.settings.question }}
+            <svg class="faq-plus-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+            <svg class="faq-minus-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+          </button>
+          <div class="faq-answer" style="display: none;">
+            <p>{{ block.settings.answer }}</p>
+          </div>
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+</div>
+
+<script>
+  function toggleAnswer(button, selected_faq) {
+    var answer = button.nextElementSibling;
+    var plus_icon = document.querySelector(`.faq-question.${selected_faq} .faq-plus-icon`);
+    var minus_icon = document.querySelector(`.faq-question.${selected_faq} .faq-minus-icon`);
+    console.log(plus_icon,minus_icon);
+    
+    if (answer.style.display === "none") {
+      answer.style.display = "block";
+      plus_icon.style.display = "none";
+      minus_icon.style.display = "block";
+    } else {
+      answer.style.display = "none";
+      plus_icon.style.display = "block";
+      minus_icon.style.display = "none";
+    }
+  }
+</script>
+
+{% schema %}
+{
+  "name": "FAQs",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "section_top_margin",
+      "label": "Add section top margin",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "section_bottom_margin",
+      "label": "Add section bottom margin",
+      "default": false
+    },
+  ],
+  "blocks": [
+    {
+      "type": "faq_item",
+      "name": "FAQ Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "Answer"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "FAQs"
+    }
+  ]
+}
+{% endschema %}

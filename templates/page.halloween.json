@@ -1,0 +1,579 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": { "show_title": false, "title_alignment": "left" }
+    },
+    "slideshow_BFr9Dh": {
+      "type": "slideshow",
+      "blocks": {
+        "image_6w6aPU": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/NFL_landing_1600.png",
+            "image_link": "",
+            "color_overlay_bg": "#ffffff",
+            "overlay_opacity": 80,
+            "color_overlay_text": "#333333",
+            "text_alignment": "center",
+            "overlay_position_x": 50,
+            "overlay_position_y": 80,
+            "overlay_title": "",
+            "enlarge_title": false,
+            "overlay_title_width": 100,
+            "styled_words": "",
+            "words_style": "stencil",
+            "highlight_words_top": 10,
+            "highlight_color": "#ffffff",
+            "styled_word_color": "#1c1c1c",
+            "overlay_text": "",
+            "enlarge_text": false,
+            "overlay_url_text_1": "",
+            "overlay_url_1": "",
+            "overlay_url_text_2": "",
+            "overlay_url_2": "",
+            "overlay_url_style": "button_1",
+            "color_label_background": "#ffffff",
+            "color_label_text": "#333333",
+            "show_chevron": true,
+            "product_id_1": "",
+            "chevron_position_1": "right",
+            "label_position_x_1": 20,
+            "label_position_y_1": 30,
+            "product_id_2": "",
+            "chevron_position_2": "right",
+            "label_position_x_2": 80,
+            "label_position_y_2": 50
+          }
+        }
+      },
+      "block_order": ["image_6w6aPU"],
+      "disabled": true,
+      "custom_css": [
+        ".full-width-slideshow {padding-left: 0; padding-right: 0; margin-top: 0;}",
+        ".full-width-slideshow .slick-track {width: 100% !important;}",
+        ".full-width-slideshow .slick-initialized .slide {width: 100% !important;}"
+      ],
+      "settings": {
+        "height": "adapt",
+        "height_desktop": 600,
+        "height_mobile": 500,
+        "mobile_text_below": true,
+        "slide_transition": "fade",
+        "slideshow_autoplay": true,
+        "slideshow_autoplay_speed": 6
+      }
+    },
+    "image_with_text_overlay_4dmUaT": {
+      "type": "image-with-text-overlay",
+      "disabled": true,
+      "custom_css": [],
+      "settings": {
+        "image": "shopify://shop_images/NFL_landing_1600.png",
+        "image_link": "",
+        "height": "adapt",
+        "height_desktop": 600,
+        "height_mobile": 500,
+        "color_overlay_bg": "#ffffff",
+        "overlay_opacity": 80,
+        "color_overlay_text": "#1c1c1c",
+        "text_alignment": "center",
+        "overlay_position_x": 50,
+        "overlay_position_y": 70,
+        "mobile_text_below": false,
+        "overlay_title": "",
+        "enlarge_title": false,
+        "overlay_title_width": 100,
+        "styled_words": "",
+        "words_style": "stencil",
+        "highlight_words_top": 10,
+        "highlight_color": "#ffffff",
+        "styled_word_color": "#1c1c1c",
+        "overlay_text": "",
+        "enlarge_text": false,
+        "iwto-richtext": "",
+        "overlay_url_text_1": "",
+        "overlay_url_1": "",
+        "overlay_url_text_2": "",
+        "overlay_url_2": "",
+        "overlay_url_style": "button_1",
+        "color_label_background": "#ffffff",
+        "color_label_text": "#333333",
+        "show_chevron": true,
+        "product_id_1": "",
+        "chevron_position_1": "right",
+        "label_position_x_1": 20,
+        "label_position_y_1": 30,
+        "product_id_2": "",
+        "chevron_position_2": "right",
+        "label_position_x_2": 80,
+        "label_position_y_2": 50
+      }
+    },
+    "logo_list_J4YdJL": {
+      "type": "logo-list",
+      "blocks": {
+        "logo_YUHx6X": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/NFL_Logo_Kansas_City_Chiefs.png",
+            "image_width": 60,
+            "link": "shopify://pages/nfl-teams",
+            "title": ""
+          }
+        }
+      },
+      "block_order": ["logo_YUHx6X"],
+      "disabled": true,
+      "settings": {
+        "title": "",
+        "color_bg": "#ffffff",
+        "color_title": "#1c1c1c",
+        "color_text": "#1c1c1c",
+        "enlarge_title": false,
+        "enlarge_text": false,
+        "image_opacity": 100,
+        "en-slider": false,
+        "item-per-row": 7
+      }
+    },
+    "split_image_D8ULQf": {
+      "type": "split-image",
+      "blocks": {
+        "image_irWrER": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Jalen_Hurts_Promo_2x_885ab709-ae29-4c88-b703-b2f30cf8ae22.png",
+            "image_link": "",
+            "color_overlay_bg": "#ffffff",
+            "overlay_opacity": 0,
+            "color_overlay_text": "#ffffff",
+            "overlay_title": "Jalen Hurts",
+            "overlay_text": "",
+            "overlay_url_text": "",
+            "overlay_url": "",
+            "overlay_url_style": "button_2",
+            "enlarge_title": false,
+            "enlarge_text": false,
+            "overlay_position_x": 0,
+            "overlay_position_y": 20,
+            "mobile_text_below": false,
+            "color_label_background": "#ffffff",
+            "color_label_text": "#333333",
+            "product_id": "jalen-hurts-celebration-realbig-collection-official-nfl-philadelphia-eagles-reusable-vinyl-wall-decals",
+            "show_chevron": true,
+            "chevron_position": "right",
+            "label_position_x": 32,
+            "label_position_y": 80
+          }
+        },
+        "image_yfBEaA": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Travis_Kelce_Promo_2x_2ed2c937-dc43-4e8c-9762-9e3f0d6f09c7.png",
+            "image_link": "",
+            "color_overlay_bg": "#ffffff",
+            "overlay_opacity": 0,
+            "color_overlay_text": "#ffffff",
+            "overlay_title": "Travis Kelce",
+            "overlay_text": "",
+            "overlay_url_text": "",
+            "overlay_url": "",
+            "overlay_url_style": "button_1",
+            "enlarge_title": false,
+            "enlarge_text": false,
+            "overlay_position_x": 0,
+            "overlay_position_y": 20,
+            "mobile_text_below": false,
+            "color_label_background": "#ffffff",
+            "color_label_text": "#1c1c1c",
+            "product_id": "travis-kelce-realbig-collection-official-nfl-kansas-city-chiefs-reusable-vinyl-wall-decals-5",
+            "show_chevron": true,
+            "chevron_position": "right",
+            "label_position_x": 20,
+            "label_position_y": 80
+          }
+        }
+      },
+      "block_order": ["image_irWrER", "image_yfBEaA"],
+      "disabled": true,
+      "settings": { "height_desktop": 300, "height_mobile": 300 }
+    },
+    "featured_collection_q3cQjw": {
+      "type": "featured-collection",
+      "disabled": true,
+      "settings": {
+        "title": "NFL TOP 50 PRODUCTS",
+        "enlarge_title": false,
+        "link_text": "Shop now",
+        "collection": "2022-nfl-top-50",
+        "show_vendor": false,
+        "enable_carousel": false,
+        "grid": 4,
+        "row_count": 1,
+        "grid_mobile": "2"
+      }
+    },
+    "image_with_text_overlay_bCH4HX": {
+      "type": "image-with-text-overlay",
+      "settings": {
+        "image": "shopify://shop_images/Screenshot_2024-10-09_141709.png",
+        "image_link": "",
+        "height": "fixed",
+        "height_desktop": 240,
+        "height_mobile": 220,
+        "color_overlay_bg": "#ffffff",
+        "overlay_opacity": 0,
+        "color_overlay_text": "#333333",
+        "text_alignment": "center",
+        "overlay_position_x": 50,
+        "overlay_position_y": 70,
+        "mobile_text_below": false,
+        "overlay_title": "",
+        "enlarge_title": false,
+        "overlay_title_width": 100,
+        "styled_words": "",
+        "words_style": "stencil",
+        "highlight_words_top": 10,
+        "highlight_color": "#ffffff",
+        "styled_word_color": "#b5e0fa",
+        "overlay_text": "",
+        "enlarge_text": false,
+        "iwto-richtext": "",
+        "overlay_url_text_1": "SHOP HALLOWEEN",
+        "overlay_url_1": "",
+        "overlay_url_text_2": "",
+        "overlay_url_2": "",
+        "overlay_url_style": "button_1",
+        "color_label_background": "#ffffff",
+        "color_label_text": "#333333",
+        "show_chevron": true,
+        "product_id_1": "",
+        "chevron_position_1": "right",
+        "label_position_x_1": 20,
+        "label_position_y_1": 30,
+        "product_id_2": "",
+        "chevron_position_2": "right",
+        "label_position_x_2": 80,
+        "label_position_y_2": 50
+      }
+    },
+    "logo_list_yQCeHC": {
+      "type": "logo-list",
+      "blocks": {
+        "logo_nzkyHj": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/Michael-Myers.png",
+            "image_width": 180,
+            "link": "shopify://collections/character-michael-myers",
+            "title": "Michael Myers"
+          }
+        },
+        "logo_TTYQAm": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/star-wars.png",
+            "image_width": 180,
+            "link": "https://fathead.com/collections/star-wars-halloween",
+            "title": "Star Wars"
+          }
+        },
+        "logo_RGyFfk": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/monsters.png",
+            "image_width": 180,
+            "link": "shopify://collections/universal-monsters",
+            "title": "Universal Monsters"
+          }
+        },
+        "logo_QPEwjW": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/star-wars_7fa040e5-8ddc-47e1-81cf-abf1af7a1775.png",
+            "image_width": 180,
+            "link": "shopify://collections/zombies",
+            "title": "Zombies"
+          }
+        },
+        "logo_RPMJjc": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/Chucky_1eb9789b-83d9-448b-8d26-94aac18301ab.png",
+            "image_width": 180,
+            "link": "https://fathead-llc.myshopify.com/collections/character-chucky",
+            "title": "Chucky"
+          }
+        },
+        "logo_w6N3RU": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/Minions_34e7d720-1255-44ee-a6bd-73fd401c6fd1.png",
+            "image_width": 180,
+            "link": "shopify://collections/character-minions",
+            "title": "Minions"
+          }
+        },
+        "logo_axaene": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/Hocus-Pocus.png",
+            "image_width": 180,
+            "link": "shopify://collections/hocus-pocus",
+            "title": "Hocus Pocus"
+          }
+        },
+        "logo_i3fqJX": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/Shrek_ccb70310-4330-48f8-9dcd-e9bc0127b15c.png",
+            "image_width": 180,
+            "link": "shopify://collections/shrek-halloween",
+            "title": "Shrek"
+          }
+        }
+      },
+      "block_order": [
+        "logo_nzkyHj",
+        "logo_TTYQAm",
+        "logo_RGyFfk",
+        "logo_QPEwjW",
+        "logo_RPMJjc",
+        "logo_w6N3RU",
+        "logo_axaene",
+        "logo_i3fqJX"
+      ],
+      "settings": {
+        "title": "Pick Your Scare",
+        "color_bg": "rgba(0,0,0,0)",
+        "color_title": "#0283d3",
+        "color_text": "#333333",
+        "enlarge_title": false,
+        "enlarge_text": false,
+        "image_opacity": 75,
+        "en-slider": true,
+        "item-per-row": 5
+      }
+    },
+    "featured_product_FJFJ6Y": {
+      "type": "featured-product",
+      "settings": {
+        "product": "m89-05008",
+        "image_size": "60",
+        "description": "",
+        "show_vendor": false,
+        "url_style": "button_1",
+        "enlarge_title": false,
+        "enlarge_text": false,
+        "section_text_colour": "#333333",
+        "color_bg": "rgba(0,0,0,0)",
+        "gradient_bg": "",
+        "enable_video_looping": false,
+        "layout": "image_before"
+      }
+    },
+    "logo_list_t6Gb6F": {
+      "type": "logo-list",
+      "blocks": {
+        "logo_wiKbQA": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/halloween.png",
+            "image_width": 220,
+            "link": "shopify://collections/halloween-vinyl-decals",
+            "title": "Halloween Party"
+          }
+        },
+        "logo_7h8UpN": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/scare.png",
+            "image_width": 220,
+            "link": "shopify://collections/halloween-characters",
+            "title": "Scare your neighbors"
+          }
+        },
+        "logo_nXKVmR": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/inside.png",
+            "image_width": 220,
+            "link": "shopify://collections/halloween",
+            "title": "Inside your haunted house"
+          }
+        },
+        "logo_wXYgBQ": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/handouts.png",
+            "image_width": 220,
+            "link": "shopify://collections/halloween-vinyl-decals",
+            "title": "Trick or treater handouts"
+          }
+        }
+      },
+      "block_order": [
+        "logo_wiKbQA",
+        "logo_7h8UpN",
+        "logo_nXKVmR",
+        "logo_wXYgBQ"
+      ],
+      "settings": {
+        "title": "Shop your Occasion",
+        "color_bg": "rgba(0,0,0,0)",
+        "color_title": "#0283d3",
+        "color_text": "#333333",
+        "enlarge_title": false,
+        "enlarge_text": false,
+        "image_opacity": 75,
+        "en-slider": true,
+        "item-per-row": 4
+      }
+    },
+    "logo_list_798nEi": {
+      "type": "logo-list",
+      "blocks": {
+        "logo_U9HPyc": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/dorrh5ukrsmgtpks0kev.jpg",
+            "image_width": 280,
+            "link": "https://fathead-llc.myshopify.com/products/m3150-00027-201",
+            "title": ""
+          }
+        },
+        "logo_zYJ3pr": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/snlgw5ywub7mukd1bgol.jpg",
+            "image_width": 280,
+            "link": "https://fathead-llc.myshopify.com/products/m1910-00418-002",
+            "title": ""
+          }
+        },
+        "logo_7LUDEh": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/pem4r9nuoiivw9lpuyzc.jpg",
+            "image_width": 250,
+            "link": "https://fathead-llc.myshopify.com/products/69-02569",
+            "title": ""
+          }
+        },
+        "logo_iH4TLM": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/6f9d4de4674cdc2e695f9b5975b086a3f16c3a1e.jpg",
+            "image_width": 240,
+            "link": "https://fathead-llc.myshopify.com/products/m89-05012",
+            "title": ""
+          }
+        },
+        "logo_nATGHJ": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/bd23f2639b563a42108b61f107fc43d3704807e1.jpg",
+            "image_width": 250,
+            "link": "https://fathead-llc.myshopify.com/products/m1950-00058-004",
+            "title": ""
+          }
+        },
+        "logo_MTzGEQ": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/xdqrrfdqjtxqpgkm1xbd.jpg",
+            "image_width": 250,
+            "link": "https://fathead-llc.myshopify.com/products/69-02566",
+            "title": ""
+          }
+        },
+        "logo_pPXntg": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/1900-01546-004_NBC-Uni_Chucky_004_r1a_PDP.jpg",
+            "image_width": 250,
+            "link": "https://fathead-llc.myshopify.com/products/1900-01546-004",
+            "title": ""
+          }
+        },
+        "logo_FXbUNj": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/ggepwqtj7kp23p0bgaxt.jpg",
+            "image_width": 250,
+            "link": "https://fathead-llc.myshopify.com/products/m1910-00413-001",
+            "title": ""
+          }
+        },
+        "logo_AK6krq": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/38c7eecad8184a16fd371c9cd74827658d4d88c9.jpg",
+            "image_width": 250,
+            "link": "https://fathead-llc.myshopify.com/products/m1950-00055-004",
+            "title": ""
+          }
+        }
+      },
+      "block_order": [
+        "logo_U9HPyc",
+        "logo_zYJ3pr",
+        "logo_7LUDEh",
+        "logo_iH4TLM",
+        "logo_nATGHJ",
+        "logo_MTzGEQ",
+        "logo_pPXntg",
+        "logo_FXbUNj",
+        "logo_AK6krq"
+      ],
+      "custom_css": [".container {padding-top: 50px;}"],
+      "settings": {
+        "title": "Hot Items for Halloween",
+        "color_bg": "rgba(0,0,0,0)",
+        "color_title": "#0283d3",
+        "color_text": "#333333",
+        "enlarge_title": false,
+        "enlarge_text": false,
+        "image_opacity": 100,
+        "en-slider": true,
+        "item-per-row": 5
+      }
+    },
+    "countdown_zqnC6L": {
+      "type": "countdown",
+      "settings": {
+        "background_image": "shopify://shop_images/Halloween-footer_bg.png",
+        "background_image_mobile": "shopify://shop_images/mobile_footer_bg_countdown.png",
+        "foreground_image": "shopify://shop_images/NBC_Frankenstein.png",
+        "text": "<p>YOU WANNA KNOW WHAT’S REALLY SCARY? <br>\nNOT GETTING DECORATIONS IN TIME FOR HALLOWEEN!</p>\n\n<p></p>",
+        "button_label": "Shop Now",
+        "button_link": "https://fathead.com/discount/BOO?redirect=/collections/halloween",
+        "year": 2023,
+        "month": "Oct",
+        "day": 30,
+        "hour": 23,
+        "minute": 58,
+        "countdown_bg_color": "#000",
+        "numbers_bg_color": "#E4723B",
+        "countdown_text_color": "#FFE203",
+        "numbers_color": "#fff"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "slideshow_BFr9Dh",
+    "image_with_text_overlay_4dmUaT",
+    "logo_list_J4YdJL",
+    "split_image_D8ULQf",
+    "featured_collection_q3cQjw",
+    "image_with_text_overlay_bCH4HX",
+    "logo_list_yQCeHC",
+    "featured_product_FJFJ6Y",
+    "logo_list_t6Gb6F",
+    "logo_list_798nEi",
+    "countdown_zqnC6L"
+  ]
+}

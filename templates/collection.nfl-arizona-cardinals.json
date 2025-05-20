@@ -1,0 +1,295 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "custom_team_banner_k6FCPJ": {
+      "type": "custom-team-banner",
+      "custom_css": [
+        ".team-title {font-family: Inter, sans-serif !important; font-weight: 600; letter-spacing: 0; text-transform: uppercase;}"
+      ],
+      "settings": {
+        "section_top_margin": false,
+        "section_bottom_margin": false,
+        "team-background-img": "{{ collection.metafields.custom.top_banner_background.value }}"
+      }
+    },
+    "team_featured_product_EzUN9w": {
+      "type": "team-featured-product",
+      "blocks": {
+        "block_9P3WBY": {
+          "type": "block",
+          "settings": {
+            "custom-product": "{{ collection.metafields.custom.featured_product_1.value }}",
+            "team-fp-txt": "<p>{{ block.settings[\"custom-product\"].metafields.custom.featured_product_sub_title.value }}</p>",
+            "cfp-btn": "shop now",
+            "team-fp-img": "{{ block.settings[\"custom-product\"].metafields.custom.featured_product_right_side_image.value }}"
+          }
+        },
+        "block_eqMxkE": {
+          "type": "block",
+          "settings": {
+            "custom-product": "{{ collection.metafields.custom.featured_product_2.value }}",
+            "team-fp-txt": "<p>{{ block.settings[\"custom-product\"].metafields.custom.featured_product_sub_title.value }}</p>",
+            "cfp-btn": "shop now"
+          }
+        }
+      },
+      "block_order": [
+        "block_9P3WBY",
+        "block_eqMxkE"
+      ],
+      "custom_css": [
+        ".c_2-title {letter-spacing: 0; font-family: Inter, sans-serif !important; font-weight: 600; line-height: 1;}",
+        ".team-product-price {font-size: 35px; letter-spacing: 0; font-family: Roboto, sans-serif !important; font-weight: 600;}",
+        "@media (max-width: 426px) {.cfp-label {padding-right: 10px; padding-left: 10px; max-width: 100%; text-align: center; font-family: Roboto, sans-serif !important; font-weight: 600; }}"
+      ],
+      "settings": {
+        "section_top_margin": false,
+        "section_bottom_margin": false
+      }
+    },
+    "main": {
+      "type": "main-collection",
+      "disabled": true,
+      "settings": {
+        "enable_feature_header": false,
+        "grid": 4,
+        "grid_mobile": "2",
+        "pagination_limit": 8,
+        "show_total": true,
+        "show_vendor": false,
+        "show_filters": true,
+        "show_filter_prod_counts": false,
+        "show_sort_by": true,
+        "show_featured": false
+      }
+    },
+    "1728113856f77454f1": {
+      "type": "apps",
+      "blocks": {
+        "searchanise_search_filter_app_block_cUGVKQ": {
+          "type": "shopify://apps/searchanise-search-filter/blocks/app-block/d8f24ada-02b1-458a-bbeb-5bf16d5c921e",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "searchanise_search_filter_app_block_cUGVKQ"
+      ],
+      "custom_css": [
+        ".large-section {padding-top: 0 !important; overflow-x: hidden;}",
+        ".snize-price-list {font-size: 20px; font-family: sans-serif !important; font-weight: 100;}"
+      ],
+      "settings": {}
+    },
+    "custom_image_with_text_overlay_7xRra3": {
+      "type": "custom-image-with-text-overlay",
+      "custom_css": [
+        ".overlay-title {font-family: Inter, sans-serif !important; font-weight: 600; letter-spacing: 0;}",
+        "div p {font-family: Roboto, sans-serif !important; line-height: 1.2; letter-spacing: 0px;}",
+        "@media (max-width: 768px) {.overlay {padding-left: 0 !important; padding-right: 0 !important; }}"
+      ],
+      "settings": {
+        "section_top_margin": false,
+        "section_bottom_margin": false,
+        "image_link": "",
+        "height": "fixed",
+        "height_desktop": 260,
+        "height_mobile": 260,
+        "color_overlay_bg": "#ffffff",
+        "overlay_opacity": 0,
+        "color_overlay_text": "#333333",
+        "text_alignment": "align-left",
+        "overlay_position_x": 50,
+        "overlay_position_y": 50,
+        "mobile_text_below": false,
+        "overlay_title": "CUSTOM BIG HEADS",
+        "enlarge_title": false,
+        "overlay_title_width": 100,
+        "styled_words": "",
+        "words_style": "stencil",
+        "highlight_words_top": 10,
+        "highlight_color": "#ffffff",
+        "styled_word_color": "#b5e0fa",
+        "overlay_text": "",
+        "enlarge_text": false,
+        "iwto-richtext": "<p>Perfect for a wedding photo booth, birthday,<br/>sporting event, or fun family holiday!</p>",
+        "overlay_url_text_1": "CREATE NOW",
+        "overlay_url_1": "",
+        "overlay_url_text_2": "",
+        "overlay_url_2": "",
+        "overlay_url_style": "button_1",
+        "color_label_background": "#ffffff",
+        "color_label_text": "#333333",
+        "show_chevron": true,
+        "product_id_1": "",
+        "chevron_position_1": "right",
+        "label_position_x_1": 20,
+        "label_position_y_1": 30,
+        "product_id_2": "",
+        "chevron_position_2": "right",
+        "label_position_x_2": 80,
+        "label_position_y_2": 50
+      }
+    },
+    "custom_collection_list_UkymyM": {
+      "type": "custom-collection-list",
+      "custom_css": [
+        ".text-center {font-family: Inter, sans-serif !important; font-weight: 600;}"
+      ],
+      "settings": {
+        "section_top_margin": false,
+        "section_bottom_margin": false,
+        "title": "OUR COLLECTIONS",
+        "link-txt": "ALL",
+        "link-txt-url": "shopify://collections/all",
+        "enlarge_title": false,
+        "collection_list": [
+          "team-disney-princess",
+          "group-nfl",
+          "group-nba",
+          "group-star-wars",
+          "group-marvel",
+          "halloween",
+          "team-wwe",
+          "group-wnba",
+          "godzilla"
+        ],
+        "section_bg_color": "",
+        "section_text_color": "#000000"
+      }
+    },
+    "featured_collection_F9YBXh": {
+      "type": "featured-collection",
+      "custom_css": [
+        ".featured-collection--title {font-family: Inter, sans-serif !important; font-weight: 600; padding-top: 20px;}"
+      ],
+      "settings": {
+        "section_top_margin": false,
+        "section_bottom_margin": false,
+        "title": "NEW PICKS FOR YOU",
+        "enlarge_title": false,
+        "link_text": "",
+        "collection": "new-1",
+        "show_vendor": false,
+        "enable_carousel": true,
+        "grid": 4,
+        "row_count": 1,
+        "grid_mobile": "2"
+      }
+    },
+    "et_review_carousel_bqNYnA": {
+      "type": "et-review-carousel",
+      "blocks": {
+        "review_bzhiyw": {
+          "type": "Review",
+          "settings": {
+            "review_item_img": "shopify://shop_images/d13606ed-46f0-4794-bec6-079820ebbb07_full_size.jpg",
+            "review_heading": "Great Addition",
+            "review_des": "Looks amazing in my office!!!"
+          }
+        },
+        "review_YYPPRN": {
+          "type": "Review",
+          "settings": {
+            "review_item_img": "shopify://shop_images/847c9919-4c56-4ff9-9deb-600d7d9f0139_full_size.jpg",
+            "review_heading": "CMC Fathead!",
+            "review_des": "We are big 49er fans and CMC is my sons favorite player so this has been an amazing addition to his room!"
+          }
+        },
+        "review_B4BnpH": {
+          "type": "Review",
+          "settings": {
+            "review_item_img": "shopify://shop_images/aa22b4ba-7f22-4fed-988d-cf51ff24e193_full_size.jpg",
+            "review_heading": "Surpassed expectations!",
+            "review_des": "In an effort to have our cat included in our wedding day, we made these cutouts of her. They came out amazing and are even better than I could have imagined! The ordering process was really easy, the shipping fast, and the quality is great. We got the 10\" x 16.5\" sheet size (the smaller one - perfect for the photo booth) and the 16.5\" x 21.5\" sheet size (larger one - will use on the dance floor)"
+          }
+        },
+        "review_TwN4qG": {
+          "type": "Review",
+          "settings": {
+            "review_item_img": "shopify://shop_images/Screenshot_2024-01-23_140903asdfasdf.png",
+            "review_heading": "Just terrific!",
+            "review_des": "Great image!!! AND lots of other signage to use!"
+          }
+        },
+        "review_ffiKNx": {
+          "type": "Review",
+          "settings": {
+            "review_item_img": "shopify://shop_images/cb4d5e29-7e12-49e3-b4f2-1176c56ecbfa_full_size.jpg",
+            "review_heading": "The Mario Theme fatheads look amazing!",
+            "review_des": "I ended up cutting out the pieces to make it easier to map out and design the room. Easy to attach to the walls and If you don't get it perfect on the first try, it's super easy to remove and reposition. I would love more themes like these, such as Sonic."
+          }
+        },
+        "review_QAABNb": {
+          "type": "Review",
+          "settings": {
+            "review_item_img": "shopify://shop_images/4cd7e4d8-be15-4efb-acbd-c86469c4719e_full_size.jpg",
+            "review_heading": "Miami Dolphins Kids Room",
+            "review_des": "Room was finished off with fat head decals and looks amazing. They are huge and didn't want to make a mistake. Went on wall smooth with some help."
+          }
+        }
+      },
+      "block_order": [
+        "review_bzhiyw",
+        "review_YYPPRN",
+        "review_B4BnpH",
+        "review_TwN4qG",
+        "review_ffiKNx",
+        "review_QAABNb"
+      ],
+      "custom_css": [
+        ".et-section-title h2 {font-family: Inter, sans-serif !important; font-weight: 600; letter-spacing: 0px; font-size: 36px;}"
+      ],
+      "settings": {
+        "section_top_margin": false,
+        "section_bottom_margin": false,
+        "section_title": "Fathead Nation Inspiration",
+        "center_padding": 100
+      }
+    },
+    "newsletter_ec6KtJ": {
+      "type": "newsletter",
+      "disabled": true,
+      "custom_css": [
+        ".subscribe-form__submit {background: #222; padding: 20px; --button-border-color: #222; border-radius: 12px;}",
+        ".subscribe-content {margin-bottom: 30px;}",
+        ".subscribe-form__inputs {border-bottom: none; column-gap: 5px;}",
+        ".subscribe-form__inputs .input-wrapper {background: #ebebeb; border-radius: 12px; padding: 2px;}",
+        ".subscribe-form__label {padding: 7px 0 0 16px;}",
+        "@media (max-width: 768px) {.subscribe-form__submit {width: 100%; }}",
+        "@media (min-width: 769px) {.subscribe-form {padding-left: 150px; padding-right: 150px; }}"
+      ],
+      "settings": {
+        "section_top_margin": false,
+        "section_bottom_margin": false,
+        "title": "Join FATHEAD NATION!",
+        "section_subtitle": "<p>Earn exclusive offers and rewards when you<br/> become a FATHEAD NATION member.</p>",
+        "color_title": "#333333",
+        "color_text": "#333333",
+        "color_bg": "#ffffff",
+        "gradient_bg": "",
+        "button_style": "button_1",
+        "enlarge_title": true,
+        "enlarge_text": false
+      }
+    }
+  },
+  "order": [
+    "custom_team_banner_k6FCPJ",
+    "team_featured_product_EzUN9w",
+    "main",
+    "1728113856f77454f1",
+    "custom_image_with_text_overlay_7xRra3",
+    "custom_collection_list_UkymyM",
+    "featured_collection_F9YBXh",
+    "et_review_carousel_bqNYnA",
+    "newsletter_ec6KtJ"
+  ]
+}

@@ -1,0 +1,34 @@
+{%- capture imgLz -%}_{width}x.{%- endcapture -%}
+{%- assign widths = "165,360,533,720,1000,1500" | split: "," -%}
+{%- assign title = title | default: 'image' -%}
+{%- capture iconWidth -%}{%- if icon_width and icon_width != "auto" -%} style="--gm-item-icon-width:{{- icon_width -}};"{%- endif -%}{%- endcapture -%}
+{%- if icon contains "ri-" -%}
+  <i class="gm-icon {{ icon }}" />
+{%- elsif icon contains '.png' or icon contains '.jpg' or icon contains '.jpeg' or icon contains '.webp' or icon contains '.svg' or icon contains '.gif' or icon contains '.avif' -%}
+  <span class="gm-icon gm-icon-img"{{iconWidth}}>
+    {%- if icon contains '.svg' -%}
+      <img
+        src="{{ icon | file_url }}"
+        class="{% if class %} {{ class }}{% endif %}"
+        width="{{ icon.width }}"
+        loading="lazy"
+        height="{{ icon.height }}"
+        alt="{{ title | escape }}"
+      />
+    {%- else -%}
+      <img
+        {% if settings.general.lazy_load_enable %}srcSet="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="{% endif %}
+        data-sizes="auto"
+        {% if settings.general.lazy_load_enable %}data-src="{{ icon | file_img_url: 'large' | replace: '_large.', imgLz | replace: '.JPG', '.jpg' }}"{% else %}src="{{ icon | file_img_url: 'large' | replace: '.JPG', '.jpg' }}"{% endif %}
+        width="{{ icon.width }}"
+        height="{{ icon.height }}"
+        loading="lazy"
+        data-widths="[40, 100, 140, 180, 250, 260, 275, 305, 440, 610, 720, 930, 1080]"
+        class="{% if settings.general.lazy_load_enable %}gmlazyload{% endif %}{% if class %} {{ class }}{% endif %}"
+        alt="{{ title | escape }}"
+      />
+    {%- endif -%}
+  </span>
+{%- else -%}
+  <i class="gm-icon fa fa-{{ icon }}"></i>
+{%- endif -%} 

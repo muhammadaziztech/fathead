@@ -1,0 +1,365 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": { "show_title": false, "title_alignment": "left" }
+    },
+    "slideshow_BFr9Dh": {
+      "type": "slideshow",
+      "blocks": {
+        "image_6w6aPU": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/NFL_landing_1600.png",
+            "image_link": "",
+            "color_overlay_bg": "#ffffff",
+            "overlay_opacity": 80,
+            "color_overlay_text": "#333333",
+            "text_alignment": "center",
+            "overlay_position_x": 50,
+            "overlay_position_y": 80,
+            "overlay_title": "",
+            "enlarge_title": false,
+            "overlay_title_width": 100,
+            "styled_words": "",
+            "words_style": "stencil",
+            "highlight_words_top": 10,
+            "highlight_color": "#ffffff",
+            "styled_word_color": "#1c1c1c",
+            "overlay_text": "",
+            "enlarge_text": false,
+            "overlay_url_text_1": "",
+            "overlay_url_1": "",
+            "overlay_url_text_2": "",
+            "overlay_url_2": "",
+            "overlay_url_style": "button_1",
+            "color_label_background": "#ffffff",
+            "color_label_text": "#333333",
+            "show_chevron": true,
+            "product_id_1": "",
+            "chevron_position_1": "right",
+            "label_position_x_1": 20,
+            "label_position_y_1": 30,
+            "product_id_2": "",
+            "chevron_position_2": "right",
+            "label_position_x_2": 80,
+            "label_position_y_2": 50
+          }
+        }
+      },
+      "block_order": ["image_6w6aPU"],
+      "disabled": true,
+      "custom_css": [
+        ".full-width-slideshow {padding-left: 0; padding-right: 0; margin-top: 0;}",
+        ".full-width-slideshow .slick-track {width: 100% !important;}",
+        ".full-width-slideshow .slick-initialized .slide {width: 100% !important;}"
+      ],
+      "settings": {
+        "height": "adapt",
+        "height_desktop": 600,
+        "height_mobile": 500,
+        "mobile_text_below": true,
+        "slide_transition": "fade",
+        "slideshow_autoplay": true,
+        "slideshow_autoplay_speed": 6
+      }
+    },
+    "image_with_text_overlay_4dmUaT": {
+      "type": "image-with-text-overlay",
+      "disabled": true,
+      "custom_css": [],
+      "settings": {
+        "image": "shopify://shop_images/NFL_landing_1600.png",
+        "image_link": "",
+        "height": "adapt",
+        "height_desktop": 600,
+        "height_mobile": 500,
+        "color_overlay_bg": "#ffffff",
+        "overlay_opacity": 80,
+        "color_overlay_text": "#1c1c1c",
+        "text_alignment": "center",
+        "overlay_position_x": 50,
+        "overlay_position_y": 70,
+        "mobile_text_below": false,
+        "overlay_title": "",
+        "enlarge_title": false,
+        "overlay_title_width": 100,
+        "styled_words": "",
+        "words_style": "stencil",
+        "highlight_words_top": 10,
+        "highlight_color": "#ffffff",
+        "styled_word_color": "#1c1c1c",
+        "overlay_text": "",
+        "enlarge_text": false,
+        "overlay_url_text_1": "",
+        "overlay_url_1": "",
+        "overlay_url_text_2": "",
+        "overlay_url_2": "",
+        "overlay_url_style": "button_1",
+        "color_label_background": "#ffffff",
+        "color_label_text": "#333333",
+        "show_chevron": true,
+        "product_id_1": "",
+        "chevron_position_1": "right",
+        "label_position_x_1": 20,
+        "label_position_y_1": 30,
+        "product_id_2": "",
+        "chevron_position_2": "right",
+        "label_position_x_2": 80,
+        "label_position_y_2": 50
+      }
+    },
+    "logo_list_J4YdJL": {
+      "type": "logo-list",
+      "blocks": {
+        "logo_YUHx6X": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/NFL_Logo_Kansas_City_Chiefs.png",
+            "image_width": 60,
+            "link": "shopify://pages/nfl-teams",
+            "title": ""
+          }
+        }
+      },
+      "block_order": ["logo_YUHx6X"],
+      "disabled": true,
+      "settings": {
+        "title": "",
+        "color_bg": "#ffffff",
+        "color_title": "#1c1c1c",
+        "color_text": "#1c1c1c",
+        "enlarge_title": false,
+        "enlarge_text": false,
+        "image_opacity": 100,
+        "en-slider": false
+      }
+    },
+    "split_image_D8ULQf": {
+      "type": "split-image",
+      "blocks": {
+        "image_irWrER": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Jalen_Hurts_Promo_2x_885ab709-ae29-4c88-b703-b2f30cf8ae22.png",
+            "image_link": "",
+            "color_overlay_bg": "#ffffff",
+            "overlay_opacity": 0,
+            "color_overlay_text": "#ffffff",
+            "overlay_title": "Jalen Hurts",
+            "overlay_text": "",
+            "overlay_url_text": "",
+            "overlay_url": "",
+            "overlay_url_style": "button_2",
+            "enlarge_title": false,
+            "enlarge_text": false,
+            "overlay_position_x": 0,
+            "overlay_position_y": 20,
+            "mobile_text_below": false,
+            "color_label_background": "#ffffff",
+            "color_label_text": "#333333",
+            "product_id": "jalen-hurts-celebration-realbig-collection-official-nfl-philadelphia-eagles-reusable-vinyl-wall-decals",
+            "show_chevron": true,
+            "chevron_position": "right",
+            "label_position_x": 32,
+            "label_position_y": 80
+          }
+        },
+        "image_yfBEaA": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Travis_Kelce_Promo_2x_2ed2c937-dc43-4e8c-9762-9e3f0d6f09c7.png",
+            "image_link": "",
+            "color_overlay_bg": "#ffffff",
+            "overlay_opacity": 0,
+            "color_overlay_text": "#ffffff",
+            "overlay_title": "Travis Kelce",
+            "overlay_text": "",
+            "overlay_url_text": "",
+            "overlay_url": "",
+            "overlay_url_style": "button_1",
+            "enlarge_title": false,
+            "enlarge_text": false,
+            "overlay_position_x": 0,
+            "overlay_position_y": 20,
+            "mobile_text_below": false,
+            "color_label_background": "#ffffff",
+            "color_label_text": "#1c1c1c",
+            "product_id": "travis-kelce-realbig-collection-official-nfl-kansas-city-chiefs-reusable-vinyl-wall-decals-5",
+            "show_chevron": true,
+            "chevron_position": "right",
+            "label_position_x": 20,
+            "label_position_y": 80
+          }
+        }
+      },
+      "block_order": ["image_irWrER", "image_yfBEaA"],
+      "disabled": true,
+      "settings": { "height_desktop": 300, "height_mobile": 300 }
+    },
+    "featured_collection_q3cQjw": {
+      "type": "featured-collection",
+      "disabled": true,
+      "settings": {
+        "title": "NFL TOP 50 PRODUCTS",
+        "enlarge_title": false,
+        "link_text": "Shop now",
+        "collection": "2022-nfl-top-50",
+        "show_vendor": false,
+        "enable_carousel": false,
+        "grid": 4,
+        "row_count": 1,
+        "grid_mobile": "2"
+      }
+    },
+    "et_about_us_banner_wHf6qg": {
+      "type": "et-about-us-banner",
+      "settings": {
+        "section_title": "We are",
+        "logo": "shopify://shop_images/343333.png",
+        "des": "<p><strong>We are not about small. We are about the big wall. <br/><br/></strong>The big moment. The big expression. We’re here to amplify...the huge outpouring of emotion. With color. With graphics. <br/><br/>With awesomeness.</p><p>Whether you’re decorating a room, having a party, or celebrating what and who you love, we’ll help you go big with it. <br/><br/>Because we celebrate the oversized, the over-the- top, and all things overboard.</p><p></p><p><strong><br/>We’ll help you go big with it! Like no one else can.</strong></p>",
+        "banner_cta": "",
+        "banner_cta_label": "Find your fandom!",
+        "section_bg": "#0258B7",
+        "content_clr": "#fff",
+        "banner_cta_bg": "#D33901",
+        "banner_cta_clr": "#fff"
+      }
+    },
+    "multi_column_3ApMyA": {
+      "type": "multi-column",
+      "blocks": {
+        "text_block_kGRjTM": {
+          "type": "text_block",
+          "settings": {
+            "enable_image": true,
+            "image": "shopify://shop_images/Icon_Exclusive.png",
+            "image_width": 30,
+            "enable_icon": false,
+            "icon": "award",
+            "icon_size": 48,
+            "icon_color": "",
+            "title": "Superior Quality & Design",
+            "text": "<p>All of our art and designs are top notch from our officially licensed partnership products and non-licensed products...You'll be the elite fan you're destined to be!</p>",
+            "button_label": "",
+            "button_link": "",
+            "enlarge_title": false,
+            "enlarge_text": false
+          }
+        },
+        "text_block_4fTVFr": {
+          "type": "text_block",
+          "settings": {
+            "enable_image": true,
+            "image": "shopify://shop_images/Untitled_design_15.png",
+            "image_width": 20,
+            "enable_icon": false,
+            "icon": "award",
+            "icon_size": 48,
+            "icon_color": "",
+            "title": "On Trend",
+            "text": "<p>All products are printed on demand and homegrown, made in the USA. We ensure that everyone can easily find what they're a BIG fan of! With over 24,000+ product offerings, we are sure you'll find what you desire.</p>",
+            "button_label": "",
+            "button_link": "",
+            "enlarge_title": false,
+            "enlarge_text": false
+          }
+        },
+        "text_block_xP8C8t": {
+          "type": "text_block",
+          "settings": {
+            "enable_image": true,
+            "image": "shopify://shop_images/Icon_Quality.png",
+            "image_width": 30,
+            "enable_icon": false,
+            "icon": "award",
+            "icon_size": 48,
+            "icon_color": "",
+            "title": "Easy to Use & Reuse",
+            "text": "<p>Our wall decals are removable, reusable, and built to last! Stand outs- set up and display, or fold away for later! Make it yours, and get creative! We believe in providing products that reflect only the best of what true fans deserve.</p>",
+            "button_label": "",
+            "button_link": "",
+            "enlarge_title": false,
+            "enlarge_text": false
+          }
+        }
+      },
+      "block_order": [
+        "text_block_kGRjTM",
+        "text_block_4fTVFr",
+        "text_block_xP8C8t"
+      ],
+      "settings": {
+        "title": "",
+        "enlarge_title": false,
+        "text_alignment": "center",
+        "url_style": "button_1",
+        "enable_custom_colors": false,
+        "color_title": "rgba(0,0,0,0)",
+        "color_text": "",
+        "color_bg": "",
+        "gradient_bg": ""
+      }
+    },
+    "collapsible_tabs_aAkc4r": {
+      "type": "collapsible-tabs",
+      "blocks": {
+        "question_wbmAKP": {
+          "type": "question",
+          "settings": {
+            "title": "WALL DECALS",
+            "answer": "<p>Our wall decals are the best in the game. Removable, reusable, high quality vinyl meant to last.</p>"
+          }
+        },
+        "question_GpXnRq": {
+          "type": "question",
+          "settings": {
+            "title": "STAND OUTS",
+            "answer": "<p>Bring your fandom to life. Deck out that movie room. These life-size (or mini!) stand outs mean business.</p>"
+          }
+        },
+        "question_x8WaLN": {
+          "type": "question",
+          "settings": {
+            "title": "BIG HEADS",
+            "answer": "<p>High quality foam core or card stock. Its not a big head if it isn't a Fathead!</p>"
+          }
+        },
+        "question_B8VeGm": {
+          "type": "question",
+          "settings": {
+            "title": "CUSTOM CREATIONS",
+            "answer": "<p>Not only can you get the above from your favorite athletes, movies, and more.... But you can make your own!</p>"
+          }
+        },
+        "question_4nQx7B": {
+          "type": "question",
+          "settings": {
+            "title": "And much much more!",
+            "answer": "<p>Sift your way through Fathead.com. You'll find officially licensed wall lights, clocks, dog beds... and so much more!</p>"
+          }
+        }
+      },
+      "block_order": [
+        "question_wbmAKP",
+        "question_GpXnRq",
+        "question_x8WaLN",
+        "question_B8VeGm",
+        "question_4nQx7B"
+      ],
+      "settings": { "title": "Collapsible tabs" }
+    }
+  },
+  "order": [
+    "main",
+    "slideshow_BFr9Dh",
+    "image_with_text_overlay_4dmUaT",
+    "logo_list_J4YdJL",
+    "split_image_D8ULQf",
+    "featured_collection_q3cQjw",
+    "et_about_us_banner_wHf6qg",
+    "multi_column_3ApMyA",
+    "collapsible_tabs_aAkc4r"
+  ]
+}

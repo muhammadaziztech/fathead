@@ -1,0 +1,216 @@
+<div
+  class="container container--no-mobile-padding large-row section-{{ section.id }} mb-0"
+  data-section-id="{{ section.id }}"
+  data-section-type="subscribe"
+>
+  {% style %}
+    .section-{{ section.id }} .subscribe-section {
+      background: {{ section.settings.gradient_bg | default: section.settings.color_bg }};
+      color: {{ section.settings.color_text }};
+    }
+    .section-{{ section.id }} .large-title,
+    .section-{{ section.id }} .giant-title {
+      color: {{ section.settings.color_title }};
+    }
+
+    .section-{{ section.id }} .subscribe-form__inputs,
+    .section-{{ section.id }} .input-wrapper {
+      border-bottom-color: {{ section.settings.color_text | color_modify: 'alpha', 0.3 }};
+    }
+
+    .section-{{ section.id }} .subscribe-form__inputs .input-wrapper label {
+      color: {{ section.settings.color_text | color_modify: 'alpha', 0.7 }};
+    }
+    .section-{{ section.id }} {
+      background-image: url('{{ section.settings.background_img |img_url: 'original' }}');
+      background-repeat: no-repeat;
+      background-size: cover;
+      padding-top: 120px;
+    }
+    .section-{{ section.id }} .subscribe-section {
+      max-width: 80%;
+      padding-top: 30px;
+      padding-bottom: 20px;
+    }
+    @media(max-width:767px) {
+      .section-{{ section.id }} .subscribe-section {
+        padding-left: 0;
+        padding-right: 0;
+      }
+      {% if section.settings.mobile_background_img != blank %}
+        .section-{{ section.id }} {
+          background-image: url('{{ section.settings.mobile_background_img |img_url: 'original' }}');
+          background-repeat: no-repeat;
+          background-size: cover;
+          padding-top: 120px;
+        }
+      {% endif %}
+    }
+    {% if section.settings.section_top_margin %}
+      #shopify-section-{{ section.id }} {
+        margin-top: 30px;
+      }
+    {% endif %}
+    {% if section.settings.section_bottom_margin %}
+      #shopify-section-{{ section.id }} {
+        margin-bottom: 30px;
+      }
+    {% endif %}
+  {% endstyle %}
+
+  <div class="subscribe-section large-section page-width global-border-radius">
+    <div class="reading-width subscribe-content" data-cc-animate>
+      <h2 class="subscribe-content__title {% if section.settings.enlarge_title %} giant-title{% else %} large-title{% endif %}">
+        {{ section.settings.title | replace: 'NATION!', '<span style="color:#035fcf;word-break:normal;">NATION!</span>' }}
+      </h2>
+      {% if section.settings.section_subtitle != blank %}
+        <div class="{% if section.settings.enlarge_text %}large-text{% endif %} rte">
+          {{ section.settings.section_subtitle }}
+        </div>
+      {% endif %}
+    </div>
+    <div class="reading-width subscribe-form" data-cc-animate>
+      {% form 'customer' %}
+        {% if form.posted_successfully? %}
+          <div class="subscribe-form__response subscribe-form__response--success">
+            <h4>{{ 'general.newsletter.success' | t }}</h4>
+          </div>
+        {% else %}
+          {% if form.errors %}
+            <div class="subscribe-form__response">
+              {% for field in form.errors %}
+                <p class="error-message">{{ field | capitalize }} - {{ form.errors.messages[field] }}</p>
+              {% endfor %}
+            </div>
+          {% endif %}
+          <input type="hidden" id="contact_tags" name="contact[tags]" value="prospect,newsletter">
+          <div class="subscribe-form__inputs">
+            <div class="input-wrapper grid__item two-thirds small-down--one-whole">
+              <label class="subscribe-form__label" for="mailinglist_email">{{ 'layout.signup.email' | t }}</label>
+              <input
+                type="email"
+                required
+                class="subscribe-form__email required grid__item one-third"
+                value=""
+                id="mailinglist_email"
+                name="contact[email]"
+              >
+            </div>
+            <div class="subscribe-form__btn-wrapper grid__item one-third small-down--one-whole">
+              <button
+                class="btn {% if section.settings.button_style == 'button_1' %} btn--primary{% else %} btn--secondary{% endif %} subscribe-form__submit"
+                type="submit"
+              >
+                {{ 'layout.signup.submit' | t | escape }}
+              </button>
+            </div>
+          </div>
+        {% endif %}
+      {% endform %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Newsletter",
+  "tag": "section",
+  "class": "section-newsletter",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "section_top_margin",
+      "label": "Add section top margin",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "section_bottom_margin",
+      "label": "Add section bottom margin",
+      "default": false
+    },
+    {
+      "type": "image_picker",
+      "id": "background_img",
+      "label": "Desktop Background Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_background_img",
+      "label": "Mobile Background Image"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Newsletter"
+    },
+    {
+      "type": "richtext",
+      "id": "section_subtitle",
+      "label": "Text",
+      "default": "<p>Sign up now!<\/p>"
+    },
+          {
+      "type": "color",
+      "id": "color_title",
+      "label": "Heading color",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "color_text",
+      "label": "Text color",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "color_bg",
+      "label": "Background color",
+      "default": "#ecf1f2"
+    },
+    {
+      "type": "color_background",
+      "id": "gradient_bg",
+      "label": "Background gradient",
+      "info": "If set, replaces background color"
+    },
+    {
+      "type": "radio",
+      "id": "button_style",
+      "label": "Button style",
+      "options": [
+        { "value": "button_1", "label": "Button - primary" },
+        { "value": "button_2", "label": "Button - secondary" }
+      ],
+      "default": "button_1"
+    },
+    {
+      "type": "checkbox",
+      "id": "enlarge_title",
+      "label": "Enlarge heading",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "enlarge_text",
+      "label": "Enlarge text",
+      "default": false
+    },
+    {
+      "type": "paragraph",
+      "content": "Customers who subscribe will have their email address added to the “accepts marketing” [customer list](/admin/customers?query=&accepts_marketing=1)"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Newsletter"
+    }
+  ],
+  "disabled_on": {
+    "groups": [
+      "aside"
+    ]
+  }
+}
+{% endschema %}

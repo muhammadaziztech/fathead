@@ -1,0 +1,274 @@
+<section class="section et-app-landing-banner-section">
+    <div class="page-width">
+        <div class="app-landing-banner-wrap">
+            <div class="app-landing-banner-top {{ section.settings.show_banner_bg }}">
+                <div class="banner-cont">
+                    <h1 class="banner-title {{ section.settings.banner_title_tt }}">{{ section.settings.banner_title }}</h1>
+                    <div class="banner-des">
+                        {{ section.settings.banner_des }}
+                    </div>
+                    {%- unless section.settings.banner_sub_title == blank -%}
+                      <h3 class="banner-sub-title">{{section.settings.banner_sub_title}}</h3>
+                    {% endunless %}
+
+                    <div class="offer-wrap">
+                      {%- for block in section.blocks -%}
+                        {% if block.type == "offer" %}
+                          <div class="offer-item">
+                              <img src="{{ block.settings.offer_icon | img_url: 'master' }}" alt="">
+                              <p>{{ block.settings.offer_title }}</p>
+                          </div>
+                        {% endif %}
+                        
+                        {% if block.type == "appdownload" %}
+                            <div class="app-download-wrap">
+                              <a href="{{ block.settings.app_store_url }}" class="app-iem" target="_blank">
+                                {{ block.settings.app_store_logo | image_url: width: full | image_tag }}
+                              </a>
+                              <a href="{{ block.settings.google_play_url }}" class="app-iem" target="_blank">
+                                {{ block.settings.google_play_logo | image_url: width: full | image_tag }}
+                              </a>
+                            </div>
+                        {% endif %}
+
+                      {% endfor %}
+                    </div>
+                    
+                    {%- unless section.settings.email_signup_title == blank -%}
+                      <div class="email-signup-wrap">
+                          <h4>{{ section.settings.email_signup_title }}</h4>
+                      </div>
+                    {% endunless %}
+                </div>
+                {%- unless section.settings.banner_img == blank -%}
+                <div class="banner-img">
+                    {%- unless section.settings.banner_logo == blank -%}
+                      <div class="logo">
+                          <img src="{{ section.settings.banner_logo | img_url: 'master' }}" alt="">
+                      </div>
+                    {% endunless %}
+                    {%- unless section.settings.banner_img == blank -%}
+                      <div class="main-img">
+                          <img src="{{ section.settings.banner_img | img_url: 'master' }}" alt="">
+                      </div>
+                    {% endunless %}
+                </div>
+              {% endunless %}
+     
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+{%- style -%}
+  .app-landing-banner-top {
+      background-color: {{section.settings.banner_bg}};
+  }
+  .app-landing-banner-top.true {
+    background-image: url('{{ section.settings.banner_bg_img | img_url: 'master' }}');
+  }
+  @media (max-width: 768px) {
+    .app-landing-banner-top.true {
+      background-image: url('{{ section.settings.banner_bg_img_mobile | img_url: 'master' }}');
+    }
+  }
+  .app-landing-banner-wrap {
+      background-color: {{section.settings.banner_bottom_bg}};
+  }
+  .app-landing-banner-bottom .banner-cont p {
+      color: {{section.settings.banner_bottom_cont_clr}};
+  }
+  .app-landing-banner-top .banner-cont .banner-title,
+  .app-landing-banner-top .banner-cont .banner-des,
+  .app-landing-banner-top .banner-cont .banner-sub-title,
+  .app-landing-banner-top .banner-cont .banner-des p {
+      color: {{section.settings.content_clr}};
+  }
+  {% if section.settings.section_top_margin %}
+    #shopify-section-{{ section.id }} {
+      margin-top: 30px;
+    }
+  {% endif %}
+  {% if section.settings.section_bottom_margin %}
+    #shopify-section-{{ section.id }} {
+      margin-bottom: 30px;
+    }
+  {% endif %}
+{%- endstyle -%}
+
+  
+  {% schema %}
+    {
+      "name": "App Landing Banner",
+      "max_blocks": 8 ,
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "section_top_margin",
+          "label": "Add section top margin",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "section_bottom_margin",
+          "label": "Add section bottom margin",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "banner_title",
+          "label": "Banner Title",
+          "default": "THE FATHEAD APP AVAILABLE FEB. 1"
+        },
+        {
+          "type": "select",
+          "id": "banner_title_tt",
+          "label": "Text Transform",
+          "options": [
+            {
+              "value": "uppercase",
+              "label": "Uppercase"
+            },
+            {
+              "value": "capitalize",
+              "label": "Capitalize"
+            }
+          ],
+          "default": "capitalize"
+        },
+        {
+          "type": "richtext",
+          "id": "banner_des",
+          "label": "Banner Description"
+        },
+        {
+            "type": "image_picker",
+            "id": "banner_img",
+            "label": "Banner Main Image"
+        },
+        {
+            "type": "image_picker",
+            "id": "banner_logo",
+            "label": "Banner Logo"
+        },
+        {
+          "type": "text",
+          "id": "banner_sub_title",
+          "label": "Banner Sub Title",
+          "default": "Starting Feb. 1, download Fathead app & create your profile for a chance to win the Ultimate Football Fan Giveaway"
+        },
+        {
+          "type": "text",
+          "id": "banner_bottom_des",
+          "label": "Banner Bottom Description",
+          "default": "NO PURCHASE NECESSARY. Sweepstakes begins...."
+        },
+        {
+          "type": "text",
+          "id": "banner_bottom_cta_url",
+          "label": "Banner Bottom CTA URL"
+        },
+        {
+          "type": "text",
+          "id": "banner_bottom_cta_label",
+          "label": "Banner Bottom CTA Label",
+          "default": "Official Rules"
+        },
+        {
+            "type": "checkbox",
+            "id": "show_banner_bg",
+            "label": "Show Banner BG Image",
+            "default": false
+          },
+         {
+            "type": "image_picker",
+            "id": "banner_bg_img",
+            "label": "Banner Background Image"
+        },
+         {
+            "type": "image_picker",
+            "id": "banner_bg_img_mobile",
+            "label": "Banner Background Image Mobile"
+        },
+         {
+            "type": "color",
+            "id": "banner_bg",
+            "label": "Banner Background",
+            "default": "#055CB2"
+        },
+         {
+            "type": "color",
+            "id": "content_clr",
+            "label": "Banner Content Color",
+            "default": "#fff"
+        },
+        {
+            "type": "color",
+            "id": "banner_bottom_bg",
+            "label": "Banner Bottom BG Color",
+            "default": "#FFB81D"
+        },
+        {
+            "type": "color",
+            "id": "banner_bottom_cont_clr",
+            "label": "Banner Bottom Text Color",
+            "default": "#005EA8"
+        }
+      ],
+      "blocks": [
+        {
+          "type": "offer",
+          "name": "offer item",
+          "limit": 3,
+          "settings": [
+            {
+              "type": "image_picker",
+              "id": "offer_icon",
+              "label": "Offer icon"
+            },
+            {
+              "type": "text",
+              "id": "offer_title",
+              "label": "Offer Title",
+              "default": "2 tickets to ANY regular season game"
+            }
+          ]
+        },
+        {
+          "type": "appdownload",
+          "name": "app URL",
+          "limit": 1,
+          "settings": [
+            {
+              "type": "image_picker",
+              "id": "app_store_logo",
+              "label": "App Store logo"
+            },
+            {
+              "type": "image_picker",
+              "id": "google_play_logo",
+              "label": "Google Play Logo"
+            },
+            {
+              "type": "url",
+              "id": "app_store_url",
+              "label": "App Store URL"
+            },
+            {
+              "type": "url",
+              "id": "google_play_url",
+              "label": "Google Play URL"
+            }
+          ]
+        }
+      ],
+      "presets": [
+        {
+          "name": "App Landing Banner",
+          "category": "fathead"
+        }
+      ]
+    }
+  {% endschema %}

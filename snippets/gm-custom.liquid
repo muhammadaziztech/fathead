@@ -1,0 +1,14 @@
+<script>
+  var check = false;
+  var ga_interval = setInterval(checkApp, 100);
+
+  function checkApp() {
+    if (typeof GloboMenuConfig == 'object' && $('.gm-menu').length) {
+      check = true;
+      clearInterval(ga_interval);
+    }
+    if (check) {
+      $('.gm-target').removeAttr('title');
+    }
+  }
+</script>

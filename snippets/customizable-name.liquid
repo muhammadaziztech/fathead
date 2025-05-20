@@ -1,0 +1,56 @@
+<div class="customizable-name__wrapper">
+  <div class="form__customizable-name">
+    <input type="hidden" name="properties[_Width]" value="0">
+    <input type="hidden" name="properties[_Height]" value="0">
+    <input type="hidden" name="properties[_Flip]" value="portrait">
+    <input type="hidden" name="properties[_CustomProductType]" value="{{ product.type }}">
+
+    {%- if _section.label != blank -%}
+      <label for="customizable-name-label">{{ _section.label | newline_to_br }}:</label>
+    {%- endif -%}
+
+    {%- if _section.error_message != blank -%}
+      <div class="form__customizable-error is-hidden">
+        <p>{{ _section.error_message | newline_to_br }}</p>
+      </div>
+      <!-- /.form__customizable-error -->
+    {%- endif -%}
+
+    <div class="form__controls">
+      <input
+        type="text"
+        id="customizable-name-label"
+        class="field js-customizable-name-field"
+        name="properties[Customizable name]"
+        data-maxlength="25"
+        data-counter-holder="customizable-name-counter"
+      >
+
+      <span class="form__counter" id="customizable-name-counter">0/25</span>
+    </div>
+    <!-- /.form__controls -->
+  </div>
+  <!-- /.form__customizable-name -->
+
+  {%- if _section.request_proof != blank -%}
+    <div class="form__customizable-checkbox checkbox">
+      <input type="hidden" name="properties[Digital Proof]" value="No">
+      <input type="checkbox" id="customizable-name-request-proof" name="properties[Digital Proof]" value="Yes">
+
+      <label for="customizable-name-request-proof">{{ _section.request_proof }}</label>
+
+      {%- if _section.tooltip != blank -%}
+        <span class="tooltip">
+          <span>{%- render 'icon-help' -%}</span>
+
+          <div class="tooltip__content">
+            <p>{{ _section.tooltip | newline_to_br }}</p>
+          </div>
+          <!-- /.tooltip__content -->
+        </span>
+        <!-- /.tooltip -->
+      {%- endif -%}
+    </div>
+    <!-- /.form__customizable-checkbox .checkbox -->
+  {%- endif -%}
+</div>

@@ -1,0 +1,166 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": { "show_title": true, "title_alignment": "left" }
+    },
+    "et_about_us_banner_bb9aMt": {
+      "type": "et-about-us-banner",
+      "settings": {
+        "section_title": "We are",
+        "logo": "shopify://shop_images/Fathead_Logo_White.png",
+        "des": "<p>We are not about small. We are about the big wall. The big moment. The big expression. We’re here to amplify...the huge outpouring of emotion. With color. With graphics. With awesomeness. Whether you’re decorating a room, having a party, or celebrating what and who you love, we’ll help you go big with it. Because we celebrate the oversized, the over-the- top, and all things overboard. We’ll help you go big with it! Like no one else can.</p>",
+        "banner_cta": "",
+        "banner_cta_label": "Find your fandom!",
+        "banner_bottom_img": "shopify://shop_images/Group_1877_75deb260-725f-465b-b42f-2c31528deda3.png",
+        "section_bg": "#0258b7",
+        "content_clr": "#ffffff",
+        "banner_cta_bg": "#d33901",
+        "banner_cta_clr": "#ffffff"
+      }
+    },
+    "et_about_us_steps_XqW7Yz": {
+      "type": "et-about-us-steps",
+      "blocks": {
+        "step_NWjpWF": {
+          "type": "step",
+          "settings": {
+            "step_icon": "shopify://shop_images/fi_4692442_c6017924-bb65-411c-a90c-9e2dd6b4d0be.png",
+            "step_title": "Superior Quality & Design",
+            "step_des": "All of our art and designs are top notch from our officially licensed partnership products and non-licensed products...You'll be the elite fan you're destined to be!"
+          }
+        },
+        "step_CAGWYk": {
+          "type": "step",
+          "settings": {
+            "step_icon": "shopify://shop_images/fi_2769480.png",
+            "step_title": "On Trend",
+            "step_des": "All products are printed on demand and homegrown, made in the USA. We ensure that everyone can easily find what they're a BIG fan of! With over 24,000+ product offerings, we are sure you'll find what you desire."
+          }
+        },
+        "step_jUFBVp": {
+          "type": "step",
+          "settings": {
+            "step_icon": "shopify://shop_images/Icon_Quality_a380feea-633e-4896-9b5a-c2bbb3af3a4b.png",
+            "step_title": "Easy to Use & Reuse",
+            "step_des": "Our wall decals are removable, reusable, and built to last! Stand outs- set up and display, or fold away for later! Make it yours, and get creative! We believe in providing products that reflect only the best of what true fans deserve."
+          }
+        }
+      },
+      "block_order": ["step_NWjpWF", "step_CAGWYk", "step_jUFBVp"],
+      "settings": { "step_item_bg_clr": "#eff0f2" }
+    },
+    "et_what_we_do_eDNw8Q": {
+      "type": "et-what-we-do",
+      "blocks": {
+        "accordion_CpD9P6": {
+          "type": "accordion",
+          "settings": {
+            "accordion_title": "WALL DECALS",
+            "accordion_des": "Our wall decals are the best in the game. Removable, reusable, high quality vinyl meant to last."
+          }
+        },
+        "accordion_V6gpXE": {
+          "type": "accordion",
+          "settings": {
+            "accordion_title": "STAND OUTS",
+            "accordion_des": "Bring your fandom to life. Deck out that movie room. These life-size (or mini!) stand outs mean business."
+          }
+        },
+        "accordion_qKi46R": {
+          "type": "accordion",
+          "settings": {
+            "accordion_title": "BIG HEADS",
+            "accordion_des": "High quality foam core or card stock. Its not a big head if it isn't a Fathead!"
+          }
+        },
+        "accordion_JVQ8wz": {
+          "type": "accordion",
+          "settings": {
+            "accordion_title": "CUSTOM CREATIONS",
+            "accordion_des": "Not only can you get the above from your favorite athletes, movies, and more.... But you can make your own!"
+          }
+        },
+        "accordion_myNPxm": {
+          "type": "accordion",
+          "settings": {
+            "accordion_title": "AND MUCH MUCH MORE!",
+            "accordion_des": "Sift your way through Fathead.com. You'll find officially licensed wall lights, clocks, dog beds... and so much more!"
+          }
+        }
+      },
+      "block_order": [
+        "accordion_CpD9P6",
+        "accordion_V6gpXE",
+        "accordion_qKi46R",
+        "accordion_JVQ8wz",
+        "accordion_myNPxm"
+      ],
+      "settings": {
+        "section_img": "shopify://shop_images/Picture_Untitled_design_5_png_ec3462aa-b377-48b9-b1cc-ed9d51fe36e5.png",
+        "section_title": "What we do",
+        "section_cta": "",
+        "section_cta_label": "GET STARTED!",
+        "section_img_bg": "#3ba715",
+        "section_bg": "#eff0f2",
+        "section_content_clr": "#505561",
+        "section_cta_bg": "#d33901",
+        "section_cta_clr": "#ffffff"
+      }
+    },
+    "et_about_us_bottom_banner_dERFqA": {
+      "type": "et-about-us-bottom-banner",
+      "settings": {
+        "section_title": "Amplify, Share, and Celebrate What You Love",
+        "section_des": "Our Promise to you",
+        "left_img": "shopify://shop_images/wepik-export-20240101034742hxGe_1.png",
+        "right_img": "shopify://shop_images/4_Licensed_Athletes_1_36de88d2-8b33-4775-bfd2-ba8c20693221.png",
+        "section_bg": "#ffb81d",
+        "content_clr": "#ffffff"
+      }
+    },
+    "logos_carousel_RiHNqe": {
+      "type": "logos-carousel",
+      "blocks": {
+        "logo_GTrNna": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/fox_b114bae8-f8c2-4219-9b2e-8788c6ff3395.png",
+            "url": ""
+          }
+        },
+        "logo_YDNWKf": {
+          "type": "logo",
+          "settings": { "image": "shopify://shop_images/today.png", "url": "" }
+        },
+        "logo_QHpEQq": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/cnn_07dea49e-987a-4fa2-ac87-6229a75f0790.png",
+            "url": ""
+          }
+        }
+      },
+      "block_order": ["logo_GTrNna", "logo_YDNWKf", "logo_QHpEQq"],
+      "custom_css": [],
+      "settings": {
+        "title": "In the news",
+        "heading_position": "middle",
+        "background_color": "",
+        "text_color": "",
+        "autoplay": true,
+        "margin_top": 12,
+        "margin_bottom": 12
+      }
+    }
+  },
+  "order": [
+    "main",
+    "et_about_us_banner_bb9aMt",
+    "et_about_us_steps_XqW7Yz",
+    "et_what_we_do_eDNw8Q",
+    "et_about_us_bottom_banner_dERFqA",
+    "logos_carousel_RiHNqe"
+  ]
+}

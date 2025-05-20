@@ -1,0 +1,99 @@
+{
+  "sections": {
+    "image_with_text_overlay_qKkNbA": {
+      "type": "image-with-text-overlay",
+      "settings": {
+        "image": "shopify://shop_images/Major_League_Baseball_logo_svg_52e912bb-a14d-4de8-b2a9-1a2dc1e7edfd.png",
+        "image_link": "",
+        "height": "fixed",
+        "height_desktop": 200,
+        "height_mobile": 100,
+        "color_overlay_bg": "#ffffff",
+        "overlay_opacity": 80,
+        "color_overlay_text": "#333333",
+        "text_alignment": "center",
+        "overlay_position_x": 50,
+        "overlay_position_y": 70,
+        "mobile_text_below": false,
+        "overlay_title": "",
+        "enlarge_title": false,
+        "overlay_title_width": 100,
+        "styled_words": "",
+        "words_style": "stencil",
+        "highlight_words_top": 10,
+        "highlight_color": "#ffffff",
+        "styled_word_color": "#b5e0fa",
+        "overlay_text": "",
+        "enlarge_text": false,
+        "overlay_url_text_1": "",
+        "overlay_url_1": "",
+        "overlay_url_text_2": "",
+        "overlay_url_2": "",
+        "overlay_url_style": "button_1",
+        "color_label_background": "#ffffff",
+        "color_label_text": "#333333",
+        "show_chevron": true,
+        "product_id_1": "",
+        "chevron_position_1": "right",
+        "label_position_x_1": 20,
+        "label_position_y_1": 30,
+        "product_id_2": "",
+        "chevron_position_2": "right",
+        "label_position_x_2": 80,
+        "label_position_y_2": 50
+      }
+    },
+    "main": {
+      "type": "main-collection",
+      "disabled": true,
+      "settings": {
+        "enable_feature_header": false,
+        "grid": 3,
+        "grid_mobile": "2",
+        "pagination_limit": 15,
+        "show_total": true,
+        "show_vendor": false,
+        "show_filters": true,
+        "show_filter_prod_counts": false,
+        "show_sort_by": true,
+        "show_featured": false
+      }
+    },
+    "1728113856f77454f1": {
+      "type": "apps",
+      "blocks": {
+        "searchanise_search_filter_app_block_cUGVKQ": {
+          "type": "shopify://apps/searchanise-search-filter/blocks/app-block/d8f24ada-02b1-458a-bbeb-5bf16d5c921e",
+          "settings": {}
+        }
+      },
+      "block_order": ["searchanise_search_filter_app_block_cUGVKQ"],
+      "custom_css": [".large-section {padding-top: 1rem;}"],
+      "settings": {}
+    },
+    "video_th9daN": {
+      "type": "video",
+      "settings": {
+        "heading": "How to Install Your Fathead!",
+        "video_external": "https://www.youtube.com/watch?v=NuMZbRjWOVw&ab_channel=Fathead",
+        "image": "shopify://shop_images/Screenshot_2024-03-20_141828.png",
+        "color_overlay_bg": "#ffffff",
+        "overlay_opacity": 80,
+        "color_overlay_text": "#333333",
+        "overlay_title": "",
+        "overlay_text": "",
+        "enlarge_title": false,
+        "enlarge_text": false,
+        "overlay_position_x": 50,
+        "overlay_position_y": 70,
+        "mobile_text_below": false
+      }
+    }
+  },
+  "order": [
+    "image_with_text_overlay_qKkNbA",
+    "main",
+    "1728113856f77454f1",
+    "video_th9daN"
+  ]
+}

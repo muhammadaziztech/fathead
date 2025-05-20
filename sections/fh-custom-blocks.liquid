@@ -1,0 +1,293 @@
+{% style %}
+
+{% if section.settings.section_top_margin %}
+#shopify-section-{{ section.id }} {
+   margin-top: 30px;
+}
+{% endif %}
+{% if section.settings.section_bottom_margin %}
+#shopify-section-{{ section.id }} {
+   margin-bottom: 30px;
+}
+{% endif %}
+
+.block-box{
+   margin: 10px 8px;
+   background: #fff;
+   padding-bottom: 10px;
+   box-shadow: 0 0 15px #00000026;
+}
+.custom-block{
+   border:unset;
+   border-radius:unset;
+}
+.custom-block .block-box .product-block__title a p{
+   margin:0;
+}
+#shopify-section-{{ section.id }} .product-block__title span {
+  font-family: Roboto, sans-serif;
+  display: block;
+}
+#shopify-section-{{ section.id }} .product-block__title span.line_one {
+  font-size: 14px;
+  font-weight: 500;
+}
+#shopify-section-{{ section.id }} .product-block__title span.line_two {
+  font-size: 20px;
+  font-weight: 600;
+}
+#shopify-section-{{ section.id }} .product-block__title span.line_three {
+  font-size: 20px;
+  font-weight: 400;
+  margin: 10px 0;
+}
+#shopify-section-{{ section.id }} .block-box {
+  height: 100%;
+  padding-bottom: 0;
+}
+@media (max-width: 767px){
+  #shopify-section-{{ section.id }} .custom-block{
+    margin-bottom: 1rem;
+  }
+ #shopify-section-{{ section.id }}  .custom-wrap--mob{
+    padding-left:15px;
+    padding-right:15px;
+  }
+ #shopify-section-{{ section.id }} .block-box{
+    margin:5px;
+  }
+  #shopify-section-{{ section.id }} .title-wrap{
+    margin-top:10px;
+  }
+}
+  {% if section.settings.enable_carousel %}
+    #shopify-section-{{ section.id }} .featured-collection .grid-flex .slick-track .product-block{
+      border: unset !important;
+      box-shadow: unset;
+    }
+  {% endif %}
+{% endstyle %}
+{%- liquid
+  if section.settings.enable_carousel == true
+    assign show_carousel_nav = true
+
+    if section.settings.product_list != blank and section.settings.product_list.size <= section.settings.grid
+      assign show_carousel_nav = false
+    endif
+  else
+    assign show_carousel_nav = false
+  endif
+-%}
+
+<div
+  class="relative product--list container large-row featured-collection"
+  data-section-id="{{ section.id }}"
+  data-section-type="featured-collection">
+  <div class="page-width">
+    {%- if section.settings.title != blank or section.settings.link_text != blank or section.settings.enable_carousel == true -%}
+      <div data-cc-animate>
+        <div class="text-center">
+          {% if section.settings.title != blank %}
+            <h2 class="featured-collection--title {% if section.settings.enlarge_title %}giant-title{% else %}large-title{% endif %}">{{ section.settings.title | escape }}</h2>
+          {% endif %}
+
+          {% if section.settings.link_text != blank %}
+            <a class="standard-link" href="{{ section.settings.link_url }}">{{ section.settings.link_text | escape }}</a>
+          {% endif %}
+        </div>
+      </div>
+    {% endif %}
+
+    <div class="product-carousel-peek custom-wrap--mob">
+      {%- if show_carousel_nav -%}
+        <div class="featured-collection-controls featured-collection-controls--prev">
+          <button class="btn--plain prev icon feather-icon" aria-label="{{ 'general.accessibility_labels.previous' | t | escape }}">{% render 'custom-slide-arrow-left' %}</button>
+        </div>
+      {%- endif -%}
+
+    <div
+        class="grid-flex"
+        {%- if section.settings.enable_carousel == true -%}
+        data-carousel-enabled
+        data-slides-per-row="{{ section.settings.grid }}"
+        {%- endif -%}>
+        {%- assign grid_class = 'one-quarter' -%}
+        {%- if section.settings.grid == 2 -%}
+          {%- assign grid_class = 'one-half' -%}
+        {%- elsif section.settings.grid == 3 -%}
+          {%- assign grid_class = 'one-third' -%}
+        {%- elsif section.settings.grid == 5 -%}
+          {%- assign grid_class = 'one-fifth' -%}
+        {%- endif -%}
+
+        {%- if section.settings.grid_mobile == "2" -%}
+          {%- assign mobile_grid_class = 'small-down--one-half' -%}
+        {%- else -%}
+          {%- assign mobile_grid_class = 'small-down--one-whole' -%}
+        {%- endif -%}
+        {% capture grid_class_list %}{{ grid_class }} {{ mobile_grid_class }} grid-flex__item{% endcapture %}
+        {% for block in section.blocks %}
+            <div class="featured-collection--product custom-block product-block relative grid-flex__item {{ grid_class_list }}">
+              <div class="block-box">
+                <div class="product-block__image-container">
+                  {% if block.settings.fh_block_img !=blank %}
+                    <a href="{{ block.settings.fh_block_link }}" style="text-decoration:unset;">
+                      <div class="image-one">
+                        {% liquid
+                          if settings.product_grid_image_shape == 'natural'
+                            assign aspect_ratio = false
+                          elsif settings.product_grid_image_shape == 'square'
+                            assign aspect_ratio = 1.0
+                          elsif settings.product_grid_image_shape == 'landscape-32'
+                            assign aspect_ratio = 1.5
+                          elsif settings.product_grid_image_shape == 'landscape-54'
+                            assign aspect_ratio = 1.25
+                          elsif settings.product_grid_image_shape == 'portrait-45'
+                            assign aspect_ratio = 0.8
+                          elsif settings.product_grid_image_shape == 'portrait-23'
+                            assign aspect_ratio = 0.67
+                          endif
+                        %}
+                        {% render 'responsive-image', image: block.settings.fh_block_img, aspect_ratio: aspect_ratio %}
+                      </div>
+                    </a>
+                  {% endif %}
+                </div>
+                {% assign line_one = '' %}
+                {% assign line_two = '' %}
+                {% assign line_three = '' %}
+                {% assign splitted_text = block.settings.fh_block_txt | split: ' - ' %}
+
+              {% if splitted_text.size > 1 %}
+                {% assign line_one = splitted_text[0] %}
+                {% assign line_two = splitted_text[1] %}
+                {% if splitted_text.size > 2 %}
+                  {% assign line_three = splitted_text[2] %}
+                {% endif %}
+              {% else %}
+                {% assign line_one = block.settings.fh_block_txt %}
+              {% endif %}
+              <div class="product-block__title title-wrap">
+                <span class="line_one">{{ line_one }}</span>
+                <span class="line_two">{{ line_two }}</span>
+                <span class="line_three">{{ line_three }}</span>
+              </div>
+            </div>
+            </div>
+        {% endfor %}
+      </div>
+
+      {%- if show_carousel_nav -%}
+        <div class="featured-collection-controls featured-collection-controls--next">
+          <button class="btn--plain next icon feather-icon" aria-label="{{ 'general.accessibility_labels.previous' | t | escape }}">{% render 'custom-slide-arrow-right' %}</button>
+        </div>
+        {% render 'peek-carousel-advice' %}
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "FH - Custom Blocks",
+    "tag": "section",
+    "class": "section-product-list",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "section_top_margin",
+        "label": "Add section top margin",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "section_bottom_margin",
+        "label": "Add section bottom margin",
+        "default": false
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading"
+      },
+      {
+        "type": "checkbox",
+        "id": "enlarge_title",
+        "label": "Enlarge heading",
+        "default": false
+      }, {
+        "type": "text",
+        "id": "link_text",
+        "label": "Link text"
+      }, {
+        "type": "url",
+        "id": "link_url",
+        "label": "Link URL"
+      }, {
+        "type": "checkbox",
+        "id": "show_vendor",
+        "label": "Show vendor",
+        "default": false
+      }, {
+        "type": "checkbox",
+        "id": "enable_carousel",
+        "label": "Enable carousel",
+        "default": false
+      }, {
+        "type": "range",
+        "id": "grid",
+        "label": "Desktop products per row",
+        "min": 2,
+        "max": 5,
+        "step": 1,
+        "default": 4
+      }, {
+        "type": "select",
+        "id": "grid_mobile",
+        "label": "Mobile products per row",
+        "options": [
+          {
+            "value": "1",
+            "label": "1"
+          }, {
+            "value": "2",
+            "label": "2"
+          }
+        ],
+        "default": "2"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "block",
+        "name": "Block",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "fh_block_img",
+            "label": "Image"
+          },
+          {
+            "type": "text",
+            "id": "fh_block_txt",
+            "label": "Text"
+          },
+          {
+            "type": "url",
+            "id": "fh_block_link",
+            "label": "Link"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "FH - Custom Blocks"
+      }
+    ],
+    "disabled_on": {
+      "templates": ["password"],
+      "groups": ["aside"]
+    }
+  }
+{% endschema %}

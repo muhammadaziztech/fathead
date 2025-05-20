@@ -1,0 +1,260 @@
+<style>
+  .breadcrumbs-container {
+    display:none;
+  }
+  .cb-main {
+    {% if section.settings.cb-featured-img !=blank %}
+    background-image: url('{{ section.settings.cb-featured-img |img_url: 'master' }}');
+    {% endif %}
+    width:100%;
+    position:relative;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+  }
+  .control-img {
+    position:absolute;
+  }
+  .cb-left-character-img {
+    height:100%;
+    left:0;
+    max-width:100%;
+  }
+  .cb-right-rip-img {
+    bottom:-7px;
+    right:0;
+    max-width:32%;
+  }
+  .cb-left-character-img img {
+    height:100%;
+    object-fit:cover;
+  }
+  .cb-center-logo {
+    top:50%;
+    left:50%;
+    max-width: 180px;
+    transform: translate(-50%, -50%);
+  }
+  .cb-right-logo {
+    top: 50%;
+    right: 5%;
+    max-width: 188px;
+    transform: translateY(-50%);
+  }
+  .cb-right-logo img{
+    vertical-align: middle;
+  }
+  .mob-character {
+    display:none;
+  }
+  @media(max-width: 1080px) {
+    .cb-center-logo {
+      left: 65%;
+      max-width:140px;
+    }
+    .cb-right-logo{
+      max-width:150px;
+    }
+  }
+  .banner_{{ section.id }} .cb-right-rip-img img{
+      max-height: {{section.settings.banner_height_desktop | minus:5}}px;
+    }
+  @media(min-width:810px) {
+    .banner_{{ section.id }} .cb-main{
+      height:{{section.settings.banner_height_desktop}}px;
+    }
+  }
+  @media(max-width:810px) {
+    .cb-right-logo{
+      transform:unset;
+    }
+    .banner_{{ section.id }} .cb-main{
+      height:{{section.settings.banner_height_mobile}}px;
+    }
+    .cb-logos{
+      display: flex;
+      align-items: center;
+      position: relative;
+      justify-content: center;
+      gap: 50px;  
+    }
+    .cb-logos-wrapper{
+      position:absolute;
+      bottom:20px;
+      width:100%;
+    }
+    .cb-center-logo,
+    .cb-right-logo{
+      position:unset;
+    }
+    .cb-center-logo{
+      max-width: 110px;
+      transform:none;
+    }
+    .cb-right-logo{
+      max-width: 120px;
+    }
+    .des-character{
+      display:none;
+    }
+    .mob-character{
+      display:block;
+    }
+    .cb-right-rip-img{
+      max-width:45%;
+    }
+  }
+  {% if section.settings.section_top_margin %}
+    #shopify-section-{{ section.id }} {
+     margin-top: 30px;
+    }
+  {% endif %}
+  {% if section.settings.section_bottom_margin %}
+    #shopify-section-{{ section.id }} {
+      margin-bottom: 30px;
+    }
+  {% endif %}
+</style>
+  
+<div class="custom-banner banner_{{ section.id }}">
+  <div class="cb-main">
+    {% if section.settings.cb-left-character-img !=blank %}
+      <div class="cb-left-character-img control-img des-character">
+        <img 
+          src="{{ section.settings.cb-left-character-img |img_url: 'master' }}" 
+          alt="{{ section.settings.cb-left-character-img.alt }}"
+          {% if section.settings.cb-left-character-img contains 'svg' %}
+            width="100%"
+          {% endif %}
+          height="{{ section.settings.image.height }}"
+          >
+      </div>
+    {% endif %}
+      
+    {% if section.settings.cb-left-character-img-mob !=blank %}
+      <div class="cb-left-character-img control-img mob-character">
+        <img src="{{ section.settings.cb-left-character-img-mob |img_url: 'master' }}" 
+          alt="{{ section.settings.cb-left-character-img-mob.alt }}"
+          height="{{ section.settings.image.height }}"
+          {% if section.settings.cb-left-character-img-mob contains 'svg' %}
+            width="100%"
+          {% endif %}
+          >
+      </div>
+    {% endif %}
+
+    {% if section.settings.cb-right-rip-img !=blank %}
+      <div class="cb-right-rip-img control-img">
+        <img 
+          src="{{ section.settings.cb-right-rip-img |img_url: 'master' }}" 
+          alt="{{ section.settings.cb-right-rip-img.alt }}"
+          height="{{ section.settings.image.height }}"
+          {% if section.settings.cb-right-rip-img contains 'svg' %}
+            width="100%"
+          {% endif %}
+          >
+      </div>
+    {% endif %}
+    <div class="cb-logos-wrapper">
+      <div class="cb-logos">
+        {% if section.settings.cb-center-logo !=blank %}
+          <div class="cb-center-logo control-img">
+            <img 
+              src="{{ section.settings.cb-center-logo |img_url: 'master' }}" 
+              alt="{{ section.settings.cb-center-logo.alt }}"
+              height="{{ section.settings.image.height }}"
+              {% if section.settings.cb-center-logo contains 'svg' %}
+              width="100%"
+              {% endif %}
+              >
+          </div>
+        {% endif %}
+        {% if section.settings.cb-right-logo !=blank %}
+          <div class="cb-right-logo control-img">
+            <img 
+              src="{{ section.settings.cb-right-logo |img_url: 'master' }}" 
+              alt="{{ section.settings.cb-right-logo.alt }}"
+              height="{{ section.settings.image.height }}"
+              {% if section.settings.cb-right-logo contains 'svg' %}
+              width="100%"
+              {% endif %}
+              >
+          </div>
+        {% endif %}
+      </div>     
+    </div>
+  </div>
+</div>
+  
+{% schema %}
+  {
+    "name": "FH - Banner",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "section_top_margin",
+        "label": "Add section top margin",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "section_bottom_margin",
+        "label": "Add section bottom margin",
+        "default": false
+      },
+      {
+        "type": "range",
+        "id": "banner_height_desktop",
+        "label": "Banner Height (Dektop)",
+        "max": 700,
+        "min": 200,
+        "step": 10,
+        "unit": "px",
+        "default": 400
+      },
+      {
+        "type": "range",
+        "id": "banner_height_mobile",
+        "label": "Banner Height (Mobile)",
+        "max": 700,
+        "min": 200,
+        "step": 10,
+        "unit": "px",
+        "default": 400
+      },
+      {
+        "type": "image_picker",
+        "id": "cb-featured-img",
+        "label": "Featured Image"
+      },
+      {
+        "type": "image_picker",
+        "id": "cb-left-character-img",
+        "label": "Left Character Image"
+      },
+      {
+        "type": "image_picker",
+        "id": "cb-left-character-img-mob",
+        "label": "Mobile Left Character Image"
+      },
+      {
+        "type": "image_picker",
+        "id": "cb-right-rip-img",
+        "label": "Right Rip"
+      },
+      {
+        "type": "image_picker",
+        "id": "cb-center-logo",
+        "label": "Center Logo"
+      },
+      {
+        "type": "image_picker",
+        "id": "cb-right-logo",
+        "label": "Right Logo"
+      }
+    ],
+    "presets": [
+      {"name": "FH - banner"}
+    ]
+  }
+{% endschema %}

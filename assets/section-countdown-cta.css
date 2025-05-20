@@ -1,0 +1,155 @@
+.section-countdown-cta{
+    overflow: hidden  
+}
+.section-countdown-cta__inner{
+    position: relative;
+}
+.section-countdown-cta .page-width{
+    flex-direction: row;
+    display: flex;
+}
+.section-countdown__media{
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+}
+.section-countdown__media img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+.section-countdown__content {
+    text-align: center;
+    width: 50%;
+    position: relative;
+    padding: 40px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    z-index: 1;
+}
+.countdown__button {
+    margin-top: 2rem;
+}
+.countdown__button .button--halloween{
+    font-size: 1.4rem;
+    border-radius: 8px;
+    padding: 1.6rem 3.5rem;
+    color: #000;
+    background: linear-gradient(153.43deg, rgba(255, 230, 0, 1) 16.33%, rgba(255, 135, 67, 1) 90.72%);
+}
+.countdown__button .button:before,
+.countdown__button .button:after{
+    display: none!important;
+}
+.countdown__timer-container{
+    width: 477px;
+    width:fit-content;
+    max-width: 100%;
+    margin: 0 auto;
+}
+.countdown__timer{
+    font-family: Helvetica, 'Helvetica Neue', Arial, 'Lucida Grande', sans-serif;
+    padding: 1.5rem 3rem;
+    border-radius: 100px;
+    display: flex;
+    color: #fff;
+    opacity: 0;
+}
+.countdown__timer.is-initialized{
+    opacity: 1;
+}
+.countdown-timer__item > span:not(.counter-timer__text){
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    line-height: 1;
+    background: #E4723B;
+    border-radius: 4px;
+    width: 2rem;
+    height: 2rem;
+}
+.countdown-timer__item .counter-timer__text{
+    display: block;
+    line-height: 1;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #FFE203;
+    font-weight: 700;
+    margin-top: 0.8rem;
+    font-size: 0.6rem;
+}
+.countdown-timer__sep{
+    font-size: 1.5rem;
+    padding: 0 1rem
+}
+.countdown__description {
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #fff;
+    letter-spacing: 0.08em;
+    line-height: 1.2;
+}
+.section-countdown__foreground-image{
+    width: 50%;
+    position: relative;
+}
+.countdown__foreground-media{
+    position: absolute;
+    top: -40px;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    text-align: right;
+}
+.countdown__foreground-media img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: bottom right;
+}
+@media only screen and (max-width: 1040px) {
+    .section-countdown__content{
+        width: 100%;
+        margin: 0 auto;
+        max-width: 650px;
+    }
+    .section-countdown__foreground-image{
+        position: absolute;
+        right: 0;
+        transform: translateX(35%);
+        top: -40px;
+        bottom: 0PX;
+    }
+}
+@media only screen and (max-width: 749px) {
+    .section-countdown__foreground-image{
+        display: none;
+    }
+    .countdown__timer {
+        padding: 1.5rem;
+    }
+    .countdown-timer__item > span:not(.counter-timer__text){
+        width: 2rem;
+        height: 2rem;
+        font-size: 1rem;
+    }
+    .countdown-timer__sep{
+        font-size: 1rem;
+    }
+    .section-countdown__content{
+        padding: 0;
+    }
+    .section-countdown__media img{
+        object-position: center center;
+    }
+}
+
+@media only screen and (min-width: 750px) {
+    .countdown__button .button--halloween{
+        padding: 1.3rem 6rem;
+    }
+}

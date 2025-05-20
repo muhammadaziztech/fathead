@@ -1,0 +1,43 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": { "show_title": false, "title_alignment": "left" }
+    },
+    "17282972532072460f": {
+      "type": "apps",
+      "blocks": {
+        "okendo_reviews_carousel_hyjGg8": {
+          "type": "shopify://apps/okendo/blocks/reviews-carousel/bb689e69-ea70-4661-8fb7-ad24a2e23c29",
+          "settings": {
+            "show_heading": true,
+            "heading": "FATHEAD REVIEWS",
+            "badge_link": "",
+            "product": ""
+          }
+        }
+      },
+      "block_order": ["okendo_reviews_carousel_hyjGg8"],
+      "custom_css": [
+        ".container.large-section {padding-top: 10px; padding-bottom: 0;}"
+      ],
+      "settings": {}
+    },
+    "172829729597cd84f9": {
+      "type": "apps",
+      "blocks": {
+        "okendo_reviews_widget_9fyBBd": {
+          "type": "shopify://apps/okendo/blocks/reviews-widget/bb689e69-ea70-4661-8fb7-ad24a2e23c29",
+          "settings": { "product": "", "widget_type": "reviews_widget" }
+        }
+      },
+      "block_order": ["okendo_reviews_widget_9fyBBd"],
+      "custom_css": [
+        ".container.large-section {padding-top: 10px; padding-bottom: 0;}"
+      ],
+      "settings": {}
+    }
+  },
+  "order": ["main", "17282972532072460f", "172829729597cd84f9"]
+}

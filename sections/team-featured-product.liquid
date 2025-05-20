@@ -1,0 +1,606 @@
+{% style %}
+  .breadcrumbs-container{
+    display:none;
+  }
+  .custom__{{ section.id }} .custom-product-wrapper{
+    display:flex;
+    flex-wrap:wrap;
+  }
+  .custom__{{ section.id }} .cfp-btn-wrap{
+    border-radius:5px;
+    padding: 10px 25px 10px 3px;
+  }
+  .cfp-btn-wrap:hover::after{
+    transform: translateX(6px);
+  }
+  .custom__{{ section.id }} .cfp-btn-wrap::after {
+    content: '➜';
+    font-size: 18px;
+    transition: transform 0.3s ease;
+    position:absolute;
+    margin-left:5px;
+  }
+  .custom__{{ section.id }} .custom-block-bottom{
+    padding-top:10px;
+  }
+  .custom__{{ section.id }} .custom-product-block{
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+    background-position: bottom, left;
+    position:relative;
+    width:50%;
+    min-height: 50vh;
+    display:flex;
+    align-items:center;
+  }
+  .custom__{{ section.id }} .c_2-title{
+    font-size: 34px;
+    text-transform: uppercase;
+    line-height:.8;
+  }
+  .custom__{{ section.id }} .product-block__title .c_3-title{
+    font-size:19px;
+    font-family: sans-serif !important;
+  }
+  .custom__{{ section.id }} .product-block__title .c_1-title{
+    text-transform:uppercase;
+    font-family: sans-serif !important;
+    font-size:22px
+  }
+  .custom__{{ section.id }} .cfp-label{
+    font-size:20px;
+    max-width: max-content;
+    padding: 4px 30px;
+    transform:translateX(-30px);
+    margin-bottom: 25px;
+  }
+  .custom__{{ section.id }} .cfp-track-wrapper{
+    width:55%;
+    padding: 50px 0px 45px 30px;
+  }
+  .custom__{{ section.id }} .cfp-image{
+    width: 45%;
+    max-width: 100%;
+    padding: 0px 20px;
+    display: flex;
+    height:100%;
+  }
+  .custom__{{ section.id }} .cfp-image img{
+    max-height: -webkit-fill-available;
+    object-fit: contain;
+  }
+  .team-text p{
+    margin-top:5px;
+    line-height:1.2;
+    font-size:18px;
+  }
+  .custom__{{ section.id }} .slick-dots{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    bottom:3px;
+  }
+  .custom__{{ section.id }} .slick-dots button{
+    border:unset !important;
+    background:unset !important;
+  }
+  .custom__{{ section.id }} .slick-dots li button:before{
+    font-size:10px;
+    color:#fff;
+    opacity:1;
+  }
+  .custom__{{ section.id }} .slick-dots li.slick-active button:before{
+    color:#000;
+  }
+  .custom__{{ section.id }} .team-video-wrapper{
+    position:absolute;
+    top:0;
+    height:100%;
+    width:100%;
+    z-index:1;
+  }
+  .custom__{{ section.id }} .team-video-wrapper .team-video{
+    max-width:100%;
+    width:100%;  
+    object-fit:cover;
+    pointer-events:none;
+  }
+    @media(min-width:1451px){
+    .custom__{{ section.id }} .custom-product-block{
+      min-height:{{section.settings.large_desktop}}px;
+      max-height:{{section.settings.large_desktop}}px;
+    }
+    }
+    @media(max-width:1450px){
+    .custom__{{ section.id }} .custom-product-block{
+      min-height:{{section.settings.desktop}}px;
+      max-height:{{section.settings.desktop}}px;
+    }
+    }
+    @media(max-width:1150px){
+    .custom__{{ section.id }} .custom-product-block{
+      min-height:{{section.settings.small_desktop}}px;
+      max-height:{{section.settings.small_desktop}}px;
+    }
+    }
+    @media(min-width:1024px){
+    .custom__{{ section.id }} .br-wrap{
+      width:78%;
+    }
+    }
+    @media(max-width:1024px){
+    .custom__{{ section.id }} .c_2-title{
+      font-size: 32px;
+      text-transform: uppercase;
+    }
+    @media(max-width:940px){
+    .custom__{{ section.id }} .cfp-track-wrapper{
+      padding-left:20px !important;
+    }
+    .custom__{{ section.id }} .cfp-label{
+      transform:translateX(-20px) !important;
+    }
+    }
+    .custom__{{ section.id }} .product-block__title .c_3-title{
+      font-size:17px;
+      font-family: sans-serif !important;
+    }
+    .custom__{{ section.id }} .product-block__title .c_1-title{
+      text-transform:uppercase;
+      font-family: sans-serif !important;
+      font-size:20px
+    }
+    }
+    @media(min-width:800px){
+    .team-text{
+      max-width:80%;
+    }
+    .custom__{{ section.id }} h4.team-product-price {
+      font-weight: bold;
+      font-size: 30px;
+    }
+       .custom__{{ section.id }} .cfp-image img{
+    max-height: -webkit-fill-available;
+    object-fit: contain;
+    height: inherit;
+    }
+    }
+    @media(max-width:821px){
+    .custom__{{ section.id }} .custom-product-block{
+      min-height:{{section.settings.tablet}}px;
+      max-height:{{section.settings.tablet}}px;
+    }
+    .custom__{{ section.id }} .cfp-image{
+      height:{{section.settings.tablet}}px;
+    }
+    }
+    @media(max-width:768px){
+    .custom__{{ section.id }} .c_2-title{
+      font-size:38px;
+    }
+    .custom__{{ section.id }} .slick-dotted.slick-slider{
+      margin-bottom:0 !important;
+    }
+    }
+    @media(max-width:550px){
+    .custom__{{ section.id }} .custom-product-block{
+      min-height:{{section.settings.mobile}}px;
+      max-height:{{section.settings.mobile}}px;
+    }
+    .custom__{{ section.id }} .c_2-title{
+      font-size:30px;
+    }
+    .custom__{{ section.id }} .product-block__title .c_3-title{
+      font-size:14px;
+    }
+    .team-text p {
+      font-size: 15px;
+    }
+    .custom__{{ section.id }} .product-block__title .c_1-title{
+      font-size:17px;
+    }
+    .custom__{{ section.id }} .custom-block-bottom{
+      padding-top:0;
+    }
+    .custom__{{ section.id }} .cfp-btn-wrap{
+      font-size:15px;
+    }
+    .custom__{{ section.id }} .cfp-label{
+      transform:translateX(-20px);
+    }
+    .custom__{{ section.id }} .cfp-track-wrapper{
+      width:55%;
+      padding:5px 0 25px 20px;
+    }
+    .custom__{{ section.id }} .cfp-image{
+      width:45%;
+      transform: translateX(15px);
+      height:{{section.settings.mobile}}px;
+    }
+    }
+    .team_1 .c_2-title,
+    .team_1 .team-text{
+      color:#000;
+    }
+    .team_1 .cfp-btn-wrap{
+      background:#000;
+      --button-border-color: #000;
+    }
+    .team_1 .cfp-label{
+      background: #da1e25;
+      color:#fff;
+    }
+    .team_2 .cfp-label{
+      color:#000;
+      background:#fff;
+    }
+    .team_2 .c_2-title,
+    .team_2 .team-text,
+    .team_2 .team-product-price{
+      color:#fff;
+    }
+    .team_2 .cfp-btn-wrap{
+      background:#fff;
+      --button-border-color: #fff;
+      color:#000;
+    }
+    .team_2 .cfp-btn-wrap:hover{
+      color:#000;
+    }
+
+    .team_2 .hidden_content_promo_link {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    }
+
+    {% if section.settings.section_top_margin %}
+      #shopify-section-{{ section.id }} {
+        margin-top: 30px;
+      }
+    {% endif %}
+    {% if section.settings.section_bottom_margin %}
+      #shopify-section-{{ section.id }} {
+        margin-bottom: 30px;
+      }
+    {% endif %}
+
+    @media (max-width: 767px) {
+      #shopify-section-{{ section.id }} .custom-product-block.team_1 .cfp-image {
+        padding: 0 5px;
+      }
+      #shopify-section-{{ section.id }} .custom-product-block.team_1 .cfp-image img {
+        min-height: 70%;
+        object-fit: cover;
+        object-position: left;
+      }
+    }
+    @media (max-width: 415px) {
+      #shopify-section-{{ section.id }} .custom-product-block.team_1 .cfp-track-wrapper {
+        width: 60%;
+      }
+    }
+{% endstyle %}
+
+<div class="cfp-main custom__{{ section.id }}">
+  <div class="custom-product-wrapper">
+    {% for block in section.blocks %}
+      {% assign product = block.settings['custom-product'] %}
+      {% assign team_color = '' %}
+
+      {% for collection in product.collections %}
+        {% if collection.metafields.custom.template_color %}
+          {% assign team_color = collection.metafields.custom.template_color %}
+        {% endif %}
+      {% endfor %}
+
+      {% if block.settings['custom-product'] != blank %}
+        <div
+          class="custom-product-block team_{{ forloop.index }} custom_{{ block.id }}"
+          {% if block.settings.team_fp_video == blank
+            and product.metafields.custom.featured_product_background != blank
+          %}
+            style="background-image:url({{ product.metafields.custom.featured_product_background | img_url: 'original'}}) !important;"
+          {% endif %}
+        >
+          {% if forloop.index == 2 and collection.metafields.custom.link_for_hidden_right_promo != blank %}
+            <a
+              class="hidden_content_promo_link"
+              href="{{ collection.metafields.custom.link_for_hidden_right_promo.value }}"
+            >
+          {% endif %}
+
+          {%- if block.settings.team_fp_video != blank -%}
+            <div class="team-video-wrapper">
+              <video class="team-video" style="height:100%;" autoplay muted loop playsinline>
+                {%- for source in block.settings.team_fp_video.sources -%}
+                  <source src="{{ source.url }}" type="{{ source.mime_type }}">
+                {%- endfor -%}
+              </video>
+            </div>
+          {%- endif -%}
+
+          <div class="cfp-track-wrapper">
+            {% unless forloop.index == 2 and collection.metafields.custom.hide_right_promo_bucket_content == true %}
+              {% if product.metafields.custom.featured_product_badge %}
+                <p
+                  class="cfp-label"
+                  {% if team_color != blank and forloop.index == 1 %}
+                    style="background: {{ team_color }}"
+                  {% endif %}
+                >
+                  {{ product.metafields.custom.featured_product_badge }}
+                </p>
+              {% endif %}
+
+              {% assign prod_t = product.title %}
+
+              {% assign prod_1 = prod_t | split: ' - ' %}
+
+              <div class="product-block__title">
+                <div class="br-wrap">
+                  <span class="c_2-title">{{ prod_1[0] }}</span><br>
+                </div>
+              </div>
+              {% if block.settings['team-fp-txt'] != blank %}
+                <div class="team-text">{{ block.settings['team-fp-txt'] }}</div>
+              {% endif %}
+              <div class="custom-block-bottom">
+                {% if block.settings['cfp-btn'] != blank %}
+                  <a class="btn custom-iwto cfp-btn-wrap" href="{{ product.url }}">
+                    {{- block.settings['cfp-btn'] -}}
+                    <img
+                      class="c-arrow-ban"
+                      src="https://cdn.shopify.com/s/files/1/0279/0234/5304/files/icon-right-arrow-removebg-preview.png?v=1727979155"
+                      style="height:12px; width:14px; margin-left: 11px; display:none;"
+                      width="width"
+                      height="height"
+                  ></a>
+                {% endif %}
+                {% assign from = false %}
+                {% for variant in product.variants %}
+                  {% if forloop.index > 1 %}
+                    {% assign from = true %}
+                  {% endif %}
+                {% endfor %}
+                {% if product.price %}
+                  <h4
+                    class="team-product-price"
+                    style="padding-top:14px;display:flex;align-items:center;column-gap:0.5rem;"
+                  >
+                    {% if from == true -%}
+                      <span style="font-size:16px;font-weight:500;">FROM:</span>
+                    {%- endif -%}
+                    {{- product.price | money }}
+                  </h4>
+                {% endif %}
+              </div>
+            {% endunless %}
+          </div>
+          {% if block.settings['team-fp-img'] != blank %}
+            <div class="cfp-image">
+              <img
+                src="{{ block.settings.team-fp-img | img_url: 'original' }}"
+                height=""
+                width=""
+                alt="{{ block.settings.team-fp-img.alt }}"
+              >
+            </div>
+          {% endif %}
+          {% assign low_meta = product.metafields.custom.featured_product_right_image_alignment | downcase %}
+          {% style %}
+            @media(min-width:520px){
+            .custom_{{ block.id }} .cfp-image{
+             align-items:
+            {% if low_meta contains 'bottom' %}
+              flex-end;
+            {% elsif low_meta contains 'top' %}
+              flex-start;
+            {% else %}
+              center;
+            {% endif %}
+            }
+              .custom_{{ block.id }} .cfp-image img{
+                object-position:
+                {% if low_meta contains 'bottom' %}
+                  bottom;
+                {% elsif low_meta contains 'top' %}
+                  top;
+                {% else %}
+                  center;
+                {% endif %}
+              }
+            }
+            @media(max-width:520px){
+              .custom_{{ block.id }} .cfp-image{
+             align-items:
+            {% if low_meta contains 'bottom' %}
+              flex-end;
+            {% elsif low_meta contains 'top' %}
+              flex-start;
+            {% else %}
+              center;
+            {% endif %}
+            position:absolute;
+            right:0;
+            }
+              .custom_{{ block.id }} .cfp-image img{
+                object-position:
+                {% if low_meta contains 'bottom' %}
+                  bottom;
+                {% elsif low_meta contains 'top' %}
+                  top;
+                {% else %}
+                  center;
+                {% endif %}
+              }
+            }
+            {% if block.settings.team_fp_video %}
+             .custom_{{ block.id }} .cfp-track-wrapper{
+                display:none;
+              }
+            {% endif %}
+          {% endstyle %}
+          {% if forloop.index == 2 and collection.metafields.custom.link_for_hidden_right_promo != blank %}
+            </a>
+          {% endif %}
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+</div>
+
+<script>
+  $(document).ready(function () {
+    function initMobileSlider() {
+      if ($(window).width() <= 821) {
+        if (!$('.custom__{{ section.id }}').hasClass('slick-initialized')) {
+          $('.custom__{{ section.id }} .custom-product-wrapper').slick({
+            infinite: true,
+            slidesToShow: 1,
+            autoplay: false,
+            autoplaySpeed: 2000,
+            arrows: false,
+            dots: true,
+            responsive: [
+              {
+                breakpoint: 821,
+                settings: {
+                  slidesToShow: 1,
+                  slidesToScroll: 1
+                }
+              },
+              {
+                breakpoint: 425,
+                settings: {
+                  slidesToShow: 1,
+                  slidesToScroll: 1
+                }
+              }
+            ]
+          });
+        }
+      }
+      else {
+        if ($('.custom__{{ section.id }}').hasClass('slick-initialized')) {
+          $('.custom__{{ section.id }}').slick('unslick');
+        }
+      }
+    }
+
+    initMobileSlider();
+    // $(window).on('resize', initMobileSlider);
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Team Featured Product",
+  "class": "shopify-section--team-featured-product",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "section_top_margin",
+      "label": "Add section top margin",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "section_bottom_margin",
+      "label": "Add section bottom margin",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Section Height"
+    },
+    {
+      "type": "range",
+      "id": "large_desktop",
+      "label": "Larger Desktop",
+      "max": 800,
+      "min": 200,
+      "step": 10,
+      "unit": "px",
+      "default": 500
+    },
+    {
+      "type": "range",
+      "id": "desktop",
+      "label": "Desktop",
+      "max": 800,
+      "min": 200,
+      "step": 10,
+      "unit": "px",
+      "default": 400
+    },
+     {
+      "type": "range",
+      "id": "small_desktop",
+      "label": "Smaller Desktop",
+      "max": 800,
+      "min": 200,
+      "step": 10,
+      "unit": "px",
+      "default": 400
+    },
+    {
+      "type": "range",
+      "id": "tablet",
+      "label": "Tablet",
+      "max": 800,
+      "min": 200,
+      "step": 10,
+      "unit": "px",
+      "default": 390
+    },
+    {
+      "type": "range",
+      "id": "mobile",
+      "label": "Mobile",
+      "max": 800,
+      "min": 200,
+      "step": 10,
+      "unit": "px",
+      "default": 350
+    }
+  ],
+  "blocks": [
+    {
+      "type": "block",
+      "name": "Product",
+      "limit": 2,
+      "settings": [
+       {
+         "type": "product",
+         "id": "custom-product",
+         "label": "Product"
+       },
+        {
+          "type": "richtext",
+          "id": "team-fp-txt",
+          "label": "Text"
+        },
+        {
+          "type": "text",
+          "id": "cfp-btn",
+          "label": "Button"
+        },
+        {
+          "type": "image_picker",
+          "id": "team-fp-img",
+          "label": "Image"
+        },
+         {
+          "type": "video",
+          "id": "team_fp_video",
+          "label": "Video"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {"name": "team-featured-product"}
+  ]
+}
+{% endschema %}

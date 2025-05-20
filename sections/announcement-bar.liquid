@@ -1,0 +1,86 @@
+{% unless template contains 'fh-customs' %}
+  {%- if section.settings.home_only_announcement_bar == false or template == 'index' -%}
+    <section class="announcement-bar announcement-bar__content container" style="--text-color: {{ section.settings.announcement_text_col }}; --background: {{ section.settings.announcement_bar_grad | default: section.settings.announcement_bar_col }}">
+      {%- if section.settings.announcement_bar_url != blank -%}
+        <a href="{{ section.settings.announcement_bar_url }}" class="announcement-bar__link">
+      {%- endif -%}
+      <span>
+        {{ section.settings.announcement_bar_text }}
+        {%- if section.settings.announcement_bar_url != blank -%}
+          {% render 'icon-arrow' %}
+        {%- endif -%}
+      </span>
+      {%- if section.settings.announcement_bar_url != blank -%}
+        </a>
+      {%- endif -%}
+    </section>
+  {%- endif -%}
+  {% style %}
+  .announcement-bar__link {
+    text-decoration: none;
+  }
+  .announcement-bar__link:hover {
+    color: {{ section.settings.announcement_text_col }};
+  }
+  @media(max-width:500px){
+  .announcement-bar__link span{
+    font-size:15px !important;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:5px;
+  }
+  .announcement-bar__link svg{
+    margin-top:-6px;
+  }
+  }
+  {% endstyle %}
+  {% endunless %}
+  
+  {% schema %}
+    {
+      "name": "Announcement bar",
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "home_only_announcement_bar",
+          "label": "Show only on the home page",
+          "default": false
+        },
+        {
+           "type": "inline_richtext",
+           "id": "announcement_bar_text",
+           "label": "Text",
+           "default": "Add notices for your shoppers here"
+        },
+        {
+          "type": "url",
+          "id": "announcement_bar_url",
+          "label": "Link"
+        },
+        {
+          "type": "header",
+          "content": "Colors"
+        },
+        {
+          "type": "color",
+          "id": "announcement_bar_col",
+          "label": "Bar",
+          "default": "#43467f"
+        },
+        {
+          "type": "color_background",
+          "id": "announcement_bar_grad",
+          "label": "Bar gradient",
+          "info": "If set, replaces bar color"
+        },
+        {
+          "type": "color",
+          "id": "announcement_text_col",
+          "label": "Text",
+          "default": "#ffffff"
+        }
+      ]
+    }
+  {% endschema %}
+  

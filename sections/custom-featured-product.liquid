@@ -1,0 +1,271 @@
+{% style %}
+.custom__{{ section.id }} .custom-product-wrapper{
+  display:flex;
+  flex-wrap:wrap;
+  margin-bottom:0;
+}
+.custom__{{ section.id }} .cfp-btn-wrap{
+  color:{{section.settings.btn-color}};
+  background:{{section.settings.btn-background}};
+  border-radius:unset;
+  margin-top:18px;
+  --button-border-color:{{section.settings.btn-background}};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+.custom__{{ section.id }} .cfp-btn-wrap:hover{
+  color:{{section.settings.btn-color}};
+}
+.custom__{{ section.id }} .cfp-image{
+  max-width:60px;
+}
+.custom__{{ section.id }} .custom-block-bottom{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top:20px;
+  padding-right:35px;
+}
+.custom__{{ section.id }} .custom-product-block{
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+  position: relative;
+  background-position: center;
+  padding:70px 30px 60px 30px;
+  width:50%;
+}
+.custom__{{ section.id }} .logo-display{
+  display:flex;
+  justify-content:space-between;
+}
+.custom__{{ section.id }} .product-block__title .c_2-title{
+  font-size: 35px;
+  text-transform: uppercase;
+  line-height:1;
+  font-family: Inter, sans-serif !important;
+  font-weight:600;
+}
+.custom__{{ section.id }} .product-block__title .c_3-title{
+  font-size:16px;
+}
+.custom__{{ section.id }} .product-block__title .c_1-title{
+  text-transform:uppercase;
+  font-size: 18px;
+}
+.custom__{{ section.id }} .cfp-label{
+  font-size:20px;
+  max-width: max-content;
+  color: #fff;
+  background: #6c6c6c;
+  padding: 3px 10px;
+  margin-bottom:20px;
+}
+.custom__{{ section.id }} .slick-dots{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  bottom:0px;
+}
+.custom__{{ section.id }} .slick-dots button{
+  border:unset !important;
+  background:unset !important;
+}
+.custom__{{ section.id }} .slick-dots li button:before{
+  font-size:10px;
+  color:#00000036;
+  opacity:1;
+}
+.custom__{{ section.id }} .slick-dots li.slick-active button:before{
+  color:#000;
+}
+  
+@media(min-width:1024px){
+.custom__{{ section.id }} .br-wrap{
+  width:78%;
+}
+}
+@media(max-width:1024px){
+.custom__{{ section.id }} .product-block__title .c_2-title{
+  font-size: 35px;
+}
+.custom__{{ section.id }} .product-block__title .c_1-title{
+  font-size:20px;
+}
+}
+@media(max-width:940px){
+.custom__{{ section.id }} .custom-product-block{
+  padding-left:20px !important;
+  padding-right:20px !important;
+}
+}
+@media(min-width:768px){
+.custom__{{ section.id }} .logo-display{
+  padding-right:35px;
+}
+}
+@media(max-width:768px){
+.custom__{{ section.id }} .custom-product-block{
+  width:100%;
+  padding:10px 30px 0px 20px;
+  min-height: 330px;
+}
+.custom__{{ section.id }} .cfp-image{
+  bottom:5%;
+  right:20px;
+}
+.custom__{{ section.id }} .custom-block-bottom{
+  position: absolute;
+  width: 100%;
+  bottom: 20px;
+  padding-right:60px;
+}
+.cfp-main{
+  overflow-x:hidden;
+}
+.custom__{{ section.id }} .product-block__title .c_2-title{
+  font-size: 32px;
+}
+.custom__{{ section.id }} .product-block__title .c_1-title{
+  font-size:18px;
+}
+}
+
+{% if section.settings.section_top_margin %}
+  #shopify-section-{{ section.id }} {
+    margin-top: 30px;
+  }
+{% endif %}
+{% if section.settings.section_bottom_margin %}
+  #shopify-section-{{ section.id }} {
+    margin-bottom: 30px;
+  }
+{% endif %}
+{% endstyle %}
+
+<div class="cfp-main custom__{{ section.id }}">
+  <div class="custom-product-wrapper">
+    {% for block in section.blocks %}
+      {% assign product = block.settings['custom-product'] %}
+      {% if block.settings['custom-product'] != blank %}
+        <div
+          class="custom-product-block"
+          {% if product.metafields.custom.featured_product_background != blank %}
+            style="background-image:url({{ product.metafields.custom.featured_product_background | img_url: 'original'}}) !important;"
+          {% endif %}
+        >
+          <div class="cfp-track-wrapper">
+            <div class="logo-display">
+              {% if product.metafields.custom.featured_product_badge %}
+                <p class="cfp-label">{{ product.metafields.custom.featured_product_badge }}</p>
+              {% endif %}
+              {% if product.metafields.custom.featured_product_right_image_alignment contains 'top' %}
+                {% if product.metafields.custom.featured_product_logo %}
+                <img
+                  class="cfp-image lazy"
+                  data-src="{{ product.metafields.custom.featured_product_logo | img_url: 'original' }}"
+                  height=""
+                  width=""
+                  alt="{{ product.metafields.custom.featured_product_logo.alt }}"
+                >
+              {% endif %}
+              {% endif %}
+            </div>
+            {% if product %}
+              {% assign prod_t = product.title %}
+
+              {% assign prod_1 = prod_t | split: ':' %}
+              {% assign prod_2 = prod_1[1] | split: ' - ' %}
+
+              <div class="product-block__title">
+                <span class="c_1-title">{{ prod_1[0] }}</span><br>
+                <div class="br-wrap">
+                  <span class="c_2-title">{{ prod_2[0] }}</span><br>
+                </div>
+                <span class="c_3-title">{{ prod_2[1] }}</span><br>
+              </div>
+            {% endif %}
+
+            <div class="custom-block-bottom">
+              {% if block.settings['cfp-btn'] != blank %}
+                <a class="btn custom-iwto cfp-btn-wrap" href="{{ product.url }}">
+                  {{- block.settings['cfp-btn'] -}}
+                  <img
+                    class="c-arrow-ban"
+                    src="https://cdn.shopify.com/s/files/1/0279/0234/5304/files/icon-right-arrow-removebg-preview.png?v=1727979155" height="" width="" style="height:12px; width:14px; margin-left: 11px;"
+                ></a>
+              {% endif %}
+              {% if product.metafields.custom.featured_product_right_image_alignment contains 'bottom' or product.metafields.custom.featured_product_right_image_alignment == blank %}
+              {% if product.metafields.custom.featured_product_logo %}
+                <img
+                  class="cfp-image"
+                  src="{{ product.metafields.custom.featured_product_logo | img_url: 'original' }}"
+                  height=""
+                  width=""
+                  alt="{{ product.metafields.custom.featured_product_logo.alt }}"
+                >
+                {% endif %}
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+</div>
+
+
+
+{% schema %}
+{
+  "name": "FH - Featured Product",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "section_top_margin",
+      "label": "Add section top margin",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "section_bottom_margin",
+      "label": "Add section bottom margin",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "btn-color",
+      "label": "Button Color"
+    },
+    {
+      "type": "color",
+      "id": "btn-background",
+      "label": "Button Background"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "block",
+      "name": "Product",
+      "limit": 2,
+      "settings": [
+       {
+         "type": "product",
+         "id": "custom-product",
+         "label": "Product"
+       },
+        {
+          "type": "text",
+          "id": "cfp-btn",
+          "label": "Button",
+          "default": "SHOP"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {"name": "FH - Featured-Product"}
+  ]
+}
+{% endschema %}
